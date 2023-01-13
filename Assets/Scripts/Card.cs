@@ -12,6 +12,8 @@ public class Card : MonoBehaviour
     public MeshRenderer mesh_BackgroundImage;
     public TextMeshProUGUI cardName;
 
+    public bool PickedUp => pickedUp;
+
     private Tween currentTween;
     private bool pickedUp;
     private Vector3 offset;
@@ -82,5 +84,12 @@ public class Card : MonoBehaviour
         if (currentTween != null)
             currentTween.Kill();
         currentTween = transform.DOMoveY(0f, 0.1f);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Card card = other.gameObject.GetComponent<Card>();
+        if (card != null && !card.PickedUp)
+            Debug.Log("Hit: " + card.cardData.name);
     }
 }

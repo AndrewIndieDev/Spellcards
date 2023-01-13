@@ -17,9 +17,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Card card = null;
         foreach (CardData data in Resources.LoadAll<CardData>("Cards"))
         {
-
+            card = Instantiate(cardPrefab, new Vector3(Random.Range(-40f, 40f), 0f, Random.Range(-15, 15)), Quaternion.identity);
+            card.cardData = data;
         }
     }
 
@@ -28,6 +30,6 @@ public class GameManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
         MousePosition = hit.point;
-        MousePosition.y = 1f;
+        MousePosition.y = 0.8f;
     }
 }
