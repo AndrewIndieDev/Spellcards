@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using TMPro;
+using QFSW.QC;
 
 public class Card : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Card : MonoBehaviour
     public MeshRenderer mesh_CardImage;
     public MeshRenderer mesh_BackgroundImage;
     public TextMeshProUGUI cardName;
+    public GameObject audioSourcePrefab;
+    public GameObject vfxPrefab;
 
     public bool PickedUp => pickedUp;
 
@@ -19,9 +22,45 @@ public class Card : MonoBehaviour
     private Vector3 offset;
     private Card triggerHit;
     private Vector3 behindOffset;
+    private Card cardBehind;
+    private Card cardInFront;
 
-    public Card cardBehind;
-    public Card cardInFront;
+    [Command]
+    private void PerformAction(ActionType action)
+    {
+        PlaySound(action);
+        PlayVFX(action);
+    }
+
+    private void PlaySound(ActionType action)
+    {
+        foreach (CardAction ca in cardData.actions)
+        {
+            if (ca.action != action) continue;
+            if (ca.sound.Length <= 0)
+                Debug.LogWarning($"WARNING: {cardData.name} has no sounds in it's list. Is this correct?");
+            foreach (AudioClip clip in ca.sound)
+            {
+                AudioSource source = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
+                source.clip = clip;
+                source.Play();
+            }
+        }
+    }
+    private void PlayVFX(ActionType action)
+    {
+        foreach (CardAction ca in cardData.actions)
+        {
+            if (ca.action != action) continue;
+            if (ca.vfx.Length <= 0)
+                Debug.LogWarning($"WARNING: {cardData.name} has no vfx's in it's list. Is this correct?");
+            foreach (GameObject vfx in ca.vfx)
+            {
+                ParticleSystem ps = Instantiate(vfx, transform).GetComponent<ParticleSystem>();
+                ps.Play();
+            }
+        }
+    }
 
     private void Start()
     {
@@ -35,12 +74,6 @@ public class Card : MonoBehaviour
 
         behindOffset = new Vector3(0f, -0.01f, -1.4f);
     }
-
-    [Space(50)]
-    public UnityEvent OnCardPlay;
-    public UnityEvent OnCardRemove;
-    public UnityEvent OnCardDraw;
-    public UnityEvent OnCardSell;
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -105,7 +138,6 @@ public class Card : MonoBehaviour
         if (triggerHit == null) return;
 
         triggerHit.PutCardBehind(this);
-        cardBehind = triggerHit;
         triggerHit = null;
     }
 
@@ -140,17 +172,17 @@ public class Card : MonoBehaviour
 
     public void RemoveFromBehind()
     {
-        if (cardBehind != null)
+        Card removeLast = this;
+        while (removeLast.cardBehind != null)
         {
-            cardBehind.RemoveFromBehind();
-            return;
+            removeLast = removeLast.cardBehind;
         }
 
-        transform.parent = null;
-        cardInFront.cardBehind = null;
-        cardInFront = null;
-        transform.DOMoveY(0f, 0.1f);
-        EnableCollider();
+        removeLast.transform.parent = null;
+        removeLast.cardInFront.cardBehind = null;
+        removeLast.cardInFront = null;
+        removeLast.transform.DOMoveY(0f, 0.1f);
+        removeLast.EnableCollider();
     }
 
     public void PutCardBehind(Card inFront)
@@ -159,6 +191,7 @@ public class Card : MonoBehaviour
         while (toPutBehind.cardBehind != null)
         {
             toPutBehind = toPutBehind.cardBehind;
+            Debug.Log("Down 1 step");
         }
 
         toPutBehind.cardBehind = this;

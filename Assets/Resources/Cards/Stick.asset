@@ -15,4 +15,4 @@ MonoBehaviour:
   cardImage: {fileID: 2100000, guid: 75488813e64fe0142a5248df75e7643b, type: 2}
   cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}
   description: Just a stick man... What more do you need?
-  effects: []
+  actions: []

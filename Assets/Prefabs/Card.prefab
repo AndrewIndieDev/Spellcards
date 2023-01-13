@@ -54,20 +54,10 @@ MonoBehaviour:
   mesh_CardImage: {fileID: 1885606930561768564}
   mesh_BackgroundImage: {fileID: 7120478653413280432}
   cardName: {fileID: 7576925757602594689}
-  cardBehind: {fileID: 0}
-  cardInFront: {fileID: 0}
-  OnCardPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCardRemove:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCardDraw:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCardSell:
-    m_PersistentCalls:
-      m_Calls: []
+  audioSourcePrefab: {fileID: 6613016387622341732, guid: cc83a04c669754243a14ef31f57e09a9,
+    type: 3}
+  vfxPrefab: {fileID: 7538811729531692483, guid: 0f4f3f27b1ca398459912bf47ca1cef5,
+    type: 3}
 --- !u!65 &945469149472439880
 BoxCollider:
   m_ObjectHideFlags: 0

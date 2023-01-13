@@ -9,5 +9,5 @@ public class CardData : ScriptableObject
     public Material cardBackground;
     [TextArea]
     public string description;
-    public Effect[] effects;
+    public CardAction[] actions;
 }

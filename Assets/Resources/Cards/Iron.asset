@@ -15,4 +15,4 @@ MonoBehaviour:
   cardImage: {fileID: 2100000, guid: 007b54d86d5a5b74abc1070ac67c5673, type: 2}
   cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}
   description: 
-  effects: []
+  actions: []

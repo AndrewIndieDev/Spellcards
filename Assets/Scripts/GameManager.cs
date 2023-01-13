@@ -1,3 +1,4 @@
+using QFSW.QC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,13 +16,15 @@ public class GameManager : MonoBehaviour
     public LayerMask table;
     public Vector3 MousePosition;
 
-    private void Start()
+    [Command]
+    private void SpawnCards(int amount)
     {
         Card card = null;
-        foreach (CardData data in Resources.LoadAll<CardData>("Cards"))
+        CardData[] cards = Resources.LoadAll<CardData>("Cards");
+        for (int i = 0; i < amount; i++)
         {
             card = Instantiate(cardPrefab, new Vector3(Random.Range(-40f, 40f), 0f, Random.Range(-15, 15)), Quaternion.identity);
-            card.cardData = data;
+            card.cardData = cards[i%cards.Length];
         }
     }
 
