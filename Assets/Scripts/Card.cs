@@ -24,6 +24,7 @@ public class Card : MonoBehaviour
     private Vector3 behindOffset;
     private Card cardBehind;
     private Card cardInFront;
+    private List<Card> stackedCards = new();
 
     [Command]
     private void PerformAction(ActionType action)
@@ -72,7 +73,7 @@ public class Card : MonoBehaviour
         if (cardName)
             cardName.text = cardData.name;
 
-        behindOffset = new Vector3(0f, -0.01f, -1.4f);
+        behindOffset = new Vector3(0f, -0.002f, -0.035f);
     }
 
 #if UNITY_EDITOR
@@ -93,7 +94,7 @@ public class Card : MonoBehaviour
         if (pickedUp) return;
         if (currentTween != null)
             currentTween.Kill();
-        currentTween = transform.DOMoveY(0.5f, 0.1f);
+        currentTween = transform.DOMoveY(0.01f, 0.1f);
     }
 
     private void OnMouseExit()
@@ -101,7 +102,7 @@ public class Card : MonoBehaviour
         if (pickedUp) return;
         if (currentTween != null)
             currentTween.Kill();
-        currentTween = transform.DOMoveY(0.011f, 0.1f);
+        currentTween = transform.DOMoveY(0.0f, 0.1f);
     }
 
     private void OnMouseDown()
@@ -116,6 +117,8 @@ public class Card : MonoBehaviour
     private void OnMouseDrag()
     {
         transform.position = GameManager.Instance.MousePosition + offset;
+
+        PerformAction(ActionType.HOLDING);
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -139,6 +142,8 @@ public class Card : MonoBehaviour
 
         triggerHit.PutCardBehind(this);
         triggerHit = null;
+
+        UpdateStackList();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -191,7 +196,6 @@ public class Card : MonoBehaviour
         while (toPutBehind.cardBehind != null)
         {
             toPutBehind = toPutBehind.cardBehind;
-            Debug.Log("Down 1 step");
         }
 
         toPutBehind.cardBehind = this;
@@ -199,5 +203,17 @@ public class Card : MonoBehaviour
         transform.parent = toPutBehind.transform;
         transform.DOLocalMove(behindOffset, 0.1f);
         EnableCollider(false);
+    }
+
+    private void UpdateStackList()
+    {
+        if (cardInFront != null) return;
+
+        stackedCards.Clear();
+        stackedCards.Add(this);
+        foreach (Card card in GetComponentsInChildren<Card>())
+        {
+            stackedCards.Add(card);
+        }
     }
 }

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         CardData[] cards = Resources.LoadAll<CardData>("Cards");
         for (int i = 0; i < amount; i++)
         {
-            card = Instantiate(cardPrefab, new Vector3(Random.Range(-40f, 40f), 0f, Random.Range(-15, 15)), Quaternion.identity);
+            card = Instantiate(cardPrefab, new Vector3(Random.Range(-0.8f, 0.8f), 0f, Random.Range(-0.3f, 0.3f)), Quaternion.identity);
             card.cardData = cards[i%cards.Length];
         }
     }
@@ -33,6 +33,6 @@ public class GameManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
         MousePosition = hit.point;
-        MousePosition.y = 0.8f;
+        MousePosition.y = 0.015f;
     }
 }
