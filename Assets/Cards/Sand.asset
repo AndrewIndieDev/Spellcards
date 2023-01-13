@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0632293d1780324ab8f414292813046, type: 3}
-  m_Name: Sand'
+  m_Name: Sand
   m_EditorClassIdentifier: 
   cardImage: {fileID: 2100000, guid: 4c6a008ebf2d7b1469a1031ddf3ebe15, type: 2}
   cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0632293d1780324ab8f414292813046, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  cardImage: {fileID: 0}
-  cardBackground: {fileID: 0}
+  cardImage: {fileID: 2100000, guid: a75ccaac4adbfac4d930c1ce54fd71cf, type: 2}
+  cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}
   description: 
   effects: []

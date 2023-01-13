@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    public Card cardPrefab;
+
     public LayerMask table;
     public Vector3 MousePosition;
     private void Update()

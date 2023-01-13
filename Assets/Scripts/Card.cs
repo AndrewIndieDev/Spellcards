@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using TMPro;
 
 public class Card : MonoBehaviour
 {
     public CardData cardData;
     public MeshRenderer mesh_CardImage;
     public MeshRenderer mesh_BackgroundImage;
+    public TextMeshProUGUI cardName;
 
     private Tween currentTween;
     private bool pickedUp;
@@ -21,6 +23,8 @@ public class Card : MonoBehaviour
             mesh_CardImage.material = cardData.cardImage;
         if (mesh_BackgroundImage)
             mesh_BackgroundImage.material = cardData.cardBackground;
+        if (cardName)
+            cardName.text = cardData.name;
     }
 
     [Space(50)]
@@ -28,6 +32,19 @@ public class Card : MonoBehaviour
     public UnityEvent OnCardRemove;
     public UnityEvent OnCardDraw;
     public UnityEvent OnCardSell;
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (cardData == null) return;
+        if (mesh_CardImage)
+            mesh_CardImage.material = cardData.cardImage;
+        if (mesh_BackgroundImage)
+            mesh_BackgroundImage.material = cardData.cardBackground;
+        if (cardName)
+            cardName.text = cardData.name;
+    }
+#endif
 
     private void OnMouseEnter()
     {
