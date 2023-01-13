@@ -45,6 +45,7 @@ public class Card : MonoBehaviour
                 AudioSource source = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
                 source.clip = clip;
                 source.Play();
+                source.gameObject.name = action.ToString();
             }
         }
     }
@@ -59,6 +60,7 @@ public class Card : MonoBehaviour
             {
                 ParticleSystem ps = Instantiate(vfx, transform).GetComponent<ParticleSystem>();
                 ps.Play();
+                ps.gameObject.name = action.ToString();
             }
         }
     }
@@ -130,6 +132,8 @@ public class Card : MonoBehaviour
 
     private void OnMouseUp()
     {
+        RemoveVFX(ActionType.HOLDING);
+
         Debug.Log("Dropped <" + cardData.name + ">");
         pickedUp = false;
         if (currentTween != null)
@@ -213,6 +217,15 @@ public class Card : MonoBehaviour
         foreach (Card card in GetComponentsInChildren<Card>())
         {
             stackedCards.Add(card);
+        }
+    }
+
+    private void RemoveVFX(ActionType action)
+    {
+        foreach (var vfx in GetComponentsInChildren<ParticleSystem>())
+        {
+            if (vfx.gameObject.name == action.ToString())
+                Destroy(vfx.gameObject);
         }
     }
 }
