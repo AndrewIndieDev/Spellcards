@@ -112,13 +112,12 @@ public class Card : MonoBehaviour
         pickedUp = true;
         offset = transform.position - GameManager.Instance.MousePosition;
         offset.y = 0f;
+        PerformAction(ActionType.HOLDING);
     }
 
     private void OnMouseDrag()
     {
         transform.position = GameManager.Instance.MousePosition + offset;
-
-        PerformAction(ActionType.HOLDING);
 
         if (Input.GetMouseButtonDown(1))
         {
