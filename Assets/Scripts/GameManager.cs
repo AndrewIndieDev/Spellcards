@@ -14,6 +14,15 @@ public class GameManager : MonoBehaviour
 
     public LayerMask table;
     public Vector3 MousePosition;
+
+    private void Start()
+    {
+        foreach (CardData data in Resources.LoadAll<CardData>("Cards"))
+        {
+
+        }
+    }
+
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
