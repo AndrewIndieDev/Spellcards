@@ -54,6 +54,8 @@ MonoBehaviour:
   mesh_CardImage: {fileID: 1885606930561768564}
   mesh_BackgroundImage: {fileID: 7120478653413280432}
   cardName: {fileID: 7576925757602594689}
+  cardBehind: {fileID: 0}
+  cardInFront: {fileID: 0}
   OnCardPlay:
     m_PersistentCalls:
       m_Calls: []
