@@ -20,8 +20,8 @@ public class Card : MonoBehaviour
     private Card triggerHit;
     private Vector3 behindOffset;
 
-    private Card cardBehind;
-    private Card cardInFront;
+    public Card cardBehind;
+    public Card cardInFront;
 
     private void Start()
     {
@@ -140,7 +140,14 @@ public class Card : MonoBehaviour
 
     public void RemoveFromBehind()
     {
+        if (cardBehind != null)
+        {
+            cardBehind.RemoveFromBehind();
+            return;
+        }
+
         transform.parent = null;
+        cardInFront.cardBehind = null;
         cardInFront = null;
         transform.DOMoveY(0f, 0.1f);
         EnableCollider();
@@ -148,8 +155,15 @@ public class Card : MonoBehaviour
 
     public void PutCardBehind(Card inFront)
     {
-        cardInFront = inFront;
-        transform.parent = inFront.transform;
+        Card toPutBehind = inFront;
+        while (toPutBehind.cardBehind != null)
+        {
+            toPutBehind = toPutBehind.cardBehind;
+        }
+
+        toPutBehind.cardBehind = this;
+        cardInFront = toPutBehind;
+        transform.parent = toPutBehind.transform;
         transform.DOLocalMove(behindOffset, 0.1f);
         EnableCollider(false);
     }
