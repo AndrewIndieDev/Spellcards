@@ -58,9 +58,8 @@ public class Card : MonoBehaviour
                 Debug.LogWarning($"WARNING: {cardData.name} has no vfx's in it's list. Is this correct?");
             foreach (GameObject vfx in ca.vfx)
             {
-                ParticleSystem ps = Instantiate(vfx, transform).GetComponent<ParticleSystem>();
-                ps.Play();
-                ps.gameObject.name = action.ToString();
+                GameObject go = Instantiate(vfx, transform);
+                go.gameObject.name = action.ToString();
             }
         }
     }
