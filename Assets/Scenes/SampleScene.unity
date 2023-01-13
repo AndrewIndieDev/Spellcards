@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -257,6 +258,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 330585545}
   screenPercentageToLookUp: 10
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78da3f00f3328541b4526c0b0b5ec5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineThickness: 1.25
+  lineIntensity: 0.5
+  fillAmount: 0.2
+  lineColor0: {r: 1, g: 0, b: 0, a: 1}
+  lineColor1: {r: 0, g: 1, b: 0, a: 1}
+  lineColor2: {r: 0, g: 0, b: 1, a: 1}
+  additiveRendering: 0
+  backfaceCulling: 1
+  fillColor: {r: 0, g: 0, b: 1, a: 1}
+  useFillColor: 0
+  cornerOutlines: 0
+  addLinesBetweenColors: 0
+  scaleWithScreenSize: 1
+  alphaCutoff: 0.5
+  flipY: 0
+  sourceCamera: {fileID: 0}
+  autoEnableOutlines: 0
+  outlineCamera: {fileID: 0}
+  outlineShaderMaterial: {fileID: 0}
+  renderTexture: {fileID: 0}
+  extraRenderTexture: {fileID: 0}
 --- !u!1 &2061542326
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +379,7 @@ PrefabInstance:
     - target: {fileID: 6903816505182464225, guid: ba3e335303f599143bc1b9be821b7fde,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6903816505182464225, guid: ba3e335303f599143bc1b9be821b7fde,
         type: 3}
@@ -394,6 +428,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba3e335303f599143bc1b9be821b7fde, type: 3}
+--- !u!1 &3471387320700212327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4093570132527811740, guid: ba3e335303f599143bc1b9be821b7fde,
+    type: 3}
+  m_PrefabInstance: {fileID: 3471387320700212326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3471387320700212328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471387320700212327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1001 &6709842020182988457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,7 +473,7 @@ PrefabInstance:
     - target: {fileID: 7106579686590639794, guid: df60864e60129454e993ec95689886d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7106579686590639794, guid: df60864e60129454e993ec95689886d4,
         type: 3}
