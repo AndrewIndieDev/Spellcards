@@ -226,7 +226,7 @@ public class Card : MonoBehaviour
     {
         foreach (var vfx in GetComponentsInChildren<ParticleSystem>())
         {
-            if (vfx.gameObject.name == action.ToString())
+            if (vfx.transform.parent.gameObject.name == action.ToString())
                 Destroy(vfx.gameObject);
         }
     }
