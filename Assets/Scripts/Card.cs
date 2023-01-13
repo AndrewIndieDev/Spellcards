@@ -75,6 +75,8 @@ public class Card : MonoBehaviour
             cardName.text = cardData.name;
 
         behindOffset = new Vector3(0f, -0.002f, -0.035f);
+
+        PerformAction(ActionType.CREATED);
     }
 
 #if UNITY_EDITOR
@@ -205,6 +207,7 @@ public class Card : MonoBehaviour
         transform.parent = toPutBehind.transform;
         transform.DOLocalMove(behindOffset, 0.1f);
         EnableCollider(false);
+        PerformAction(ActionType.STACK);
     }
 
     private void UpdateStackList()
