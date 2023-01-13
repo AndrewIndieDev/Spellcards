@@ -11,7 +11,7 @@ public class Card : MonoBehaviour
     public CardData cardData;
     public MeshRenderer mesh_CardImage;
     public MeshRenderer mesh_BackgroundImage;
-    public TextMeshProUGUI cardName;
+    public TMP_Text cardName;
     public GameObject audioSourcePrefab;
     public GameObject vfxPrefab;
 
