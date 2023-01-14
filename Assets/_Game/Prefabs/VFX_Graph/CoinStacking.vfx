@@ -21,7 +21,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 574
     y: -415
-    width: 1364
+    width: 1493
     height: 2110
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -71,8 +71,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Coin Max
-    path: Coin Max
+  - name: Coin Initilize
+    path: Coin Initilize
     tooltip: 
     sheetType: m_Int
     realType: Int32
@@ -80,7 +80,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 200
+      m_SerializableObject: 25
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614603}
-  m_ExposedName: Coin Max
+  m_ExposedName: Coin Initilize
   m_Exposed: 1
   m_Order: 2
   m_Category: 
@@ -353,7 +353,14 @@ MonoBehaviour:
   m_EnumValues: []
   m_ValueFilter: 0
   m_Tooltip: 
-  m_Nodes: []
+  m_Nodes:
+  - m_Id: 0
+    linkedSlots:
+    - outputSlot: {fileID: 8926484042661614603}
+      inputSlot: {fileID: 8926484042661615074}
+    position: {x: 1469, y: -54}
+    expandedSlots: []
+    expanded: 0
 --- !u!114 &8926484042661614603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +386,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 200
+      m_SerializableObject: 25
     m_Space: 2147483647
   m_Property:
     name: o
@@ -387,7 +394,8 @@ MonoBehaviour:
       m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 1
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661615074}
 --- !u!114 &8926484042661614606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,7 +2023,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661615073}
-  m_UIPosition: {x: 1514, y: -225}
+  m_UIPosition: {x: 1643, y: -225}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2094,7 +2102,8 @@ MonoBehaviour:
       m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614603}
 --- !u!114 &8926484042661615075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,7 +2153,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1514, y: -415}
+  m_UIPosition: {x: 1643, y: -415}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
