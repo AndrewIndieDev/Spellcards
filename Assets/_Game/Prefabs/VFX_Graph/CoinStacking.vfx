@@ -170,7 +170,7 @@ VisualEffectResource:
   m_Infos:
     m_RendererSettings:
       motionVectorGenerationMode: 0
-      shadowCastingMode: 0
+      shadowCastingMode: 1
       receiveShadows: 0
       reflectionProbeUsage: 0
       lightProbeUsage: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614603}
   m_ExposedName: Coin Max
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:
@@ -411,7 +411,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614607}
   m_ExposedName: Coin Mesh
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
@@ -429,7 +429,7 @@ MonoBehaviour:
   - m_Id: 0
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614607}
-      inputSlot: {fileID: 8926484042661614914}
+      inputSlot: {fileID: 8926484042661615089}
     position: {x: 744, y: 1580}
     expandedSlots: []
     expanded: 0
@@ -467,7 +467,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_Direction: 1
   m_LinkedSlots:
-  - {fileID: 8926484042661614914}
+  - {fileID: 8926484042661615089}
 --- !u!114 &8926484042661614634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,8 +1288,8 @@ MonoBehaviour:
   - {fileID: 8926484042661614925}
   - {fileID: 8926484042661614932}
   - {fileID: 8926484042661614933}
-  - {fileID: 8926484042661614914}
-  - {fileID: 8926484042661614915}
+  - {fileID: 8926484042661615089}
+  - {fileID: 8926484042661615090}
   m_OutputSlots: []
   m_Label: 
   m_Data: {fileID: 8926484042661614568}
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
-  castShadows: 0
+  castShadows: 1
   useExposureWeight: 0
   flipbookLayout: 0
   shaderGraph: {fileID: -5475051401550479605, guid: 0b59da2de20beb94b9adae0d13f18b98,
@@ -1337,75 +1337,6 @@ MonoBehaviour:
   doubleSided: 0
   MeshCount: 1
   lod: 0
---- !u!114 &8926484042661614914
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b47b8679b468b7347a00cdd50589bc9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  m_MasterSlot: {fileID: 8926484042661614914}
-  m_MasterData:
-    m_Owner: {fileID: 8926484042661614910}
-    m_Value:
-      m_Type:
-        m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":10208,"guid":"0000000000000000e000000000000000","type":0}}'
-    m_Space: 2147483647
-  m_Property:
-    name: mesh
-    m_serializedType:
-      m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661614607}
---- !u!114 &8926484042661614915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52d920e7fff73b498050a6b3c4404ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  m_MasterSlot: {fileID: 8926484042661614915}
-  m_MasterData:
-    m_Owner: {fileID: 8926484042661614910}
-    m_Value:
-      m_Type:
-        m_SerializableType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 4294967295
-    m_Space: 2147483647
-  m_Property:
-    name: subMeshMask
-    m_serializedType:
-      m_SerializableType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-  m_Direction: 0
-  m_LinkedSlots: []
 --- !u!114 &8926484042661614917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1490,7 +1421,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614920}
   m_ExposedName: Coin Color
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: Material
   m_Min:
     m_Type:
@@ -2293,7 +2224,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615081}
   m_ExposedName: Smoothness
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 5
   m_Category: Material
   m_Min:
     m_Type:
@@ -2373,7 +2304,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615083}
   m_ExposedName: Metallic
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 3
   m_Category: Material
   m_Min:
     m_Type:
@@ -2430,3 +2361,72 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661614933}
+--- !u!114 &8926484042661615089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47b8679b468b7347a00cdd50589bc9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661615089}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614910}
+    m_Value:
+      m_Type:
+        m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"obj":{"fileID":10208,"guid":"0000000000000000e000000000000000","type":0}}'
+    m_Space: 2147483647
+  m_Property:
+    name: mesh
+    m_serializedType:
+      m_SerializableType: UnityEngine.Mesh, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  m_Direction: 0
+  m_LinkedSlots:
+  - {fileID: 8926484042661614607}
+--- !u!114 &8926484042661615090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52d920e7fff73b498050a6b3c4404ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661615090}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661614910}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 4294967295
+    m_Space: 2147483647
+  m_Property:
+    name: subMeshMask
+    m_serializedType:
+      m_SerializableType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+  m_Direction: 0
+  m_LinkedSlots: []

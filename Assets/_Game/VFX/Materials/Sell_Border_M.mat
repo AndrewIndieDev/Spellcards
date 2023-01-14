@@ -97,6 +97,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Flashing1: 0
+    - _FlashingOpacity: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -104,6 +106,7 @@ Material:
     - _OcclusionStrength: 1
     - _Opacity: 0.073
     - _Parallax: 0.005
+    - _Particles: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -122,8 +125,9 @@ Material:
     - _Bordersqew: {r: 0.89, g: 0.87, b: 0, a: 0}
     - _Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Flashingintensityrange: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tint: {r: 0, g: 0, b: 0, a: 0.5019608}
+    - _Tint: {r: 0, g: 0, b: 0, a: 0.34117648}
   m_BuildTextureStacks: []
 --- !u!114 &7176482838301314673
 MonoBehaviour:
