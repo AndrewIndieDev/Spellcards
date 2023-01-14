@@ -71,8 +71,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Coin Initilize
-    path: Coin Initilize
+  - name: Coin Initialize
+    path: Coin Initialize
     tooltip: 
     sheetType: m_Int
     realType: Int32
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614603}
-  m_ExposedName: Coin Initilize
+  m_ExposedName: Coin Initialize
   m_Exposed: 1
   m_Order: 2
   m_Category: 
@@ -2166,7 +2166,7 @@ MonoBehaviour:
   - link:
     - context: {fileID: 8926484042661615071}
       slotIndex: 0
-  eventName: Initilize
+  eventName: Initialize
 --- !u!114 &8926484042661615078
 MonoBehaviour:
   m_ObjectHideFlags: 0
