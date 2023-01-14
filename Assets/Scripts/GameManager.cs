@@ -30,6 +30,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public GameObject SpawnCard(CardData data, Vector3 position)
+    {
+        Card spawned = Instantiate(cardPrefab, position, Quaternion.identity);
+        spawned.cardData = data;
+        return spawned.gameObject;
+    }
+
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -41,5 +48,13 @@ public class GameManager : MonoBehaviour
     public void AddCurreny(int amount)
     {
         currency += amount;
+    }
+
+    public bool RemoveCurrency(int amount)
+    {
+        if (currency - amount < 0)
+            return false;
+        currency -= amount;
+        return true;
     }
 }
