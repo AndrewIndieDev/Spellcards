@@ -16,4 +16,16 @@ MonoBehaviour:
   cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}
   description: 
   sellCost: 2
-  actions: []
+  actions:
+  - action: 0
+    sound: []
+    vfx:
+    - {fileID: 3259163283906517372, guid: ed95c7fa4a657c7429e00aecb8929553, type: 3}
+  - action: 5
+    sound: []
+    vfx:
+    - {fileID: 3259163283906517372, guid: d381559524663f449be912ba3506939d, type: 3}
+  - action: 7
+    sound: []
+    vfx:
+    - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
