@@ -15,6 +15,7 @@ MonoBehaviour:
   cardImage: {fileID: 2100000, guid: 80e4a7aff163fa34bb4f867cd8e184e3, type: 2}
   cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}
   description: 
+  sellCost: 2
   actions:
   - action: 5
     sound: []

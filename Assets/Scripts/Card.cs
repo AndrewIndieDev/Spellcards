@@ -12,8 +12,13 @@ public class Card : MonoBehaviour
     public MeshRenderer mesh_CardImage;
     public MeshRenderer mesh_BackgroundImage;
     public TMP_Text cardName;
+    public TMP_Text cardSellCost;
     public GameObject audioSourcePrefab;
     public GameObject vfxPrefab;
+    public BoxCollider mainCollider;
+    public BoxCollider behindCollider;
+    public Card cardBehind;
+    public Card cardInFront;
 
     public bool PickedUp => pickedUp;
 
@@ -22,9 +27,8 @@ public class Card : MonoBehaviour
     private Vector3 offset;
     private Card triggerHit;
     private Vector3 behindOffset;
-    private Card cardBehind;
-    private Card cardInFront;
     private List<Card> stackedCards = new();
+    private bool sellTriggerHit;
 
     [Command]
     private void PerformAction(ActionType action)
@@ -73,6 +77,8 @@ public class Card : MonoBehaviour
             mesh_BackgroundImage.material = cardData.cardBackground;
         if (cardName)
             cardName.text = cardData.name;
+        if (cardSellCost)
+            cardSellCost.text = cardData.sellCost.ToString();
 
         behindOffset = new Vector3(0f, -0.002f, -0.035f);
 
@@ -110,7 +116,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Grabbed <" + cardData.name + ">");
+        EnableMainCollider();
         transform.parent = null;
         pickedUp = true;
         offset = transform.position - GameManager.Instance.MousePosition;
@@ -126,7 +132,7 @@ public class Card : MonoBehaviour
         {
             if (cardBehind != null)
             {
-                cardBehind.RemoveFromBehind();
+                cardBehind.RemoveLastCardInStack();
             }
         }
     }
@@ -134,11 +140,18 @@ public class Card : MonoBehaviour
     private void OnMouseUp()
     {
         RemoveVFX(ActionType.HOLDING);
+        PerformAction(ActionType.DROP);
 
-        Debug.Log("Dropped <" + cardData.name + ">");
         pickedUp = false;
         if (currentTween != null)
             currentTween.Kill();
+
+        if (sellTriggerHit)
+        {
+            SellCard();
+            return;
+        }
+
         currentTween = transform.DOMoveY(0f, 0.1f);
 
         //Check triggerHit and see if we need to attach ourselves to it.
@@ -160,6 +173,11 @@ public class Card : MonoBehaviour
             triggerHit = card;
             Debug.Log("Hit: " + triggerHit.cardData.name);
         }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("SellArea"))
+        {
+            sellTriggerHit = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -172,14 +190,20 @@ public class Card : MonoBehaviour
             Debug.Log("Removed TriggerHit Reference");
             triggerHit = null;
         }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("SellArea"))
+        {
+            sellTriggerHit = false;
+        }
     }
 
-    public void EnableCollider(bool enable = true)
+    public void EnableMainCollider(bool enable = true)
     {
-        GetComponent<BoxCollider>().enabled = enable;
+        mainCollider.enabled = enable;
+        //behindCollider.enabled = !enable;
     }
 
-    public void RemoveFromBehind()
+    public void RemoveLastCardInStack()
     {
         Card removeLast = this;
         while (removeLast.cardBehind != null)
@@ -190,23 +214,27 @@ public class Card : MonoBehaviour
         removeLast.transform.parent = null;
         removeLast.cardInFront.cardBehind = null;
         removeLast.cardInFront = null;
-        removeLast.transform.DOMoveY(0f, 0.1f);
-        removeLast.EnableCollider();
+        if (!pickedUp)
+            removeLast.transform.DOMoveY(0f, 0.1f);
+        removeLast.EnableMainCollider();
     }
 
-    public void PutCardBehind(Card inFront)
+    public void PutCardBehind(Card inFront = null)
     {
         Card toPutBehind = inFront;
-        while (toPutBehind.cardBehind != null)
+        if (toPutBehind != null)
         {
-            toPutBehind = toPutBehind.cardBehind;
+            while (toPutBehind.cardBehind != null)
+            {
+                toPutBehind = toPutBehind.cardBehind;
+            }
         }
 
         toPutBehind.cardBehind = this;
         cardInFront = toPutBehind;
         transform.parent = toPutBehind.transform;
         transform.DOLocalMove(behindOffset, 0.1f);
-        EnableCollider(false);
+        EnableMainCollider(false);
         PerformAction(ActionType.STACK);
     }
 
@@ -229,5 +257,14 @@ public class Card : MonoBehaviour
             if (vfx.transform.parent.gameObject.name == action.ToString())
                 Destroy(vfx.gameObject);
         }
+    }
+
+    private void SellCard()
+    {
+        if (cardBehind)
+            cardBehind.SellCard();
+
+        GameManager.Instance.AddCurreny(cardData.sellCost);
+        Destroy(gameObject);
     }
 }

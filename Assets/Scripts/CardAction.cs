@@ -10,7 +10,8 @@ public enum ActionType
     REMOVE,
     SELL,
     HOLDING,
-    STACK
+    STACK,
+    DROP
 }
 
 [System.Serializable]

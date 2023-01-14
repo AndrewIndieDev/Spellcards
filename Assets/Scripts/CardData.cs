@@ -9,5 +9,6 @@ public class CardData : ScriptableObject
     public Material cardBackground;
     [TextArea]
     public string description;
+    public int sellCost;
     public CardAction[] actions;
 }

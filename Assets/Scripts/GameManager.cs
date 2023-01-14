@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public Card cardPrefab;
 
+    public int currency = 0;
+
     public LayerMask table;
     public Vector3 MousePosition;
 
@@ -34,5 +36,10 @@ public class GameManager : MonoBehaviour
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
         MousePosition = hit.point;
         MousePosition.y = 0.015f;
+    }
+
+    public void AddCurreny(int amount)
+    {
+        currency += amount;
     }
 }
