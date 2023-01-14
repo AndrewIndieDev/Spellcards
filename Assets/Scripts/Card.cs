@@ -40,7 +40,7 @@ public class Card : MonoBehaviour
     private SpellArea spellArea;
 
     [Command]
-    private void PerformAction(ActionType action)
+    public void PerformAction(ActionType action)
     {
         PlaySound(action);
         PlayVFX(action);
@@ -59,7 +59,13 @@ public class Card : MonoBehaviour
                 source.clip = clip;
                 source.Play();
                 source.gameObject.name = action.ToString();
+
+                if (source.gameObject.GetComponent<PlayEffectOnChildren>() != null)
+                    if (cardBehind)
+                        cardBehind.PerformAction(action);
             }
+            if (cardBehind)
+                cardBehind.PerformAction(action);
         }
     }
     private void PlayVFX(ActionType action)
@@ -73,6 +79,10 @@ public class Card : MonoBehaviour
             {
                 GameObject go = Instantiate(vfx, transform);
                 go.gameObject.name = action.ToString();
+
+                if (go.GetComponent<PlayEffectOnChildren>() != null)
+                    if (cardBehind)
+                        cardBehind.PerformAction(action);
             }
         }
     }

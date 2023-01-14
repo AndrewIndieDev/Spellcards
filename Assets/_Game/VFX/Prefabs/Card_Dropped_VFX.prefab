@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3259163283906517373}
+  - component: {fileID: -3804075974354290481}
   m_Layer: 0
   m_Name: Card_Dropped_VFX
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3804075974354290481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3259163283906517372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c89dd4bca4cd1449c124b2d0d5e53c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyIn: 2
 --- !u!1 &4459691927996229128
 GameObject:
   m_ObjectHideFlags: 0
