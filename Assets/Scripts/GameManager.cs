@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     }
 
     public Card cardPrefab;
+    public CardData failedCreationRef;
 
     public int currency = 0;
 
@@ -30,9 +31,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnCard(CardData data)
+    public GameObject SpawnCard(CardData data, Vector3 position)
     {
-        Card spawned = Instantiate(cardPrefab, MousePosition, Quaternion.identity);
+        Card spawned = Instantiate(cardPrefab, position, Quaternion.identity);
         spawned.cardData = data;
         return spawned.gameObject;
     }
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
         MousePosition = hit.point;
-        MousePosition.y = 0.015f;
+        MousePosition.y += 0.015f;
     }
 
     public void AddCurreny(int amount)

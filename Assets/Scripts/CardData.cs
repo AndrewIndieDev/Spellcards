@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SlamJam2023/CardData", fileName = "new CardData")]
 public class CardData : ScriptableObject
 {
+    public bool isSpell;
     public Material cardImage;
     public Material cardBackground;
     [TextArea]

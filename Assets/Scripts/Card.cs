@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using QFSW.QC;
 
 public class Card : MonoBehaviour
 {
+    public Transform timeToCombineTransform;
+    public RecipeTimer timeToCombineParent;
     public CardData cardData;
     public MeshRenderer mesh_CardImage;
     public MeshRenderer mesh_BackgroundImage;
@@ -27,8 +29,15 @@ public class Card : MonoBehaviour
     private Vector3 offset;
     private Card triggerHit;
     private Vector3 behindOffset;
-    private List<Card> stackedCards = new();
+    public List<Card> stackedCards = new();
     private bool sellTriggerHit;
+    private Material sellTriggerMaterial;
+    private int timeToCombine = 5;
+    private bool coroutineRunning;
+    private bool cardStackChanged;
+    
+    private bool spellTriggerHit;
+    private SpellArea spellArea;
 
     [Command]
     private void PerformAction(ActionType action)
@@ -103,7 +112,7 @@ public class Card : MonoBehaviour
         if (pickedUp) return;
         if (currentTween != null)
             currentTween.Kill();
-        currentTween = transform.DOMoveY(0.01f, 0.1f);
+        currentTween = transform.DOLocalMoveY(0.01f, 0.1f);
     }
 
     private void OnMouseExit()
@@ -111,7 +120,7 @@ public class Card : MonoBehaviour
         if (pickedUp) return;
         if (currentTween != null)
             currentTween.Kill();
-        currentTween = transform.DOMoveY(0.0f, 0.1f);
+        currentTween = transform.DOLocalMoveY(0.0f, 0.1f);
     }
 
     private void OnMouseDown()
@@ -122,6 +131,7 @@ public class Card : MonoBehaviour
         offset = transform.position - GameManager.Instance.MousePosition;
         offset.y = 0f;
         PerformAction(ActionType.HOLDING);
+        UpdateStackList();
     }
 
     private void OnMouseDrag()
@@ -132,7 +142,8 @@ public class Card : MonoBehaviour
         {
             if (cardBehind != null)
             {
-                cardBehind.RemoveLastCardInStack();
+                RemoveLastCardInStack();
+                UpdateStackList();
             }
         }
     }
@@ -143,8 +154,6 @@ public class Card : MonoBehaviour
         PerformAction(ActionType.DROP);
 
         pickedUp = false;
-        if (currentTween != null)
-            currentTween.Kill();
 
         if (sellTriggerHit)
         {
@@ -152,23 +161,37 @@ public class Card : MonoBehaviour
             return;
         }
 
-        currentTween = transform.DOMoveY(0f, 0.1f);
+        if (spellTriggerHit)
+        {
+            ActivateSpell();
+            return;
+        }
+
+        if (currentTween != null)
+            currentTween.Kill();
+        currentTween = transform.DOLocalMoveY(0f, 0.1f);
 
         //Check triggerHit and see if we need to attach ourselves to it.
         if (triggerHit == null) return;
+        if (triggerHit.cardData.isSpell || cardData.isSpell) return;
 
         triggerHit.PutCardBehind(this);
         triggerHit = null;
 
         UpdateStackList();
+
+        if (CheckForRecipeSuitability())
+        {
+            StartCoroutine(RecipeTimer());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!pickedUp) return;
+        if (!pickedUp || spellTriggerHit) return;
 
         Card card = other.gameObject.GetComponent<Card>();
-        if (card != null)
+        if (card != null && card.stackedCards.Count < 3 &&stackedCards.Count < 3)
         {
             triggerHit = card;
         }
@@ -176,12 +199,22 @@ public class Card : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("SellArea"))
         {
             sellTriggerHit = true;
+            sellTriggerMaterial = other.gameObject.GetComponent<MeshRenderer>().material;
+            sellTriggerMaterial.SetFloat("_FlashingOpacity", 1f);
+        }
+
+        if (!cardData.isSpell) return;
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("SpellArea"))
+        {
+            spellTriggerHit = true;
+            spellArea = other.gameObject.GetComponent<SpellArea>();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!pickedUp) return;
+        if (!pickedUp || spellTriggerHit) return;
 
         Card card = other.gameObject.GetComponent<Card>();
         if (card != null && triggerHit != null && triggerHit == card)
@@ -192,7 +225,24 @@ public class Card : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("SellArea"))
         {
             sellTriggerHit = false;
+            sellTriggerMaterial = other.gameObject.GetComponent<MeshRenderer>().material;
+            sellTriggerMaterial.SetFloat("_FlashingOpacity", 0f);
         }
+
+        if (!cardData.isSpell) return;
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("SpellArea"))
+        {
+            spellTriggerHit = false;
+            spellArea = null;
+        }
+    }
+
+    private void ActivateSpell()
+    {
+        transform.position = spellArea.gameObject.transform.parent.position;
+        transform.rotation = spellArea.gameObject.transform.parent.rotation;
+        spellArea.SetCard(this);
     }
 
     public void EnableMainCollider(bool enable = true)
@@ -213,8 +263,10 @@ public class Card : MonoBehaviour
         removeLast.cardInFront.cardBehind = null;
         removeLast.cardInFront = null;
         if (!pickedUp)
-            removeLast.transform.DOMoveY(0f, 0.1f);
+            removeLast.transform.DOLocalMoveY(0f, 0.1f);
         removeLast.EnableMainCollider();
+        stackedCards.RemoveAt(stackedCards.Count - 1);
+        cardStackChanged = true;
     }
 
     public void PutCardBehind(Card inFront = null)
@@ -233,19 +285,79 @@ public class Card : MonoBehaviour
         transform.parent = toPutBehind.transform;
         transform.DOLocalMove(behindOffset, 0.1f);
         EnableMainCollider(false);
+        UpdateStackList();
         PerformAction(ActionType.STACK);
+    }
+
+    private IEnumerator RecipeTimer()
+    {
+        coroutineRunning = true;
+        ResetRecipeCreation();
+        timeToCombineParent.gameObject.SetActive(true);
+        Tween tween = timeToCombineTransform.DOScaleX(1f, timeToCombine);
+        while (timeToCombineTransform.localScale.x < 1f || pickedUp)
+        {
+            if (cardInFront || stackedCards.Count == 0)
+            {
+                tween?.Kill();
+                ResetRecipeCreation();
+                break;
+            }
+            if (cardStackChanged)
+            {
+                timeToCombineTransform.transform.localScale = new Vector3(0f, 1f, 1f);
+                cardStackChanged = false;
+            }
+            yield return null;
+        }
+
+        if (!cardStackChanged && !cardInFront && stackedCards.Count != 0)
+        {
+            Recipe[] recipes = Resources.LoadAll<Recipe>("Recipes");
+            bool spawned = false;
+            int cardsInRecipe = 0;
+            int cardsInStack = 0;
+            foreach (Recipe recipe in recipes)
+            {
+                bool inRecipe = true;
+                cardsInRecipe = recipe.recipeCards.Count;
+                cardsInStack = stackedCards.Count;
+                if (cardsInRecipe != cardsInStack)
+                    continue;
+                foreach (Card card in stackedCards)
+                {
+                    if (!recipe.recipeCards.Contains(card.cardData))
+                    {
+                        inRecipe = false;
+                        break;
+                    }
+                }
+                if (inRecipe)
+                {
+                    GameManager.Instance.SpawnCard(recipe.result, transform.position);
+                    spawned = true;
+                    break;
+                }
+            }
+            if (!spawned)
+                GameManager.Instance.SpawnCard(GameManager.Instance.failedCreationRef, transform.position);
+            DestroyCardStack();
+        }
+        coroutineRunning = false;
     }
 
     private void UpdateStackList()
     {
-        if (cardInFront != null) return;
-
         stackedCards.Clear();
-        stackedCards.Add(this);
+
+        if (cardInFront != null) return;
+        if (cardBehind == null) return;
+
         foreach (Card card in GetComponentsInChildren<Card>())
         {
             stackedCards.Add(card);
         }
+        cardStackChanged = true;
     }
 
     private void RemoveVFX(ActionType action)
@@ -263,6 +375,26 @@ public class Card : MonoBehaviour
             cardBehind.SellCard();
 
         GameManager.Instance.AddCurreny(cardData.sellCost);
+        sellTriggerMaterial?.SetFloat("_FlashingOpacity", 0f);
         Destroy(gameObject);
+    }
+
+    public void DestroyCardStack()
+    {
+        if (cardBehind)
+            cardBehind.DestroyCardStack();
+
+        Destroy(gameObject);
+    }
+
+    private bool CheckForRecipeSuitability()
+    {
+        return cardBehind != null && !coroutineRunning;
+    }
+
+    private void ResetRecipeCreation()
+    {
+        timeToCombineTransform.localScale = new Vector3(0f, 1f, 1f);
+        timeToCombineParent.gameObject.SetActive(false);
     }
 }

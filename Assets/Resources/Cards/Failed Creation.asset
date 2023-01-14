@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0632293d1780324ab8f414292813046, type: 3}
   m_Name: Failed Creation
   m_EditorClassIdentifier: 
+  isSpell: 1
   cardImage: {fileID: 2100000, guid: 85aebf4f281c77840ab72bf749cb77d8, type: 2}
   cardBackground: {fileID: 2100000, guid: c772376d4c8ad434faf8ebf21460a5cd, type: 2}
   description: 

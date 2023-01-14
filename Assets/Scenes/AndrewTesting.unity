@@ -269,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 8610146013685505360, guid: 300e9fe9503991c4ca78aefc02b29519,
     type: 3}
+  failedCreationRef: {fileID: 11400000, guid: c91ff38d6956bab4286f0c4ba24fc522, type: 2}
   currency: 100
   table:
     serializedVersion: 2

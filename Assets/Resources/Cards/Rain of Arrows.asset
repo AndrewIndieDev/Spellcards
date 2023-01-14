@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0632293d1780324ab8f414292813046, type: 3}
   m_Name: Rain of Arrows
   m_EditorClassIdentifier: 
+  isSpell: 1
   cardImage: {fileID: 2100000, guid: 8c894cb1646fc9e4cbfe3de08a54cb4c, type: 2}
   cardBackground: {fileID: 2100000, guid: 4452d70f5d1e1c048884a1c04f32a8d3, type: 2}
   description: 

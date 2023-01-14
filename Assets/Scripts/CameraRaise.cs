@@ -23,6 +23,7 @@ public class CameraRaise : MonoBehaviour
             currentTween = cam.transform.DORotate(new Vector3(20f, 0f, 0f), 0.5f);
             currentTween.OnComplete(() => { currentTween = null; });
             lookup = true;
+            screenPercentageToLookUp = 90;
         }
         else if (Input.mousePosition.y < screenLookUp && lookup)
         {
@@ -31,6 +32,7 @@ public class CameraRaise : MonoBehaviour
             currentTween = cam.transform.DORotate(new Vector3(60f, 0f, 0f), 0.5f);
             currentTween.OnComplete(() => { currentTween = null; });
             lookup = false;
+            screenPercentageToLookUp = 10;
         }
     }
 }
