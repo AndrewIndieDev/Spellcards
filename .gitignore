@@ -85,3 +85,9 @@ Assets/Plugins/AmplifyShaderPack/URP Samples 7xx - 9xx.unitypackage.meta
 Assets/Plugins/Borodar/RainbowFolders/Editor/Source/RainbowFolders.src.unitypackage.meta
 Assets/_Source/Designer/.autosave
 UserSettings/Layouts
+*.dwlt
+Assets/_Source/backup
+
+Assets/_Source/backup.meta
+UserSettings/Layouts/default-2021.dwlt
+*.dwlt
