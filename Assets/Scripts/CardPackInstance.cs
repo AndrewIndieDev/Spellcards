@@ -19,7 +19,7 @@ public class CardPackInstance : MonoBehaviour
         float increment = 360f / cardsToSpawn;
         while (cardsToSpawn > 0)
         {
-            GameObject spawned = GameManager.Instance.SpawnCard(potentialCards[Random.Range(0, potentialCards.Count)], transform.position);
+            GameObject spawned = GameManager.Instance.SpawnCard(potentialCards[Random.Range(0, potentialCards.Count)]);
             spawned.transform.DOMove(transform.position + radialGuide.forward * 0.15f, 0.1f);
             radialGuide.DORotate(new Vector3(0f, radialGuide.rotation.eulerAngles.y + increment, 0f), 0.005f);
             cardsToSpawn--;

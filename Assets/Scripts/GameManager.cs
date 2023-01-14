@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnCard(CardData data, Vector3 position)
+    public GameObject SpawnCard(CardData data)
     {
-        Card spawned = Instantiate(cardPrefab, position, Quaternion.identity);
+        Card spawned = Instantiate(cardPrefab, MousePosition, Quaternion.identity);
         spawned.cardData = data;
         return spawned.gameObject;
     }

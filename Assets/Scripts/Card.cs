@@ -171,7 +171,6 @@ public class Card : MonoBehaviour
         if (card != null)
         {
             triggerHit = card;
-            Debug.Log("Hit: " + triggerHit.cardData.name);
         }
 
         if (other.gameObject.layer == LayerMask.NameToLayer("SellArea"))
@@ -187,7 +186,6 @@ public class Card : MonoBehaviour
         Card card = other.gameObject.GetComponent<Card>();
         if (card != null && triggerHit != null && triggerHit == card)
         {
-            Debug.Log("Removed TriggerHit Reference");
             triggerHit = null;
         }
 

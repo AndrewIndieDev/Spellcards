@@ -49,6 +49,9 @@ public class CardPack : MonoBehaviour
     {
         if (draggingPack == null) return;
 
+        if (Vector3.Distance(draggingPack.transform.position, transform.position) < 0.3f)
+            draggingPack.transform.position = transform.position + Vector3.left * 0.3f;
+
         draggingPack.GetComponent<CardPackInstance>().Open();
         draggingPack = null;
     }
