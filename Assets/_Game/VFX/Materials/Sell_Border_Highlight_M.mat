@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sell_Border_M
+  m_Name: Sell_Border_Highlight_M
   m_Shader: {fileID: 4800000, guid: e60b5aa6f15095d40890595f0b2a0a3c, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []

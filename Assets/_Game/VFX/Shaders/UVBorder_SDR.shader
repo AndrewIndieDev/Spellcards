@@ -8,7 +8,13 @@ Shader "Spellcards/VFX/Border"
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		[ASEBegin]_Bordersqew("Border sqew", Vector) = (1,1,0,0)
 		_Borderwidth("Border width", Float) = 1.18
-		[ASEEnd]_ColorIntensity("Color Intensity", Float) = 1
+		_ColorIntensity("Color Intensity", Float) = 1
+		_Opacity("Opacity", Range( 0 , 1)) = 0
+		_Tint("Tint", Color) = (1,1,1,1)
+		[Toggle(_PARTICLES_ON)] _Particles("Particles", Float) = 1
+		[Toggle(_FLASHING1_ON)] _Flashing1("Flashing", Float) = 0
+		_FlashingOpacity("Flashing Opacity", Range( 0 , 1)) = 0
+		[ASEEnd][RemapSliders]_Flashingintensityrange("Flashing intensity range", Vector) = (0,1,0,0)
 
 
 		//_TessPhongStrength( "Tess Phong Strength", Range( 0, 1 ) ) = 0.5
@@ -198,6 +204,8 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceData.hlsl"
 
 			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+			#pragma shader_feature_local _PARTICLES_ON
 
 
 			struct VertexInput
@@ -228,9 +236,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -398,6 +410,19 @@ Shader "Spellcards/VFX/Border"
 					#endif
 				#endif
 
+				#ifdef _PARTICLES_ON
+				float4 staticSwitch46 = ( _Tint * IN.ase_color );
+				#else
+				float4 staticSwitch46 = _Tint;
+				#endif
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float4 staticSwitch62 = ( staticSwitch46 * _ColorIntensity * temp_output_56_0 );
+				#else
+				float4 staticSwitch62 = staticSwitch46;
+				#endif
+				
 				float2 texCoord10 = IN.ase_texcoord3.xy * float2( 1,1 ) + float2( 0,0 );
 				float2 temp_output_14_0 = ( texCoord10 * _Bordersqew );
 				float2 break39 = temp_output_14_0;
@@ -405,11 +430,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 				float3 BakedAlbedo = 0;
 				float3 BakedEmission = 0;
-				float3 Color = ( IN.ase_color * _ColorIntensity ).rgb;
-				float Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				float3 Color = staticSwitch62.rgb;
+				float Alpha = staticSwitch61;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -469,7 +500,9 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+
 
 			struct VertexInput
 			{
@@ -496,9 +529,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -687,9 +724,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 
-				float Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				float Alpha = staticSwitch61;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -735,7 +780,9 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+
 
 			struct VertexInput
 			{
@@ -762,9 +809,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -933,9 +984,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 
-				float Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				float Alpha = staticSwitch61;
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -981,7 +1040,9 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+
 
 			struct VertexInput
 			{
@@ -1002,9 +1063,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1158,9 +1223,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 
-				surfaceDescription.Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				surfaceDescription.Alpha = staticSwitch61;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1206,7 +1279,9 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+
 
 			struct VertexInput
 			{
@@ -1227,9 +1302,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1378,9 +1457,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 
-				surfaceDescription.Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				surfaceDescription.Alpha = staticSwitch61;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1435,7 +1522,9 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+
 
 			struct VertexInput
 			{
@@ -1457,9 +1546,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1612,9 +1705,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 
-				surfaceDescription.Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				surfaceDescription.Alpha = staticSwitch61;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1670,7 +1771,9 @@ Shader "Spellcards/VFX/Border"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 
-			
+			#define ASE_NEEDS_FRAG_COLOR
+			#pragma shader_feature_local _FLASHING1_ON
+
 
 			struct VertexInput
 			{
@@ -1692,9 +1795,13 @@ Shader "Spellcards/VFX/Border"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Tint;
+			float2 _Flashingintensityrange;
 			float2 _Bordersqew;
 			float _ColorIntensity;
+			float _FlashingOpacity;
 			float _Borderwidth;
+			float _Opacity;
 			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
@@ -1846,9 +1953,17 @@ Shader "Spellcards/VFX/Border"
 				float2 break17 = abs( ( temp_output_14_0 + appendResult40 ) );
 				float blendOpSrc19 = break17.x;
 				float blendOpDest19 = break17.y;
+				float temp_output_42_0 = ( ( IN.ase_color.a * floor( ( ( saturate( max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) ) * _Tint.a );
+				float mulTime50 = _TimeParameters.x * 5.0;
+				float temp_output_56_0 = ( (_Flashingintensityrange.x + (sin( mulTime50 ) - -1.0) * (_Flashingintensityrange.y - _Flashingintensityrange.x) / (1.0 - -1.0)) * _FlashingOpacity );
+				#ifdef _FLASHING1_ON
+				float staticSwitch61 = ( temp_output_42_0 * temp_output_56_0 * _Opacity );
+				#else
+				float staticSwitch61 = temp_output_42_0;
+				#endif
 				
 
-				surfaceDescription.Alpha = ( IN.ase_color.a * floor( ( ( saturate( 	max( blendOpSrc19, blendOpDest19 ) )) * _Borderwidth ) ) );
+				surfaceDescription.Alpha = staticSwitch61;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1888,13 +2003,10 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;9;0,0;Float;False;False;-1;
 Node;AmplifyShaderEditor.AbsOpNode;11;-293,-190.5;Inherit;True;1;0;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;12;-517,-177.5;Inherit;True;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.BreakToComponentsNode;17;-76,-163.5;Inherit;False;FLOAT2;1;0;FLOAT2;0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
-Node;AmplifyShaderEditor.RangedFloatNode;23;321,-39.5;Inherit;False;Property;_Borderwidth;Border width;1;0;Create;True;0;0;0;False;0;False;1.18;1.37;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;23;321,-39.5;Inherit;False;Property;_Borderwidth;Border width;1;0;Create;True;0;0;0;False;0;False;1.18;1.18;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;22;628.5573,-163.6983;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.VertexColorNode;32;924.5294,-440.326;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;34;1155.368,-314.6929;Inherit;False;Property;_ColorIntensity;Color Intensity;2;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;33;1356.585,-430.1118;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;35;1286.21,-187.0378;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;1629.302,-210.9381;Float;False;True;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;Spellcards/VFX/Border;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;3;True;12;all;0;False;True;1;5;False;;10;False;;1;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;0;;0;0;Standard;23;Surface;1;638092515405112142;  Blend;0;0;Two Sided;1;0;Forward Only;0;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;0;0;Built-in Fog;0;0;DOTS Instancing;0;0;Meta Pass;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;0;10;False;True;True;True;False;False;True;True;True;True;False;;False;0
 Node;AmplifyShaderEditor.FloorOpNode;30;899.3361,-165.3697;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;10;-1488.5,-163.9;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;14;-1202.5,-168.9;Inherit;True;2;2;0;FLOAT2;0,0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
@@ -1902,20 +2014,34 @@ Node;AmplifyShaderEditor.DynamicAppendNode;40;-667.0957,11.04973;Inherit;False;F
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;38;-810.0958,92.04963;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;41;-809.0958,0.04972553;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.BreakToComponentsNode;39;-961.8957,-39.85029;Inherit;False;FLOAT2;1;0;FLOAT2;0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
-Node;AmplifyShaderEditor.Vector2Node;27;-1453.1,44.9;Inherit;False;Property;_Bordersqew;Border sqew;0;0;Create;True;0;0;0;False;0;False;1,1;2,2;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;27;-1453.1,44.9;Inherit;False;Property;_Bordersqew;Border sqew;0;0;Create;True;0;0;0;False;0;False;1,1;0.89,0.87;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.BlendOpsNode;19;91,-167.5;Inherit;True;Lighten;True;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;42;1463.759,-187.4834;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;45;1196.759,-463.4834;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.ColorNode;44;928.7587,-628.4834;Inherit;False;Property;_Tint;Tint;4;0;Create;True;0;0;0;False;0;False;1,1,1,1;0,0,0,0.3411765;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;2220.302,-206.9381;Float;False;True;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;Spellcards/VFX/Border;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;3;True;12;all;0;False;True;1;5;False;;10;False;;1;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;0;;0;0;Standard;23;Surface;1;638092515405112142;  Blend;0;0;Two Sided;1;0;Forward Only;0;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;0;0;Built-in Fog;0;0;DOTS Instancing;0;0;Meta Pass;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;0;10;False;True;True;True;False;False;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.RangedFloatNode;34;1373.368,-426.6929;Inherit;False;Property;_ColorIntensity;Color Intensity;2;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;59;1948.759,-622.483;Inherit;True;3;3;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleTimeNode;50;630.7587,166.517;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SinOpNode;51;796.759,160.517;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;53;425.7587,157.517;Inherit;False;Constant;_FlashingSpeed;Flashing Speed;6;0;Create;True;0;0;0;False;0;False;5;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TFHCRemapNode;52;937.759,165.517;Inherit;False;5;0;FLOAT;0;False;1;FLOAT;-1;False;2;FLOAT;1;False;3;FLOAT;0;False;4;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;57;1160.759,242.517;Inherit;False;Property;_FlashingOpacity;Flashing Opacity;7;0;Create;True;0;0;0;False;0;False;0;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;56;1437.759,160.517;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.Vector2Node;54;656.759,257.517;Inherit;False;Property;_Flashingintensityrange;Flashing intensity range;8;1;[RemapSliders];Create;True;0;0;0;False;0;False;0,1;1,1;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.RangedFloatNode;43;1365.759,352.5166;Inherit;False;Property;_Opacity;Opacity;3;0;Create;True;0;0;0;False;0;False;0;0.073;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.StaticSwitch;46;1325.759,-629.4834;Inherit;False;Property;_Particles;Particles;5;0;Create;True;0;0;0;False;0;False;0;1;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;58;1795.759,-58.483;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StaticSwitch;61;1973.759,-180.483;Inherit;False;Property;_Flashing;Flashing;6;0;Create;True;0;0;0;False;0;False;0;1;1;True;;Toggle;2;Key0;Key1;Reference;62;True;True;All;9;1;FLOAT;0;False;0;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StaticSwitch;62;1976.759,-298.483;Inherit;False;Property;_Flashing1;Flashing;6;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
 WireConnection;11;0;12;0
 WireConnection;12;0;14;0
 WireConnection;12;1;40;0
 WireConnection;17;0;11;0
 WireConnection;22;0;19;0
 WireConnection;22;1;23;0
-WireConnection;33;0;32;0
-WireConnection;33;1;34;0
 WireConnection;35;0;32;4
 WireConnection;35;1;30;0
-WireConnection;1;2;33;0
-WireConnection;1;3;35;0
 WireConnection;30;0;22;0
 WireConnection;14;0;10;0
 WireConnection;14;1;27;0
@@ -1928,5 +2054,30 @@ WireConnection;41;1;27;1
 WireConnection;39;0;14;0
 WireConnection;19;0;17;0
 WireConnection;19;1;17;1
+WireConnection;42;0;35;0
+WireConnection;42;1;44;4
+WireConnection;45;0;44;0
+WireConnection;45;1;32;0
+WireConnection;1;2;62;0
+WireConnection;1;3;61;0
+WireConnection;59;0;46;0
+WireConnection;59;1;34;0
+WireConnection;59;2;56;0
+WireConnection;50;0;53;0
+WireConnection;51;0;50;0
+WireConnection;52;0;51;0
+WireConnection;52;3;54;1
+WireConnection;52;4;54;2
+WireConnection;56;0;52;0
+WireConnection;56;1;57;0
+WireConnection;46;1;44;0
+WireConnection;46;0;45;0
+WireConnection;58;0;42;0
+WireConnection;58;1;56;0
+WireConnection;58;2;43;0
+WireConnection;61;1;42;0
+WireConnection;61;0;58;0
+WireConnection;62;1;46;0
+WireConnection;62;0;59;0
 ASEEND*/
-//CHKSM=0C4C14B4152B616FED1372C408F921A71B79DBBF
+//CHKSM=F50551A63543231DF81704582B4E66FDA50D6F5C
