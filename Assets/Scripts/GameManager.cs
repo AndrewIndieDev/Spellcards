@@ -2,6 +2,7 @@ using QFSW.QC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,11 +14,18 @@ public class GameManager : MonoBehaviour
 
     public Card cardPrefab;
     public CardData failedCreationRef;
+    public VisualEffect coins;
 
     public int currency = 0;
+    private int oldCurrency;
 
     public LayerMask table;
     public Vector3 MousePosition;
+
+    private void Start()
+    {
+        AddCurrency(15);
+    }
 
     [Command]
     private void SpawnCards(int amount)
@@ -46,9 +54,12 @@ public class GameManager : MonoBehaviour
         MousePosition.y += 0.015f;
     }
 
-    public void AddCurreny(int amount)
+    [Command]
+    public void AddCurrency(int amount)
     {
+        oldCurrency = currency;
         currency += amount;
+        CheckCoinAmount();
     }
 
     public bool RemoveCurrency(int amount)
@@ -56,6 +67,14 @@ public class GameManager : MonoBehaviour
         if (currency - amount < 0)
             return false;
         currency -= amount;
+        CheckCoinAmount();
         return true;
+    }
+
+    private void CheckCoinAmount()
+    {
+        coins.Reinit();
+        coins.SetInt("Coin Initialize", currency);
+        coins.SendEvent("Initialize");
     }
 }

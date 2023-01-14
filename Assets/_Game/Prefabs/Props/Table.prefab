@@ -1062,7 +1062,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin_Stack_VFX
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2019742236906021786, guid: fc33ea6536a57214d89868483d6c3c27, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc33ea6536a57214d89868483d6c3c27, type: 3}
 --- !u!4 &5740478967133952694 stripped
 Transform:

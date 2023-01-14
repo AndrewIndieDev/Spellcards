@@ -384,7 +384,7 @@ public class Card : MonoBehaviour
         if (cardBehind)
             cardBehind.SellCard();
 
-        GameManager.Instance.AddCurreny(cardData.sellCost);
+        GameManager.Instance.AddCurrency(cardData.sellCost);
         sellTriggerMaterial?.SetFloat("_FlashingOpacity", 0f);
         Destroy(gameObject);
     }
