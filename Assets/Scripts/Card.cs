@@ -99,7 +99,19 @@ public class Card : MonoBehaviour
         if (cardSellCost)
             cardSellCost.text = cardData.sellCost.ToString();
 
+        GameManager.Instance.OnGameEnd += GameEnd;
+
         PerformAction(ActionType.CREATED);
+    }
+
+    private void GameEnd()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameEnd -= GameEnd;
     }
 
 #if UNITY_EDITOR
@@ -174,6 +186,17 @@ public class Card : MonoBehaviour
             ActivateSpell();
             return;
         }
+
+        //Check if we are still on the table or not
+        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, LayerMask.NameToLayer("Table"));
+        if (hit.collider == null)
+        {
+            if (currentTween != null)
+                currentTween.Kill();
+            currentTween = transform.DOMove(Vector3.zero, 0.1f);
+            return;
+        }
+
 
         //Check triggerHit and see if we need to attach ourselves to it.
         if (triggerHit == null)
@@ -250,9 +273,8 @@ public class Card : MonoBehaviour
 
     private void ActivateSpell()
     {
-        transform.position = spellArea.gameObject.transform.parent.position;
-        transform.rotation = spellArea.gameObject.transform.parent.rotation;
-        spellArea.SetCard(this);
+        spellArea.AddCard(this);
+        DestroyCardStack();
     }
 
     public void EnableMainCollider(bool enable = true)
@@ -263,20 +285,25 @@ public class Card : MonoBehaviour
 
     public void RemoveLastCardInStack()
     {
-        Card removeLast = this;
-        while (removeLast.cardBehind != null)
+        Card cardToRemove = this;
+        while (cardToRemove.cardBehind != null)
         {
-            removeLast = removeLast.cardBehind;
+            cardToRemove = cardToRemove.cardBehind;
         }
 
-        removeLast.transform.parent = null;
-        removeLast.cardInFront.cardBehind = null;
-        removeLast.cardInFront = null;
+        cardToRemove.RemoveCardFromThisCardsStack(this);
+    }
+
+    public void RemoveCardFromThisCardsStack(Card stackLeader)
+    {
+        transform.parent = null;
+        cardInFront.cardBehind = null;
+        cardInFront = null;
         if (!pickedUp)
-            removeLast.transform.DOLocalMoveY(0f, 0.1f);
-        removeLast.EnableMainCollider();
-        stackedCards.RemoveAt(stackedCards.Count - 1);
-        cardStackChanged = true;
+            transform.DOLocalMoveY(0f, 0.1f);
+        EnableMainCollider();
+        stackLeader.stackedCards.RemoveAt(stackedCards.Count - 1);
+        stackLeader.cardStackChanged = true;
     }
 
     public void PutCardBehind(Card inFront = null)

@@ -16,15 +16,16 @@ public class GameManager : MonoBehaviour
     public CardData failedCreationRef;
     public VisualEffect coins;
 
+    public float generateGoldEveryXSec = 3f;
     public int currency = 0;
 
     public LayerMask table;
     public Vector3 MousePosition;
 
-    private void Start()
-    {
-        AddCurrency(15);
-    }
+    public System.Action OnGameStart;
+    public System.Action OnGameEnd;
+
+    public bool playing;
 
     [Command]
     private void SpawnCards(int amount)
@@ -74,5 +75,38 @@ public class GameManager : MonoBehaviour
         coins.Reinit();
         coins.SetInt("Coin Initialize", currency);
         coins.SendEvent("Initialize");
+    }
+
+    [Command]
+    public void GameStart()
+    {
+        if (playing) return;
+
+        OnGameStart?.Invoke();
+
+        AddCurrency(15);
+        playing = true;
+        StartCoroutine(GoldOverTime());
+    }
+
+    [Command]
+    public void GameEnd()
+    {
+        if (!playing) return;
+
+        OnGameEnd?.Invoke();
+
+        playing = false;
+        RemoveCurrency(currency);
+    }
+
+    private IEnumerator GoldOverTime()
+    {
+        while (playing)
+        {
+            yield return new WaitForSeconds(generateGoldEveryXSec);
+            if (!playing) break;
+            AddCurrency(1);
+        }
     }
 }

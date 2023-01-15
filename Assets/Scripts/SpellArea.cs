@@ -7,26 +7,40 @@ public class SpellArea : MonoBehaviour
     public float spellChargeTime;
     public bool IsInUse => cardData != null;
     public Transform chargeTransform;
+    public FakeSpellCard visual;
 
-    private Card cardData;
+    private CardData cardData;
+    private List<CardData> queue = new();
 
-    public void SetCard(Card data)
+    public void AddCard(Card data)
     {
-        cardData = data;
-        StartCoroutine(ChargeSpell());
+        queue.Add(data.cardData);
+        for (int i = 1; i < data.stackedCards.Count; i++)
+        {
+            queue.Add(data.stackedCards[i].cardData);
+        }
+        if (!IsInUse)
+            StartCoroutine(ChargeSpell());
     }
 
     private IEnumerator ChargeSpell()
     {
-        float time = spellChargeTime;
-        while(time > 0)
+        while (queue.Count > 0)
         {
-            time -= Time.deltaTime;
-            chargeTransform.localScale = new Vector3((spellChargeTime - time) / spellChargeTime, 1f, 1f);
-            yield return null;
+            cardData = queue[0];
+            visual.gameObject.SetActive(true);
+            visual.Init(cardData);
+            float time = spellChargeTime;
+            while (time > 0)
+            {
+                time -= Time.deltaTime;
+                chargeTransform.localScale = new Vector3((spellChargeTime - time) / spellChargeTime, 1f, 1f);
+                yield return null;
+            }
+            chargeTransform.localScale = new Vector3(0f, 1f, 1f);
+            cardData = null;
+            queue.RemoveAt(0);
+            visual.gameObject.SetActive(false);
         }
-        chargeTransform.localScale = new Vector3(0f, 1f, 1f);
-        cardData.DestroyCardStack();
-        cardData = null;
     }
 }

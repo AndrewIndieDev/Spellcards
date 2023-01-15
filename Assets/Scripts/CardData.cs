@@ -12,4 +12,5 @@ public class CardData : ScriptableObject
     public string description;
     public int sellCost;
     public CardAction[] actions;
+    public GameObject spellPrefab;
 }
