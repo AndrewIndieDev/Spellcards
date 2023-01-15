@@ -14,7 +14,8 @@ Shader "Spellcards/Environment/Lit"
 		_TriplannerTiling("Triplanner Tiling", Float) = 1
 		_Contrast("Contrast", Float) = 1
 		_UVScale("UV Scale", Float) = 1
-		[ASEEnd][RemapSliders]_Offset("Offset", Vector) = (0,0,0,0)
+		[RemapSliders]_Offset("Offset", Vector) = (0,0,0,0)
+		[ASEEnd]_EmissiveIntensity("EmissiveIntensity", Float) = 0
 
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
@@ -193,6 +194,7 @@ Shader "Spellcards/Environment/Lit"
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -283,6 +285,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -575,7 +578,7 @@ Shader "Spellcards/Environment/Lit"
 
 				float3 BaseColor = ( _Tint * saturate( CalculateContrast(_Contrast,staticSwitch20) ) ).rgb;
 				float3 Normal = float3(0, 0, 1);
-				float3 Emission = 0;
+				float3 Emission = ( _Tint * _EmissiveIntensity ).rgb;
 				float3 Specular = 0.5;
 				float Metallic = _Metallic;
 				float Smoothness = _Smoothness;
@@ -794,6 +797,7 @@ Shader "Spellcards/Environment/Lit"
 			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -843,6 +847,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -1104,6 +1109,7 @@ Shader "Spellcards/Environment/Lit"
 			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -1151,6 +1157,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -1385,6 +1392,7 @@ Shader "Spellcards/Environment/Lit"
 			#define _NORMAL_DROPOFF_TS 1
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -1446,6 +1454,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -1684,7 +1693,7 @@ Shader "Spellcards/Environment/Lit"
 				
 
 				float3 BaseColor = ( _Tint * saturate( CalculateContrast(_Contrast,staticSwitch20) ) ).rgb;
-				float3 Emission = 0;
+				float3 Emission = ( _Tint * _EmissiveIntensity ).rgb;
 				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 
@@ -1723,6 +1732,7 @@ Shader "Spellcards/Environment/Lit"
 			#define _NORMAL_DROPOFF_TS 1
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -1774,6 +1784,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -2029,6 +2040,7 @@ Shader "Spellcards/Environment/Lit"
 			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -2079,6 +2091,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -2351,6 +2364,7 @@ Shader "Spellcards/Environment/Lit"
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -2437,6 +2451,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -2722,7 +2737,7 @@ Shader "Spellcards/Environment/Lit"
 
 				float3 BaseColor = ( _Tint * saturate( CalculateContrast(_Contrast,staticSwitch20) ) ).rgb;
 				float3 Normal = float3(0, 0, 1);
-				float3 Emission = 0;
+				float3 Emission = ( _Tint * _EmissiveIntensity ).rgb;
 				float3 Specular = 0.5;
 				float Metallic = _Metallic;
 				float Smoothness = _Smoothness;
@@ -2844,6 +2859,7 @@ Shader "Spellcards/Environment/Lit"
 			#define _NORMAL_DROPOFF_TS 1
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -2889,6 +2905,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -3095,6 +3112,7 @@ Shader "Spellcards/Environment/Lit"
 			#define _NORMAL_DROPOFF_TS 1
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define ASE_FOG 1
+			#define _EMISSION
 			#define ASE_SRP_VERSION 120108
 
 
@@ -3140,6 +3158,7 @@ Shader "Spellcards/Environment/Lit"
 			float _Contrast;
 			float _UVScale;
 			float _TriplannerTiling;
+			float _EmissiveIntensity;
 			float _Metallic;
 			float _Smoothness;
 			#ifdef ASE_TRANSMISSION
@@ -3366,12 +3385,15 @@ Node;AmplifyShaderEditor.RangedFloatNode;11;-38.5,-209.5;Inherit;False;Property;
 Node;AmplifyShaderEditor.TextureCoordinatesNode;30;-1610.389,-490.4874;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;31;-1533.389,-352.4874;Inherit;False;Property;_UVScale;UV Scale;7;0;Create;True;0;0;0;False;0;False;1;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;29;-1316.389,-439.4874;Inherit;False;2;2;0;FLOAT2;0,0;False;1;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.ColorNode;15;-327.5,-388.5;Inherit;False;Property;_Tint;Tint;1;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,0;0.2830189,0.148101,0.08677466,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.Vector2Node;32;-1914.612,-453.4371;Inherit;False;Property;_Offset;Offset;8;1;[RemapSliders];Create;True;0;0;0;False;0;False;0,0;0.2011173,0.6480448;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;32;-1914.612,-453.4371;Inherit;False;Property;_Offset;Offset;8;1;[RemapSliders];Create;True;0;0;0;False;0;False;0,0;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.SimpleAddOpNode;33;-1306.161,5.924683;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT2;0,0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.ColorNode;15;-522.5,-433.5;Inherit;False;Property;_Tint;Tint;1;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,0;0.1037736,0.1037736,0.1037736,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;34;-236.8596,-298.3588;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;35;-516.8596,-267.3588;Float;False;Property;_EmissiveIntensity;EmissiveIntensity;9;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 WireConnection;14;0;15;0
 WireConnection;14;1;28;0
 WireConnection;2;0;14;0
+WireConnection;2;2;34;0
 WireConnection;2;3;11;0
 WireConnection;2;4;12;0
 WireConnection;13;0;21;0
@@ -3388,5 +3410,7 @@ WireConnection;29;0;30;0
 WireConnection;29;1;31;0
 WireConnection;33;0;23;0
 WireConnection;33;1;32;0
+WireConnection;34;0;15;0
+WireConnection;34;1;35;0
 ASEEND*/
-//CHKSM=072ED9DC088CDC3313DEC33881032A60332E260D
+//CHKSM=4896380191BFD549F8C9C56CF5501087D9216ABD
