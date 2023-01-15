@@ -21,6 +21,7 @@ public class Card : MonoBehaviour
     public BoxCollider behindCollider;
     public Card cardBehind;
     public Card cardInFront;
+    public Vector3 behindOffset;
 
     public bool PickedUp => pickedUp;
 
@@ -28,7 +29,6 @@ public class Card : MonoBehaviour
     private bool pickedUp;
     private Vector3 offset;
     private Card triggerHit;
-    private Vector3 behindOffset;
     public List<Card> stackedCards = new();
     private bool sellTriggerHit;
     private Material sellTriggerMaterial;
@@ -99,8 +99,6 @@ public class Card : MonoBehaviour
         if (cardSellCost)
             cardSellCost.text = cardData.sellCost.ToString();
 
-        behindOffset = new Vector3(0f, -0.0045f, -0.085f);
-
         PerformAction(ActionType.CREATED);
     }
 
@@ -119,7 +117,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (pickedUp) return;
+        if (pickedUp || cardInFront) return;
         if (currentTween != null)
             currentTween.Kill();
         currentTween = transform.DOLocalMoveY(0.01f, 0.1f);
@@ -127,7 +125,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (pickedUp) return;
+        if (pickedUp || cardInFront) return;
         if (currentTween != null)
             currentTween.Kill();
         currentTween = transform.DOLocalMoveY(0.0f, 0.1f);
@@ -177,12 +175,14 @@ public class Card : MonoBehaviour
             return;
         }
 
-        if (currentTween != null)
-            currentTween.Kill();
-        currentTween = transform.DOLocalMoveY(0f, 0.1f);
-
         //Check triggerHit and see if we need to attach ourselves to it.
-        if (triggerHit == null) return;
+        if (triggerHit == null)
+        {
+                if (currentTween != null)
+                    currentTween.Kill();
+                currentTween = transform.DOLocalMoveY(0f, 0.1f);
+                return;
+        }
         if (triggerHit.cardData.isSpell || cardData.isSpell) return;
 
         triggerHit.PutCardBehind(this);
@@ -290,11 +290,13 @@ public class Card : MonoBehaviour
             }
         }
 
+        EnableMainCollider(false);
         toPutBehind.cardBehind = this;
         cardInFront = toPutBehind;
         transform.parent = toPutBehind.transform;
-        transform.DOLocalMove(behindOffset, 0.1f);
-        EnableMainCollider(false);
+        if (currentTween != null)
+            currentTween.Kill();
+        currentTween = transform.DOLocalMove(behindOffset, 0.1f);
         UpdateStackList();
         PerformAction(ActionType.STACK);
     }

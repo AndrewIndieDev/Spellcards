@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public VisualEffect coins;
 
     public int currency = 0;
-    private int oldCurrency;
 
     public LayerMask table;
     public Vector3 MousePosition;
@@ -57,7 +56,6 @@ public class GameManager : MonoBehaviour
     [Command]
     public void AddCurrency(int amount)
     {
-        oldCurrency = currency;
         currency += amount;
         CheckCoinAmount();
     }

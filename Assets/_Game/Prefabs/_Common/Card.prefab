@@ -69,6 +69,7 @@ MonoBehaviour:
   behindCollider: {fileID: 2523680075127948951}
   cardBehind: {fileID: 0}
   cardInFront: {fileID: 0}
+  behindOffset: {x: 0, y: -0.0045, z: -0.085}
   stackedCards: []
 --- !u!65 &945469149472439880
 BoxCollider:
