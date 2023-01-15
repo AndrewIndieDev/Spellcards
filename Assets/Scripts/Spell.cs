@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class Spell : MonoBehaviour
 {
+    public GameObject vfxExplosionPrefab;
+    [Space(20)]
     public AnimationCurve xCurve;
     public AnimationCurve yCurve;
 
+    private CardData data;
     private Vector3 endPosition;
     private float dist;
 
@@ -15,16 +17,26 @@ public class Spell : MonoBehaviour
     {
         endPosition = BigBad.Instance.spellHitTransform.position;
         dist = Vector3.Distance(transform.position, endPosition);
+    }
 
-        Tween t = transform.DOMoveZ(endPosition.z, 5f - (4.5f * ((dist - Vector3.Distance(transform.position, endPosition)) / dist)));
-        t.easePeriod = 0f;
+    public void SetData(CardData data)
+    {
+        this.data = data;
     }
 
     private void Update()
     {
-        float x = xCurve.Evaluate(((dist - Vector3.Distance(transform.position, endPosition)) / dist));
-        float y = yCurve.Evaluate(((dist - Vector3.Distance(transform.position, endPosition)) / dist));
+        endPosition = BigBad.Instance.spellHitTransform.position;
+        float x = xCurve.Evaluate((dist - Vector3.Distance(transform.position, endPosition)) / dist);
+        float y = yCurve.Evaluate((dist - Vector3.Distance(transform.position, endPosition)) / dist);
 
-        transform.position = new Vector3(x, y, transform.position.z);
+        transform.position = new Vector3(x, y, transform.position.z + Time.deltaTime * 200f);
+
+        if (transform.position.z > endPosition.z)
+        {
+            //Create explosion
+            BigBad.Instance.TakeDamage(data.spellDamage + Random.Range(-20000, 20001));
+            Destroy(gameObject);
+        }
     }
 }

@@ -16,6 +16,7 @@ public class BigBad : MonoBehaviour
     
     private Vector3 startPos;
     private Tween currentTween;
+    private int bigBadHp = 1000000;
 
     private void Start()
     {
@@ -28,11 +29,21 @@ public class BigBad : MonoBehaviour
     {
         transform.position = startPos;
         currentTween = transform.DOMove(endPos.position, 120f);
+        currentTween.onComplete += () =>
+        {
+            GameManager.Instance.GameEnd();
+        };
     }
 
     public void GameEnd()
     {
         if (currentTween != null)
             currentTween.Kill();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        bigBadHp -= damage;
+
     }
 }

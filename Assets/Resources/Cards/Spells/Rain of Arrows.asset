@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Rain of Arrows
   m_EditorClassIdentifier: 
   isSpell: 1
+  spellDamage: 90000
   cardImage: {fileID: 2100000, guid: 8c894cb1646fc9e4cbfe3de08a54cb4c, type: 2}
   cardBackground: {fileID: 2100000, guid: 25240d42bb0fd8e49aac44165401f480, type: 2}
   description: 
@@ -30,3 +31,5 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 5975477858656954894, guid: 84d3a9bb82d22944a9be8cf47b066152,
+    type: 3}

@@ -16,7 +16,8 @@ public class CameraRaise : MonoBehaviour
     public int screenPercentageToLookUp = 10;
 
     private float screenLookUp;
-    private Tween currentTween;
+    private Tween rotTween;
+    private Tween posTween;
     private bool lookup;
 
     private void Start()
@@ -33,33 +34,45 @@ public class CameraRaise : MonoBehaviour
 
         if (Input.mousePosition.y > screenLookUp && !lookup)
         {
-            SetCameraXRotation(20f);
+            SetCameraRotation(new Vector3(15f, 0f, 0f));
+            SetCameraPosition(new Vector3(0f, 1.95f, -1.57f));
             lookup = true;
             screenPercentageToLookUp = 90;
         }
         else if (Input.mousePosition.y < screenLookUp && lookup)
         {
-            SetCameraXRotation(60f);
+            SetCameraRotation(new Vector3(60f, 0f, 0f));
+            SetCameraPosition(new Vector3(0f, 1.5f, -.35f));
             lookup = false;
             screenPercentageToLookUp = 10;
         }
     }
 
-    private void SetCameraXRotation(float rot)
+    private void SetCameraRotation(Vector3 rot)
     {
-        if (currentTween != null)
-            currentTween.Kill();
-        currentTween = cam.transform.DORotate(new Vector3(rot, 0f, 0f), 0.5f);
-        currentTween.OnComplete(() => { currentTween = null; });
+        if (rotTween != null)
+            rotTween.Kill();
+        rotTween = cam.transform.DORotate(rot, 0.5f);
+        rotTween.OnComplete(() => { rotTween = null; });
+    }
+
+    private void SetCameraPosition(Vector3 pos)
+    {
+        if (posTween != null)
+            posTween.Kill();
+        posTween = cam.transform.DOMove(pos, 0.5f);
+        posTween.OnComplete(() => { posTween = null; });
     }
 
     public void GameStart()
     {
-        SetCameraXRotation(60f);
+        SetCameraRotation(new Vector3(60f, 0f, 0f));
+        SetCameraPosition(new Vector3(0f, 1.5f, -.35f));
     }
 
     public void GameEnd()
     {
-        SetCameraXRotation(-90f);
+        SetCameraRotation(new Vector3(-90f, 0f, 0f));
+        SetCameraPosition(new Vector3(0f, -.8f, -1f));
     }
 }

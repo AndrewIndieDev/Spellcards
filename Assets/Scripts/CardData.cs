@@ -6,6 +6,7 @@ using UnityEngine;
 public class CardData : ScriptableObject
 {
     public bool isSpell;
+    public int spellDamage;
     public Material cardImage;
     public Material cardBackground;
     [TextArea]

@@ -1,3 +1,4 @@
+using QFSW.QC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class SpellArea : MonoBehaviour
     public Transform chargeTransform;
     public FakeSpellCard visual;
     public Transform spellFireTransform;
+
+    [Header("DEBUG STUFF")]
+    [SerializeField] private CardData testSpell;
 
     private CardData cardData;
     private List<CardData> queue = new();
@@ -39,10 +43,33 @@ public class SpellArea : MonoBehaviour
                 yield return null;
             }
             chargeTransform.localScale = new Vector3(0f, 1f, 1f);
-            Instantiate(cardData.spellPrefab, spellFireTransform.position, spellFireTransform.rotation, spellFireTransform);
+            LaunchSpell();
             cardData = null;
             queue.RemoveAt(0);
             visual.gameObject.SetActive(false);
+        }
+    }
+
+    private void LaunchSpell()
+    {
+        Spell spell = Instantiate(cardData.spellPrefab, spellFireTransform.position, spellFireTransform.rotation, spellFireTransform).GetComponent<Spell>();
+        spell.SetData(cardData);
+    }
+
+    [Command]
+    private void DebugTestSpell(int amount)
+    {
+        StartCoroutine(DebugTestSpellEnumerator(amount));
+    }
+
+    private IEnumerator DebugTestSpellEnumerator(int amount)
+    {
+        while (amount > 0)
+        {
+            cardData = testSpell;
+            LaunchSpell();
+            amount--;
+            yield return new WaitForSeconds(1f);
         }
     }
 }
