@@ -99,7 +99,7 @@ public class Card : MonoBehaviour
         if (cardSellCost)
             cardSellCost.text = cardData.sellCost.ToString();
 
-        behindOffset = new Vector3(0f, -0.002f, -0.035f);
+        behindOffset = new Vector3(0f, -0.0045f, -0.085f);
 
         PerformAction(ActionType.CREATED);
     }
