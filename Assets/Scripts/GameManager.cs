@@ -16,15 +16,13 @@ public class GameManager : MonoBehaviour
     public CardData failedCreationRef;
     public VisualEffect coins;
 
+    public float generateGoldEveryXSec = 3f;
     public int currency = 0;
 
     public LayerMask table;
     public Vector3 MousePosition;
 
-    private void Start()
-    {
-        AddCurrency(15);
-    }
+    private bool playing;
 
     [Command]
     private void SpawnCards(int amount)
@@ -74,5 +72,23 @@ public class GameManager : MonoBehaviour
         coins.Reinit();
         coins.SetInt("Coin Initialize", currency);
         coins.SendEvent("Initialize");
+    }
+
+    [Command]
+    public void GameStart()
+    {
+        AddCurrency(15);
+        BigBad.Instance.GameStart();
+        playing = true;
+        StartCoroutine(GoldOverTime());
+    }
+
+    private IEnumerator GoldOverTime()
+    {
+        while (playing)
+        {
+            yield return new WaitForSeconds(generateGoldEveryXSec);
+            AddCurrency(1);
+        }
     }
 }
