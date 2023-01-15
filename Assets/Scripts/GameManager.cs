@@ -22,7 +22,10 @@ public class GameManager : MonoBehaviour
     public LayerMask table;
     public Vector3 MousePosition;
 
-    private bool playing;
+    public System.Action OnGameStart;
+    public System.Action OnGameEnd;
+
+    public bool playing;
 
     [Command]
     private void SpawnCards(int amount)
@@ -77,10 +80,24 @@ public class GameManager : MonoBehaviour
     [Command]
     public void GameStart()
     {
+        if (playing) return;
+
+        OnGameStart?.Invoke();
+
         AddCurrency(15);
-        BigBad.Instance.GameStart();
         playing = true;
         StartCoroutine(GoldOverTime());
+    }
+
+    [Command]
+    public void GameEnd()
+    {
+        if (!playing) return;
+
+        OnGameEnd?.Invoke();
+
+        playing = false;
+        RemoveCurrency(currency);
     }
 
     private IEnumerator GoldOverTime()
@@ -88,6 +105,7 @@ public class GameManager : MonoBehaviour
         while (playing)
         {
             yield return new WaitForSeconds(generateGoldEveryXSec);
+            if (!playing) break;
             AddCurrency(1);
         }
     }

@@ -19,10 +19,19 @@ public class BigBad : MonoBehaviour
     private void Start()
     {
         startPos = transform.position;
+        GameManager.Instance.OnGameStart += GameStart;
+        GameManager.Instance.OnGameEnd += GameEnd;
     }
 
     public void GameStart()
     {
+        transform.position = startPos;
         currentTween = transform.DOMove(endPos.position, 120f);
+    }
+
+    public void GameEnd()
+    {
+        if (currentTween != null)
+            currentTween.Kill();
     }
 }
