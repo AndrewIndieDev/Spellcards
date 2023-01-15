@@ -8,6 +8,7 @@ public class SpellArea : MonoBehaviour
     public bool IsInUse => cardData != null;
     public Transform chargeTransform;
     public FakeSpellCard visual;
+    public Transform spellFireTransform;
 
     private CardData cardData;
     private List<CardData> queue = new();
@@ -38,6 +39,7 @@ public class SpellArea : MonoBehaviour
                 yield return null;
             }
             chargeTransform.localScale = new Vector3(0f, 1f, 1f);
+            Instantiate(cardData.spellPrefab, spellFireTransform.position, spellFireTransform.rotation, spellFireTransform);
             cardData = null;
             queue.RemoveAt(0);
             visual.gameObject.SetActive(false);

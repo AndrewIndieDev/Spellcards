@@ -12,6 +12,7 @@ public class BigBad : MonoBehaviour
     }
 
     public Transform endPos;
+    public Transform spellHitTransform;
     
     private Vector3 startPos;
     private Tween currentTween;
