@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.7287984, b: 1, a: 1}
+      maxColor: {r: 0.31132078, g: 0.16815153, b: 0.116011046, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5104,8 +5104,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0, g: 0.7287984, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.4189908, b: 0, a: 1}
+      minColor: {r: 0.22745098, g: 0.084376276, b: 0.070588246, a: 1}
+      maxColor: {r: 0.42352942, g: 0.2541142, b: 0.12941177, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9987,7 +9987,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.18659005, g: 0.01027944, b: 0.7264151, a: 0.5019608}
+      maxColor: {r: 0.38679248, g: 0.2820158, b: 0.22076362, a: 0.5019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14868,8 +14868,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.5130794, g: 0.2783019, b: 1, a: 1}
-      maxColor: {r: 0.0047169924, g: 0.4936764, b: 1, a: 1}
+      minColor: {r: 0.1981132, g: 0.1700843, b: 0.16727483, a: 1}
+      maxColor: {r: 0.2735849, g: 0.16634011, b: 0.13033998, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19760,7 +19760,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.41291615, g: 0.2028302, b: 1, a: 1}
+      maxColor: {r: 0.3584906, g: 0.23447199, b: 0.16740833, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -24431,7 +24431,7 @@ GameObject:
   - component: {fileID: 485411464310066916}
   - component: {fileID: 2520023371121729155}
   m_Layer: 0
-  m_Name: Spell_Generic_Impact_Blue
+  m_Name: Spell_Generic_Impact_Grey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

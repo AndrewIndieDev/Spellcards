@@ -22,7 +22,7 @@ MonoBehaviour:
   actions:
   - action: 0
     sound:
-    - {fileID: 8300000, guid: a33212bd1e1a4634f96c907418b0cad2, type: 3}
+    - {fileID: 8300000, guid: e6116818266576240aeb54b5f2dd8ddc, type: 3}
     vfx:
     - {fileID: 3259163283906517372, guid: ed95c7fa4a657c7429e00aecb8929553, type: 3}
   - action: 5
@@ -35,6 +35,18 @@ MonoBehaviour:
     - {fileID: 8300000, guid: bcfc83d696dff59499a2e28219449639, type: 3}
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  - action: 4
+    sound:
+    - {fileID: 8300000, guid: 979e0e01bdf05b14cbf82792cae6749c, type: 3}
+    vfx: []
+  - action: 1
+    sound:
+    - {fileID: 8300000, guid: a33212bd1e1a4634f96c907418b0cad2, type: 3}
+    vfx: []
+  - action: 2
+    sound:
+    - {fileID: 8300000, guid: 59358e5cb4eb50548939b970eeb292dc, type: 3}
+    vfx: []
   spellPrefab: {fileID: 0}
   potentialRecipeCard:
   - {fileID: 11400000, guid: 1898fedfec8b288449ae6a81fb63656a, type: 2}

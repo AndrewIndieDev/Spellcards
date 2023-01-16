@@ -137,7 +137,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 1, g: 0.68540955, b: 0.28773582, a: 1}
-    - _FrontFacesColor: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+    - _FrontFacesColor: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
     - _MainTexTiling: {r: 1, g: 1, b: 0, a: 0}
     - _NoiseTiling: {r: 2, g: 0.3, b: 0, a: 0}
     - _SpeedMainTexUVNoiseZW: {r: 0.5, g: 0, b: 0, a: -1.5}

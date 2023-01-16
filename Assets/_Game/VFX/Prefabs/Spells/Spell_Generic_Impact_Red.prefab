@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.7287984, b: 1, a: 1}
+      maxColor: {r: 1, g: 0, b: 0.041718483, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5104,7 +5104,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0, g: 0.7287984, b: 1, a: 1}
+      minColor: {r: 1, g: 0, b: 0.17433167, a: 1}
       maxColor: {r: 1, g: 0.4189908, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -9987,7 +9987,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.18659005, g: 0.01027944, b: 0.7264151, a: 0.5019608}
+      maxColor: {r: 0.7254902, g: 0.011764708, b: 0.124940366, a: 0.5019608}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14868,8 +14868,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.5130794, g: 0.2783019, b: 1, a: 1}
-      maxColor: {r: 0.0047169924, g: 0.4936764, b: 1, a: 1}
+      minColor: {r: 1, g: 0.27843142, b: 0.6156121, a: 1}
+      maxColor: {r: 1, g: 0.46937713, b: 0.0039215684, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -19760,7 +19760,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.41291615, g: 0.2028302, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.41951492, b: 0.20392156, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -24431,7 +24431,7 @@ GameObject:
   - component: {fileID: 485411464310066916}
   - component: {fileID: 2520023371121729155}
   m_Layer: 0
-  m_Name: Spell_Generic_Impact_Blue
+  m_Name: Spell_Generic_Impact_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
