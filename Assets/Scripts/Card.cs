@@ -236,7 +236,7 @@ public class Card : MonoBehaviour
             sellTriggerMaterial.SetFloat("_FlashingOpacity", 1f);
         }
 
-        if (!cardData.isSpell) return;
+        if (!cardData.isSpell || cardData.cantPutInTomb) return;
 
         if (other.gameObject.layer == LayerMask.NameToLayer("SpellArea"))
         {
@@ -274,7 +274,6 @@ public class Card : MonoBehaviour
     private void ActivateSpell()
     {
         spellArea.AddCard(this);
-        DestroyCardStack();
     }
 
     public void EnableMainCollider(bool enable = true)

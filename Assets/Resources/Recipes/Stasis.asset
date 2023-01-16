@@ -15,4 +15,4 @@ MonoBehaviour:
   recipeCards:
   - {fileID: 11400000, guid: 907af195edcc3054f96c5217bddbbd26, type: 2}
   - {fileID: 11400000, guid: 5573e8abed992b348afb5f60fa2c95e9, type: 2}
-  result: {fileID: 0}
+  result: {fileID: 11400000, guid: 0d580e3fd8dae5641b5d794814a5a38b, type: 2}
