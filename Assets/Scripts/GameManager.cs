@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
         MousePosition = hit.point;
         MousePosition.y += 0.015f;
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+            GameEnd();
     }
 
     [Command]
@@ -100,13 +103,24 @@ public class GameManager : MonoBehaviour
         RemoveCurrency(currency);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     private IEnumerator GoldOverTime()
     {
+        float cooldown = generateGoldEveryXSec;
         while (playing)
         {
-            yield return new WaitForSeconds(generateGoldEveryXSec);
             if (!playing) break;
-            AddCurrency(1);
+            cooldown -= Time.deltaTime;
+            if (cooldown <= 0)
+            {
+                AddCurrency(1);
+                cooldown = generateGoldEveryXSec;
+            }
+            yield return null;
         }
     }
 }

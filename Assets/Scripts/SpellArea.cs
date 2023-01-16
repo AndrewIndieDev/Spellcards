@@ -30,7 +30,7 @@ public class SpellArea : MonoBehaviour
 
     private IEnumerator ChargeSpell()
     {
-        while (queue.Count > 0)
+        while (queue.Count > 0 && GameManager.Instance.playing)
         {
             cardData = queue[0];
             visual.gameObject.SetActive(true);
@@ -42,11 +42,14 @@ public class SpellArea : MonoBehaviour
                 chargeTransform.localScale = new Vector3((spellChargeTime - time) / spellChargeTime, 1f, 1f);
                 yield return null;
             }
-            chargeTransform.localScale = new Vector3(0f, 1f, 1f);
-            LaunchSpell();
-            cardData = null;
-            queue.RemoveAt(0);
-            visual.gameObject.SetActive(false);
+            if (GameManager.Instance.playing)
+            {
+                chargeTransform.localScale = new Vector3(0f, 1f, 1f);
+                LaunchSpell();
+                cardData = null;
+                queue.RemoveAt(0);
+                visual.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -66,6 +69,8 @@ public class SpellArea : MonoBehaviour
     {
         while (amount > 0)
         {
+            if (!GameManager.Instance.playing)
+                break;
             cardData = testSpell;
             LaunchSpell();
             amount--;

@@ -17,6 +17,14 @@ public class Spell : MonoBehaviour
     {
         endPosition = BigBad.Instance.spellHitTransform.position;
         dist = Vector3.Distance(transform.position, endPosition);
+
+        GameManager.Instance.OnGameEnd += GameEnd;
+    }
+
+    private void GameEnd()
+    {
+        GameManager.Instance.OnGameEnd -= GameEnd;
+        Destroy(gameObject);
     }
 
     public void SetData(CardData data)
@@ -35,6 +43,7 @@ public class Spell : MonoBehaviour
         if (transform.position.z > endPosition.z)
         {
             //Create explosion
+            GameManager.Instance.OnGameEnd -= GameEnd;
             BigBad.Instance.TakeDamage(data.spellDamage + Random.Range(-20000, 20001));
             Destroy(gameObject);
         }

@@ -13,7 +13,8 @@ public class BigBad : MonoBehaviour
 
     public Transform endPos;
     public Transform spellHitTransform;
-    
+    public DamagePopup damagePopupPrefab;
+
     private Vector3 startPos;
     private Tween currentTween;
     private int bigBadHp = 1000000;
@@ -39,11 +40,16 @@ public class BigBad : MonoBehaviour
     {
         if (currentTween != null)
             currentTween.Kill();
+        bigBadHp = 1000000;
     }
 
     public void TakeDamage(int damage)
     {
-        bigBadHp -= damage;
-
+        bigBadHp = (bigBadHp - damage > 0) ? bigBadHp - damage : 0;
+        BigBadHealth.Instance.UpdateHealth(bigBadHp);
+        DamagePopup dp = Instantiate(damagePopupPrefab);
+        dp.Init(damage);
+        if (bigBadHp <= 0)
+            GameManager.Instance.GameEnd();
     }
 }
