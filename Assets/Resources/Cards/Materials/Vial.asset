@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Vial
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: a5a3ca5e75c39ce43a7ac5073afa5a6b, type: 2}
   cardBackground: {fileID: 2100000, guid: a2a8123f13d535c47a30add4db0861b2, type: 2}
   description: 
@@ -30,3 +32,7 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 1898fedfec8b288449ae6a81fb63656a, type: 2}
+  - {fileID: 11400000, guid: 5891c3bb609ca1c47983647b9c9a6dd4, type: 2}

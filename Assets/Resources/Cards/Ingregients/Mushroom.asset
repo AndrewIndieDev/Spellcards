@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Mushroom
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 535472bbd82f7354fa94d86611c131d6, type: 2}
   cardBackground: {fileID: 2100000, guid: 314084a7952f57e4c825a293fb1bd8a1, type: 2}
   description: 
@@ -30,3 +32,7 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 1898fedfec8b288449ae6a81fb63656a, type: 2}
+  - {fileID: 11400000, guid: f221e1bb5d30d0b4b8c040ff1060b3c9, type: 2}

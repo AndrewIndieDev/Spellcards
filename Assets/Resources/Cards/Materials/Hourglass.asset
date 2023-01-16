@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Hourglass
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 7865a157fc0c88840b225442d6bf2704, type: 2}
   cardBackground: {fileID: 2100000, guid: a2a8123f13d535c47a30add4db0861b2, type: 2}
   description: 
@@ -30,3 +32,6 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 5573e8abed992b348afb5f60fa2c95e9, type: 2}

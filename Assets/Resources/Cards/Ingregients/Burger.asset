@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Burger
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: d3c3c475b5ab91c4db351bcf85f5c7f6, type: 2}
   cardBackground: {fileID: 2100000, guid: 314084a7952f57e4c825a293fb1bd8a1, type: 2}
   description: 
@@ -30,3 +32,7 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 5573e8abed992b348afb5f60fa2c95e9, type: 2}
+  - {fileID: 11400000, guid: d325c89ad0ff45a41bc2d3d8fbc9c8ba, type: 2}

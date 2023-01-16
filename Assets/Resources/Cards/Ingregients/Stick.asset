@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 75488813e64fe0142a5248df75e7643b, type: 2}
   cardBackground: {fileID: 2100000, guid: 314084a7952f57e4c825a293fb1bd8a1, type: 2}
   description: 
@@ -30,3 +32,7 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 1ddd042570eff4b44b1428884e96f2d4, type: 2}
+  - {fileID: 11400000, guid: 681827860cfc7c348a43afb291885521, type: 2}

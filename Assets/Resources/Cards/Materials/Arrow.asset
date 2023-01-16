@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Arrow
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 3d7ead306dfcc024384b51b8a802ff64, type: 2}
   cardBackground: {fileID: 2100000, guid: a2a8123f13d535c47a30add4db0861b2, type: 2}
   description: 
@@ -30,3 +32,6 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000}
