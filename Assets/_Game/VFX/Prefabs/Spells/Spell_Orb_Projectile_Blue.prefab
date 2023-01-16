@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 87306731443345180}
   - component: {fileID: 281008246012630614}
   - component: {fileID: 280288524139531554}
+  - component: {fileID: 8835470095821366558}
+  - component: {fileID: 4552907765768681597}
   m_Layer: 0
-  m_Name: Spell_Orb_Blue
+  m_Name: Spell_Orb_Projectile_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4884,6 +4886,57 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8835470095821366558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81661257221899100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7846c8c788873734093ec3e29bd5a94d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxExplosionPrefab: {fileID: 7521541726954360081, guid: 6a9fdcc14cffb92428c8e109dab7ebc4,
+    type: 3}
+  xCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &4552907765768681597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 81661257221899100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7846c8c788873734093ec3e29bd5a94d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxExplosionPrefab: {fileID: 0}
+  xCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  yCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &81783350747680018
 GameObject:
   m_ObjectHideFlags: 0
@@ -9931,7 +9984,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.052198283, g: 0.08652799, b: 0.21698111, a: 1}
+      maxColor: {r: 0.35457456, g: 0.76788896, b: 0.9056604, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

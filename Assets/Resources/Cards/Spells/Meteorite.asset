@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Meteorite
   m_EditorClassIdentifier: 
   isSpell: 1
+  cantPutInTomb: 0
   spellDamage: 90000
   cardImage: {fileID: 2100000, guid: fec712540ae585a449053cf021546154, type: 2}
   cardBackground: {fileID: 2100000, guid: 25240d42bb0fd8e49aac44165401f480, type: 2}
@@ -31,5 +32,5 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
-  spellPrefab: {fileID: 5975477858656954894, guid: 84d3a9bb82d22944a9be8cf47b066152,
+  spellPrefab: {fileID: 81661257221899100, guid: 56162c343faed734a8c48bc280bd897f,
     type: 3}
