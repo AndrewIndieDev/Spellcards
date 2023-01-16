@@ -957,7 +957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 330585545}
   screenPercentageToLookUp: 10
-  screenPercentageToLookRight: 90
+  screenPercentageToLookRight: 5
 --- !u!1 &372399329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,7 +1534,7 @@ PrefabInstance:
     - target: {fileID: 224130951485110974, guid: 9ed2a051c32b4fe47a5e4fb95c20b03f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 224166536479716514, guid: 9ed2a051c32b4fe47a5e4fb95c20b03f,
         type: 3}

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767a1753d67c9bb4e968e60b1b469018, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
-  recipeCards: []
-  result: {fileID: 0}
+  recipeCards:
+  - {fileID: 11400000, guid: 1ddd042570eff4b44b1428884e96f2d4, type: 2}
+  - {fileID: 11400000, guid: 91ee836d168774947be25004f2477f1b, type: 2}
+  result: {fileID: 11400000, guid: 08037cdc84a98e143b259bf475ce2ecb, type: 2}

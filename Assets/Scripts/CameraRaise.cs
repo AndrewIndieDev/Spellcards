@@ -14,7 +14,7 @@ public class CameraRaise : MonoBehaviour
     public Camera cam;
     [Range(0,100)]
     public int screenPercentageToLookUp = 10;
-    public int screenPercentageToLookRight = 95;
+    public int screenPercentageToLookRight = 5;
 
     private float screenLookUp;
     private float screenLookRight;
@@ -38,16 +38,14 @@ public class CameraRaise : MonoBehaviour
 
         if (Input.mousePosition.y > screenLookUp && !lookUp)
         {
-            ResetAllCameraProperties();
-            SetCameraRotation(new Vector3(15f, 0f, 0f));
-            SetCameraPosition(new Vector3(0f, 1.95f, -1.57f));
+            SetCameraRotation(new Vector3(0f, 0f, 0f));
+            SetCameraPosition(new Vector3(0f, 1f, -1.5f));
             screenPercentageToLookUp = 90;
             lookUp = true;
         }
         
         else if (Input.mousePosition.y < screenLookUp && lookUp)
         {
-            ResetAllCameraProperties();
             SetCameraRotation(new Vector3(60f, 0f, 0f));
             SetCameraPosition(new Vector3(0f, 1.5f, -.35f));
             screenPercentageToLookUp = 10;
