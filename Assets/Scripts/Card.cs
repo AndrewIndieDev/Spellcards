@@ -101,6 +101,8 @@ public class Card : MonoBehaviour
             cardSellCost.text = cardData.sellCost.ToString();
 
         GameManager.Instance.OnGameEnd += GameEnd;
+        GameManager.Instance.OnCardPickup += OnCardPickup;
+        GameManager.Instance.OnCardDrop += OnCardDrop;
 
         PerformAction(ActionType.CREATED);
     }
@@ -113,6 +115,8 @@ public class Card : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.OnGameEnd -= GameEnd;
+        GameManager.Instance.OnCardPickup -= OnCardPickup;
+        GameManager.Instance.OnCardDrop -= OnCardDrop;
     }
 
 #if UNITY_EDITOR
@@ -150,9 +154,10 @@ public class Card : MonoBehaviour
         transform.parent = null;
         pickedUp = true;
         offset = transform.position - GameManager.Instance.MousePosition;
-        offset.y = 0f;
+        offset.y = 0.02f;
         PerformAction(ActionType.HOLDING);
         UpdateStackList();
+        GameManager.Instance.CardPickup(this);
     }
 
     private void OnMouseDrag()
@@ -171,6 +176,7 @@ public class Card : MonoBehaviour
 
     private void OnMouseUp()
     {
+        GameManager.Instance.CardDrop();
         RemoveVFX(ActionType.HOLDING);
         PerformAction(ActionType.DROP);
 
@@ -302,7 +308,8 @@ public class Card : MonoBehaviour
         if (!pickedUp)
             transform.DOLocalMoveY(0f, 0.1f);
         EnableMainCollider();
-        stackLeader.stackedCards.RemoveAt(stackedCards.Count - 1);
+        if (stackLeader.stackedCards.Count > 0)
+            stackLeader.stackedCards.RemoveAt(stackedCards.Count - 1);
         stackLeader.cardStackChanged = true;
     }
 
@@ -435,5 +442,17 @@ public class Card : MonoBehaviour
     {
         timeToCombineTransform.localScale = new Vector3(0f, 1f, 1f);
         timeToCombineParent.gameObject.SetActive(false);
+    }
+
+    private void OnCardPickup(Card card)
+    {
+        if (card == null || card == this) return;
+        if (card.cardData.potentialRecipeCard.Contains(cardData))
+            flashingOutline.material.SetFloat("_Opacity", 1f);
+    }
+
+    private void OnCardDrop()
+    {
+        flashingOutline.material.SetFloat("_Opacity", 0f);
     }
 }

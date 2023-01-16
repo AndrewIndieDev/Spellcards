@@ -72,7 +72,7 @@ MonoBehaviour:
   cardBehind: {fileID: 0}
   cardInFront: {fileID: 0}
   behindOffset: {x: 0, y: -0.0045, z: -0.085}
-  flashingOutline: {fileID: 0}
+  flashingOutline: {fileID: 2153044161551644256}
   stackedCards: []
 --- !u!65 &945469149472439880
 BoxCollider:

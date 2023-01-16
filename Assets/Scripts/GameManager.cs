@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public System.Action OnGameStart;
     public System.Action OnGameEnd;
+    public System.Action<Card> OnCardPickup;
+    public System.Action OnCardDrop;
 
     public bool playing;
 
@@ -101,6 +103,20 @@ public class GameManager : MonoBehaviour
 
         playing = false;
         RemoveCurrency(currency);
+    }
+
+    public void CardPickup(Card card)
+    {
+        if (!playing) return;
+
+        OnCardPickup?.Invoke(card);
+    }
+
+    public void CardDrop()
+    {
+        if (!playing) return;
+
+        OnCardDrop?.Invoke();
     }
 
     public void Quit()
