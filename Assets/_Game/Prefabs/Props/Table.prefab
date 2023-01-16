@@ -470,6 +470,12 @@ PrefabInstance:
       propertyPath: cost
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7357094281271036930, guid: 626f58888a9d4174bb1403df3165f9bc,
+        type: 3}
+      propertyPath: packPrefab
+      value: 
+      objectReference: {fileID: 1206239127727503341, guid: ce73545f750c5b542af1c98c2fbb8cc4,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626f58888a9d4174bb1403df3165f9bc, type: 3}
 --- !u!4 &992493035449174491 stripped
@@ -690,6 +696,12 @@ PrefabInstance:
       propertyPath: cost
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 7357094281271036930, guid: 626f58888a9d4174bb1403df3165f9bc,
+        type: 3}
+      propertyPath: packPrefab
+      value: 
+      objectReference: {fileID: 1206239127727503341, guid: d49b58d872346894c9833e206e5128d9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 626f58888a9d4174bb1403df3165f9bc, type: 3}
 --- !u!4 &7753310774944654903 stripped
