@@ -38,6 +38,8 @@ public class SpellArea : MonoBehaviour
             float time = spellChargeTime;
             while (time > 0)
             {
+                if (!GameManager.Instance.playing)
+                    break;
                 time -= Time.deltaTime;
                 chargeTransform.localScale = new Vector3((spellChargeTime - time) / spellChargeTime, 1f, 1f);
                 yield return null;

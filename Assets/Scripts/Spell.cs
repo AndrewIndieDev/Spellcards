@@ -45,6 +45,8 @@ public class Spell : MonoBehaviour
             //Create explosion
             GameManager.Instance.OnGameEnd -= GameEnd;
             BigBad.Instance.TakeDamage(data.spellDamage + Random.Range(-20000, 20001));
+            if (vfxExplosionPrefab != null)
+                Instantiate(vfxExplosionPrefab, transform.position, Quaternion.identity, null);
             Destroy(gameObject);
         }
     }
