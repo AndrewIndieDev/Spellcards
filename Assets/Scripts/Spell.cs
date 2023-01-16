@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Spell : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class Spell : MonoBehaviour
         dist = Vector3.Distance(transform.position, endPosition);
 
         GameManager.Instance.OnGameEnd += GameEnd;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameEnd -= GameEnd;
     }
 
     private void GameEnd()
@@ -46,7 +52,10 @@ public class Spell : MonoBehaviour
             GameManager.Instance.OnGameEnd -= GameEnd;
             BigBad.Instance.TakeDamage(data.spellDamage + Random.Range(-20000, 20001));
             if (vfxExplosionPrefab != null)
-                Instantiate(vfxExplosionPrefab, transform.position, Quaternion.identity, null);
+            {
+                Transform t = Instantiate(vfxExplosionPrefab, transform.position, Quaternion.identity).transform;
+                t.DORotate(new Vector3(-90f, 0f, 0f), 0.01f);
+            }
             Destroy(gameObject);
         }
     }

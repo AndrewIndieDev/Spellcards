@@ -281,6 +281,7 @@ public class Card : MonoBehaviour
     private void ActivateSpell()
     {
         spellArea.AddCard(this);
+        DestroyCardStack();
     }
 
     public void EnableMainCollider(bool enable = true)
