@@ -14,7 +14,7 @@ public class DamagePopup : MonoBehaviour
     public void Init(int amount)
     {
         damage.text = amount.ToString();
-        if (amount > 100000)
+        if (amount > 140000)
             damage.color = Color.red;
         Tween t = transform.DOMoveY(1.6f, 1f);
         t.onComplete += () =>

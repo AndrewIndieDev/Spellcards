@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSpell: 1
   cantPutInTomb: 0
-  spellDamage: 90000
+  spellDamage: 130000
   cardImage: {fileID: 2100000, guid: 46c98bf92072b0543ace12d7a34cf1e4, type: 2}
   cardBackground: {fileID: 2100000, guid: 25240d42bb0fd8e49aac44165401f480, type: 2}
   description: 
