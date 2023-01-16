@@ -15,4 +15,5 @@ public class CardData : ScriptableObject
     public int sellCost;
     public CardAction[] actions;
     public GameObject spellPrefab;
+    public List<CardData> potentialRecipeCard = new();
 }

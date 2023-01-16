@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Iron
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 007b54d86d5a5b74abc1070ac67c5673, type: 2}
   cardBackground: {fileID: 2100000, guid: 314084a7952f57e4c825a293fb1bd8a1, type: 2}
   description: 
@@ -30,3 +32,9 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 91ee836d168774947be25004f2477f1b, type: 2}
+  - {fileID: 11400000, guid: 681827860cfc7c348a43afb291885521, type: 2}
+  - {fileID: 11400000, guid: d325c89ad0ff45a41bc2d3d8fbc9c8ba, type: 2}
+  - {fileID: 11400000, guid: 51ef2c6e265f96b4a8e46b5942ab757b, type: 2}

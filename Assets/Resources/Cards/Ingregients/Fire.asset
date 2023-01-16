@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Fire
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 72cf1588ac25357468d6bd64d54cf3d3, type: 2}
   cardBackground: {fileID: 2100000, guid: 314084a7952f57e4c825a293fb1bd8a1, type: 2}
   description: 
@@ -30,3 +32,9 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: fc7044873b6cdec4892bcdaf36581111, type: 2}
+  - {fileID: 11400000, guid: 13263225f0582eb4fa0bf7fe0617b82b, type: 2}
+  - {fileID: 11400000, guid: 23b065928d46d99408c68481757ab0f0, type: 2}
+  - {fileID: 11400000, guid: d325c89ad0ff45a41bc2d3d8fbc9c8ba, type: 2}

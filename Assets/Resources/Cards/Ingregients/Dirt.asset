@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Dirt
   m_EditorClassIdentifier: 
   isSpell: 0
+  cantPutInTomb: 0
+  spellDamage: 0
   cardImage: {fileID: 2100000, guid: 92d93f8a2ccaf3f45ab93852ae43b450, type: 2}
   cardBackground: {fileID: 2100000, guid: 314084a7952f57e4c825a293fb1bd8a1, type: 2}
   description: 
@@ -30,3 +32,7 @@ MonoBehaviour:
     sound: []
     vfx:
     - {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6, type: 3}
+  spellPrefab: {fileID: 0}
+  potentialRecipeCard:
+  - {fileID: 11400000, guid: 35fadc56a662a9442b3a23e4fb03f68e, type: 2}
+  - {fileID: 11400000, guid: 23b065928d46d99408c68481757ab0f0, type: 2}

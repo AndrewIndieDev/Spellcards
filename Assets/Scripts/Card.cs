@@ -22,6 +22,7 @@ public class Card : MonoBehaviour
     public Card cardBehind;
     public Card cardInFront;
     public Vector3 behindOffset;
+    public MeshRenderer flashingOutline;
 
     public bool PickedUp => pickedUp;
 
