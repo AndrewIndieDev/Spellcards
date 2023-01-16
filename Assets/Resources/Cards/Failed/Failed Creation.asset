@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Failed Creation
   m_EditorClassIdentifier: 
   isSpell: 1
-  cantPutInTomb: 0
+  cantPutInTomb: 1
   spellDamage: 0
   cardImage: {fileID: 2100000, guid: 85aebf4f281c77840ab72bf749cb77d8, type: 2}
   cardBackground: {fileID: 2100000, guid: 5356461239538194592c462b6c4fb160, type: 2}
