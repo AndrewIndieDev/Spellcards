@@ -23,8 +23,7 @@ public class Card : MonoBehaviour
     public Card cardInFront;
     public Vector3 behindOffset;
     public MeshRenderer flashingOutline;
-
-    public bool PickedUp => pickedUp;
+    public Transform effectParent;
 
     private Tween currentTween;
     private bool pickedUp;
@@ -52,21 +51,18 @@ public class Card : MonoBehaviour
         foreach (CardAction ca in cardData.actions)
         {
             if (ca.action != action) continue;
-            if (ca.sound.Length <= 0)
+            if (ca.sfx.Length <= 0)
                 Debug.LogWarning($"WARNING: {cardData.name} has no sounds in it's list. Is this correct?");
-            foreach (AudioClip clip in ca.sound)
+            foreach (GameObject sfx in ca.sfx)
             {
-                AudioSource source = Instantiate(audioSourcePrefab, transform).GetComponent<AudioSource>();
-                source.clip = clip;
+                AudioSource source = Instantiate(audioSourcePrefab, effectParent).GetComponent<AudioSource>();
                 source.Play();
-                source.gameObject.name = action.ToString();
+                sfx.name = action.ToString();
 
-                if (source.gameObject.GetComponent<PlayEffectOnChildren>() != null)
+                if (sfx.GetComponent<PlayEffectOnChildren>() != null)
                     if (cardBehind)
                         cardBehind.PerformAction(action);
             }
-            if (cardBehind)
-                cardBehind.PerformAction(action);
         }
     }
     private void PlayVFX(ActionType action)
@@ -78,7 +74,7 @@ public class Card : MonoBehaviour
                 Debug.LogWarning($"WARNING: {cardData.name} has no vfx's in it's list. Is this correct?");
             foreach (GameObject vfx in ca.vfx)
             {
-                GameObject go = Instantiate(vfx, transform);
+                GameObject go = Instantiate(vfx, effectParent);
                 go.gameObject.name = action.ToString();
 
                 if (go.GetComponent<PlayEffectOnChildren>() != null)
@@ -104,7 +100,7 @@ public class Card : MonoBehaviour
         GameManager.Instance.OnCardPickup += OnCardPickup;
         GameManager.Instance.OnCardDrop += OnCardDrop;
 
-        PerformAction(ActionType.CREATED);
+        PerformAction(ActionType.CARD_CREATE);
     }
 
     private void GameEnd()
@@ -155,7 +151,7 @@ public class Card : MonoBehaviour
         pickedUp = true;
         offset = transform.position - GameManager.Instance.MousePosition;
         offset.y = 0.02f;
-        PerformAction(ActionType.HOLDING);
+        PerformAction(ActionType.CARD_HOLDING);
         UpdateStackList();
         GameManager.Instance.CardPickup(this);
     }
@@ -177,8 +173,8 @@ public class Card : MonoBehaviour
     private void OnMouseUp()
     {
         GameManager.Instance.CardDrop();
-        RemoveVFX(ActionType.HOLDING);
-        PerformAction(ActionType.DROP);
+        RemoveVFX(ActionType.CARD_HOLDING);
+        PerformAction(ActionType.CARD_DROP);
 
         pickedUp = false;
 
@@ -195,8 +191,9 @@ public class Card : MonoBehaviour
         }
 
         //Check if we are still on the table or not
-        Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, LayerMask.NameToLayer("Table"));
-        if (hit.collider == null)
+        Physics.Raycast(transform.position, Vector3.up, out RaycastHit hit, 1f);
+        Debug.Log(hit.collider);
+        if (hit.collider != null)
         {
             if (currentTween != null)
                 currentTween.Kill();
@@ -303,15 +300,16 @@ public class Card : MonoBehaviour
 
     public void RemoveCardFromThisCardsStack(Card stackLeader)
     {
+        if (stackLeader.stackedCards.Count > 0)
+            stackLeader.stackedCards.RemoveAt(stackLeader.stackedCards.Count - 1);
+        stackLeader.cardStackChanged = true;
         transform.parent = null;
         cardInFront.cardBehind = null;
         cardInFront = null;
         if (!pickedUp)
             transform.DOLocalMoveY(0f, 0.1f);
         EnableMainCollider();
-        if (stackLeader.stackedCards.Count > 0)
-            stackLeader.stackedCards.RemoveAt(stackedCards.Count - 1);
-        stackLeader.cardStackChanged = true;
+        PerformAction(ActionType.CARD_DROP);
     }
 
     public void PutCardBehind(Card inFront = null)
@@ -333,27 +331,28 @@ public class Card : MonoBehaviour
             currentTween.Kill();
         currentTween = transform.DOLocalMove(behindOffset, 0.1f);
         UpdateStackList();
-        PerformAction(ActionType.STACK);
+        PerformAction(ActionType.CARD_STACK);
     }
 
     private IEnumerator RecipeTimer()
     {
         coroutineRunning = true;
-        ResetRecipeCreation();
-        timeToCombineParent.gameObject.SetActive(true);
+        ResetRecipeCreation(true);
+        //timeToCombineParent.gameObject.SetActive(true);
         Tween tween = timeToCombineTransform.DOScaleX(1f, timeToCombine);
         while (timeToCombineTransform.localScale.x < 1f || pickedUp)
         {
             if (cardInFront || stackedCards.Count == 0)
             {
                 tween?.Kill();
-                ResetRecipeCreation();
+                ResetRecipeCreation(false);
                 break;
             }
             if (cardStackChanged)
             {
-                timeToCombineTransform.transform.localScale = new Vector3(0f, 1f, 1f);
+                //timeToCombineTransform.transform.localScale = new Vector3(0f, 1f, 1f);
                 cardStackChanged = false;
+                ResetRecipeCreation(true);
             }
             yield return null;
         }
@@ -409,10 +408,10 @@ public class Card : MonoBehaviour
 
     private void RemoveVFX(ActionType action)
     {
-        foreach (var vfx in GetComponentsInChildren<ParticleSystem>())
+        for (int i = effectParent.childCount - 1; i >= 0; i--)
         {
-            if (vfx.transform.parent.gameObject.name == action.ToString())
-                Destroy(vfx.gameObject);
+            if (effectParent.GetChild(i).gameObject.name == action.ToString())
+                Destroy(effectParent.GetChild(i).gameObject);
         }
     }
 
@@ -439,10 +438,10 @@ public class Card : MonoBehaviour
         return cardBehind != null && !coroutineRunning;
     }
 
-    private void ResetRecipeCreation()
+    private void ResetRecipeCreation(bool keepEnabled)
     {
         timeToCombineTransform.localScale = new Vector3(0f, 1f, 1f);
-        timeToCombineParent.gameObject.SetActive(false);
+        timeToCombineParent.gameObject.SetActive(keepEnabled);
     }
 
     private void OnCardPickup(Card card)

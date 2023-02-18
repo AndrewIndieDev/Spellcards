@@ -17,11 +17,9 @@ public class CameraRaise : MonoBehaviour
     public int screenPercentageToLookRight = 5;
 
     private float screenLookUp;
-    private float screenLookRight;
     private Tween rotTween;
     private Tween posTween;
     private bool lookUp;
-    private bool lookRight;
 
     private void Start()
     {
@@ -34,7 +32,6 @@ public class CameraRaise : MonoBehaviour
         if (!GameManager.Instance.playing) return;
 
         screenLookUp = Screen.height - (Screen.height * ((float)screenPercentageToLookUp / 100));
-        screenLookRight = Screen.width - (Screen.width * ((float)screenPercentageToLookRight / 100));
 
         if (Input.mousePosition.y > screenLookUp && !lookUp)
         {
@@ -51,20 +48,6 @@ public class CameraRaise : MonoBehaviour
             screenPercentageToLookUp = 10;
             lookUp = false;
         }
-
-        //if (Input.mousePosition.x > screenLookRight && !lookRight)
-        //{
-        //    ResetAllCameraProperties();
-        //    SetCameraRotation(new Vector3(0f, 90f, 0f));
-        //    SetCameraPosition(new Vector3(0f, .8f, -1f));
-        //    lookRight = true;
-        //}
-    }
-
-    private void ResetAllCameraProperties()
-    {
-        lookRight = false;
-        lookUp = false;
     }
 
     private void SetCameraRotation(Vector3 rot)
@@ -94,6 +77,5 @@ public class CameraRaise : MonoBehaviour
         SetCameraRotation(new Vector3(-90f, 0f, 0f));
         SetCameraPosition(new Vector3(0f, -.8f, -1f));
         lookUp = false;
-        lookRight = false;
     }
 }
