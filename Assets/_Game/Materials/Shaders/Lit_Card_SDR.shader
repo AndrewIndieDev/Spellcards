@@ -7,7 +7,9 @@ Shader "Spellcards/Card/Lit"
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		[ASEBegin][NoScaleOffset]_MainTex("MainTex", 2D) = "white" {}
-		[ASEEnd][NoScaleOffset]_CardMask("Card Mask", 2D) = "white" {}
+		[NoScaleOffset]_CardMask("Card Mask", 2D) = "white" {}
+		_Tint("Tint", Color) = (1,1,1,0)
+		[ASEEnd]_Opacity("Opacity", Range( 0 , 1)) = 1
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 
@@ -225,7 +227,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -396,8 +400,8 @@ Shader "Spellcards/Card/Lit"
 				
 				float3 BakedAlbedo = 0;
 				float3 BakedEmission = 0;
-				float3 Color = tex2D( _MainTex, uv_MainTex10 ).rgb;
-				float Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				float3 Color = ( _Tint * tex2D( _MainTex, uv_MainTex10 ) ).rgb;
+				float Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -482,7 +486,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -663,7 +669,7 @@ Shader "Spellcards/Card/Lit"
 				float2 uv_CardMask21 = IN.ase_texcoord2.xy;
 				
 
-				float Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				float Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -734,7 +740,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -895,7 +903,7 @@ Shader "Spellcards/Card/Lit"
 				float2 uv_CardMask21 = IN.ase_texcoord2.xy;
 				
 
-				float Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				float Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -960,7 +968,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -1106,7 +1116,7 @@ Shader "Spellcards/Card/Lit"
 				float2 uv_CardMask21 = IN.ase_texcoord.xy;
 				
 
-				surfaceDescription.Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				surfaceDescription.Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1171,7 +1181,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -1312,7 +1324,7 @@ Shader "Spellcards/Card/Lit"
 				float2 uv_CardMask21 = IN.ase_texcoord.xy;
 				
 
-				surfaceDescription.Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				surfaceDescription.Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1387,7 +1399,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -1532,7 +1546,7 @@ Shader "Spellcards/Card/Lit"
 				float2 uv_CardMask21 = IN.ase_texcoord1.xy;
 				
 
-				surfaceDescription.Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				surfaceDescription.Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1608,7 +1622,9 @@ Shader "Spellcards/Card/Lit"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-						#ifdef ASE_TESSELLATION
+			float4 _Tint;
+			float _Opacity;
+			#ifdef ASE_TESSELLATION
 				float _TessPhongStrength;
 				float _TessValue;
 				float _TessMin;
@@ -1752,7 +1768,7 @@ Shader "Spellcards/Card/Lit"
 				float2 uv_CardMask21 = IN.ase_texcoord1.xy;
 				
 
-				surfaceDescription.Alpha = tex2D( _CardMask, uv_CardMask21 ).r;
+				surfaceDescription.Alpha = ( tex2D( _CardMask, uv_CardMask21 ) * _Opacity ).r;
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1790,9 +1806,17 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;17;0,0;Float;False;False;-1
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;18;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ScenePickingPass;0;7;ScenePickingPass;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Picking;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;19;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthNormals;0;8;DepthNormals;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=DepthNormalsOnly;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;20;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthNormalsOnly;0;9;DepthNormalsOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=DepthNormalsOnly;False;True;9;d3d11;metal;vulkan;xboxone;xboxseries;playstation;ps4;ps5;switch;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.SamplerNode;10;-386,-38.5;Inherit;True;Property;_MainTex;MainTex;0;1;[NoScaleOffset];Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.SamplerNode;21;-394,168.5;Inherit;True;Property;_CardMask;Card Mask;1;1;[NoScaleOffset];Create;True;0;0;0;False;0;False;-1;eacef6867acbc1346a5629eb2dba6274;eacef6867acbc1346a5629eb2dba6274;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-WireConnection;12;2;10;0
-WireConnection;12;3;21;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;22;-214,-163.5;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SamplerNode;10;-568,-49.5;Inherit;True;Property;_MainTex;MainTex;0;1;[NoScaleOffset];Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;23;-481,-297.5;Inherit;False;Property;_Tint;Tint;2;0;Create;True;0;0;0;False;0;False;1,1,1,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;21;-576,225.5;Inherit;True;Property;_CardMask;Card Mask;1;1;[NoScaleOffset];Create;True;0;0;0;False;0;False;-1;eacef6867acbc1346a5629eb2dba6274;eacef6867acbc1346a5629eb2dba6274;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;25;-162,360.5;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;24;-500,500.5;Inherit;False;Property;_Opacity;Opacity;3;0;Create;True;0;0;0;False;0;False;1;0;0;1;0;1;FLOAT;0
+WireConnection;12;2;22;0
+WireConnection;12;3;25;0
+WireConnection;22;0;23;0
+WireConnection;22;1;10;0
+WireConnection;25;0;21;0
+WireConnection;25;1;24;0
 ASEEND*/
-//CHKSM=75573659253181B7367E2291BA4AC4BA066455B0
+//CHKSM=574B8E62DD6759CB69815878F9D49D86852B6DA9
