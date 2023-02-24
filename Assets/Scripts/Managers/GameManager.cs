@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public System.Action OnGameStart;
     public System.Action OnGameEnd;
+    public System.Action<EnemyGroup> OnEnemyGroupDies;
     public System.Action<Card> OnCardPickup;
     public System.Action OnCardDrop;
 

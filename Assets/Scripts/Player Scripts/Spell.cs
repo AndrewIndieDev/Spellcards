@@ -13,12 +13,13 @@ public class Spell : MonoBehaviour
     private CardData data;
     private Vector3 endPosition;
     private float dist;
+    private float parentDist;
 
     private void Start()
     {
-        endPosition = BigBad.Instance.spellHitTransform.position;
+        endPosition = WaveSpawner.Instance.GetClosestEnemyGroup.transform.position;
         dist = Vector3.Distance(transform.position, endPosition);
-
+        parentDist = Vector3.Distance(transform.parent.position, endPosition);
         GameManager.Instance.OnGameEnd += GameEnd;
     }
 
@@ -40,17 +41,18 @@ public class Spell : MonoBehaviour
 
     private void Update()
     {
-        endPosition = BigBad.Instance.spellHitTransform.position;
-        float x = xCurve.Evaluate((dist - Vector3.Distance(transform.position, endPosition)) / dist);
-        float y = yCurve.Evaluate((dist - Vector3.Distance(transform.position, endPosition)) / dist);
+        endPosition = WaveSpawner.Instance.GetClosestEnemyGroup.transform.position;
+        dist = Vector3.Distance(transform.position, endPosition);
+        parentDist = Vector3.Distance(transform.parent.position, endPosition);
+        float x = 0f;
+        float y = 0f;
 
         transform.position = new Vector3(x, y, transform.position.z + Time.deltaTime * 200f);
 
         if (transform.position.z > endPosition.z)
         {
             //Create explosion
-            GameManager.Instance.OnGameEnd -= GameEnd;
-            BigBad.Instance.TakeDamage(data.spellDamage + Random.Range(-20000, 20001));
+            WaveSpawner.Instance.GetClosestEnemyGroup.TakeDamage(data.spellDamage + Random.Range(-20000, 20001));
             if (vfxExplosionPrefab != null)
             {
                 Transform t = Instantiate(vfxExplosionPrefab, transform.position, Quaternion.identity).transform;
