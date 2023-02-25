@@ -28,9 +28,7 @@ Transform:
   m_LocalScale: {x: 0.23374, y: 0.1, z: 0.53793997}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8060176834912435108}
   - {fileID: 4576712743663518290}
-  - {fileID: 1472070650187064956}
   - {fileID: 7386866543310913532}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,12 +58,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3258670963507434727}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 0.09988991, y: 0.11612, z: 0.099846944}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4317078921023449135}
+  m_Father: {fileID: 7386866543310913532}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &786625199540732005
@@ -148,9 +146,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 0.09988991, y: 0.11612, z: 0.099846944}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8060176834912435108}
+  - {fileID: 1472070650187064956}
   m_Father: {fileID: 4317078921023449135}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2553455360979053344
 MeshFilter:
@@ -240,13 +240,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6748262454396755405}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.025, z: 0}
-  m_LocalScale: {x: 0.09988991, y: 0.11612, z: 0.099846944}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.21529458, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4317078921023449135}
-  m_RootOrder: 2
+  m_Father: {fileID: 7386866543310913532}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1460305576208591263
 MeshFilter:
@@ -329,7 +329,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4317078921023449135}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Drag \nto \nSell"
+  m_text: Sell
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 754e720192dc7b540b293230ce2f4f05, type: 2}
   m_sharedMaterial: {fileID: -5248435358806806740, guid: 754e720192dc7b540b293230ce2f4f05,
