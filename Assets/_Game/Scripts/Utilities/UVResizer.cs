@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class UVResizer : MonoBehaviour
 {
-
     [SerializeField] private Material currentMaterial;
     [SerializeField] private Collider currentCollider;
 
-    void start()
+    private void OnValidate()
     {
-        currentCollider = transform.GetComponent<Collider>();
+        if (currentMaterial == null || currentCollider == null) return;
+        setBounds();
     }
 
     private Vector4 getBounds()
