@@ -194,20 +194,8 @@ MonoBehaviour:
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 0
-    Key: Textures
-    Ordinal: 15
-    Priority: 0
-    IconType: 2190
-    SmallIcon: {fileID: 0}
-    LargeIcon: {fileID: 0}
-    IsIconRecursive: 0
-    BackgroundType: 0
-    BackgroundTexture: {fileID: 0}
-    IsBackgroundRecursive: 0
-    IsHidden: 0
-  - Type: 0
     Key: Physics
-    Ordinal: 16
+    Ordinal: 15
     Priority: 0
     IconType: 2090
     SmallIcon: {fileID: 0}
@@ -219,7 +207,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 0
     Key: Flares
-    Ordinal: 17
+    Ordinal: 16
     Priority: 0
     IconType: 2050
     SmallIcon: {fileID: 0}
@@ -231,7 +219,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 0
     Key: Android
-    Ordinal: 18
+    Ordinal: 17
     Priority: 0
     IconType: 3000
     SmallIcon: {fileID: 0}
@@ -243,7 +231,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 0
     Key: iOS
-    Ordinal: 19
+    Ordinal: 18
     Priority: 0
     IconType: 3010
     SmallIcon: {fileID: 0}
@@ -255,7 +243,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 0
     Key: Windows
-    Ordinal: 20
+    Ordinal: 19
     Priority: 0
     IconType: 3040
     SmallIcon: {fileID: 0}
@@ -267,7 +255,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 0
     Key: Mac
-    Ordinal: 21
+    Ordinal: 20
     Priority: 0
     IconType: 3020
     SmallIcon: {fileID: 0}
@@ -279,7 +267,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 0
     Key: WebGL
-    Ordinal: 22
+    Ordinal: 21
     Priority: 0
     IconType: 3030
     SmallIcon: {fileID: 0}
@@ -291,7 +279,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/@Sandbox
-    Ordinal: 23
+    Ordinal: 22
     Priority: 0
     IconType: 20
     SmallIcon: {fileID: 0}
@@ -303,19 +291,19 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game
-    Ordinal: 24
+    Ordinal: 23
     Priority: 0
     IconType: 1150
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
-    IsIconRecursive: 1
+    IsIconRecursive: 0
     BackgroundType: 150
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/VFX
-    Ordinal: 25
+    Ordinal: 24
     Priority: 0
     IconType: 2510
     SmallIcon: {fileID: 0}
@@ -327,7 +315,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Materials
-    Ordinal: 26
+    Ordinal: 25
     Priority: 2
     IconType: 2570
     SmallIcon: {fileID: 0}
@@ -339,7 +327,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Meshs
-    Ordinal: 27
+    Ordinal: 26
     Priority: 0
     IconType: 2580
     SmallIcon: {fileID: 0}
@@ -351,7 +339,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/_Common
-    Ordinal: 28
+    Ordinal: 27
     Priority: 0
     IconType: 520
     SmallIcon: {fileID: 0}
@@ -363,7 +351,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Scenes
-    Ordinal: 29
+    Ordinal: 28
     Priority: 3
     IconType: 2650
     SmallIcon: {fileID: 0}
@@ -375,7 +363,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Source
-    Ordinal: 30
+    Ordinal: 29
     Priority: 0
     IconType: 3040
     SmallIcon: {fileID: 0}
@@ -387,7 +375,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/UI
-    Ordinal: 31
+    Ordinal: 30
     Priority: 0
     IconType: 2560
     SmallIcon: {fileID: 0}
@@ -399,7 +387,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Prefabs
-    Ordinal: 32
+    Ordinal: 31
     Priority: 2
     IconType: 2610
     SmallIcon: {fileID: 0}
@@ -411,7 +399,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Lighting
-    Ordinal: 33
+    Ordinal: 32
     Priority: 0
     IconType: 2550
     SmallIcon: {fileID: 0}
@@ -423,7 +411,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Animation
-    Ordinal: 34
+    Ordinal: 33
     Priority: 0
     IconType: 2540
     SmallIcon: {fileID: 0}
@@ -435,7 +423,7 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/RenderSettings
-    Ordinal: 35
+    Ordinal: 34
     Priority: 0
     IconType: 520
     SmallIcon: {fileID: 0}
@@ -447,12 +435,24 @@ MonoBehaviour:
     IsHidden: 0
   - Type: 1
     Key: Assets/_Game/Shaders
-    Ordinal: 36
+    Ordinal: 35
     Priority: 0
     IconType: 2670
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
     IsIconRecursive: 0
+    BackgroundType: 0
+    BackgroundTexture: {fileID: 0}
+    IsBackgroundRecursive: 0
+    IsHidden: 0
+  - Type: 1
+    Key: Assets/_Game/Textures
+    Ordinal: 36
+    Priority: 0
+    IconType: 2690
+    SmallIcon: {fileID: 0}
+    LargeIcon: {fileID: 0}
+    IsIconRecursive: 1
     BackgroundType: 0
     BackgroundTexture: {fileID: 0}
     IsBackgroundRecursive: 0

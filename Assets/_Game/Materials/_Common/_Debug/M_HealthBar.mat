@@ -99,13 +99,13 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GlowIntensity: 1
-    - _GradientRange: -25.9
+    - _GradientRange: -100
     - _Highlightintensity: 40.06
-    - _MaskDarkness: -0.133
+    - _MaskDarkness: -0.149
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Progress: 1
+    - _Progress: 0.876
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
