@@ -2236,7 +2236,7 @@ Transform:
   m_GameObject: {fileID: 1637656738}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.25, y: 1.5, z: 1}
+  m_LocalScale: {x: 2.3625, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1694041934}
@@ -2637,7 +2637,7 @@ Transform:
   m_GameObject: {fileID: 4629299782217985422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.98468745, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 830042896246458005}
@@ -3068,7 +3068,7 @@ PrefabInstance:
     - target: {fileID: 390863469034441545, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.794
+      value: -0.869
       objectReference: {fileID: 0}
     - target: {fileID: 390863469034441545, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
         type: 3}
@@ -3078,7 +3078,7 @@ PrefabInstance:
     - target: {fileID: 390863469034441545, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.109
+      value: -0.1331
       objectReference: {fileID: 0}
     - target: {fileID: 390863469034441545, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
         type: 3}
@@ -3115,10 +3115,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 526194449323796326, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0776
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058702688675292582, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.21469997
+      objectReference: {fileID: 0}
     - target: {fileID: 4707952022681704934, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
         type: 3}
       propertyPath: m_Name
       value: Crafting Station
+      objectReference: {fileID: 0}
+    - target: {fileID: 5417643641904654723, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.1009
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523083633371615069, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.003629169
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523083633371615069, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.006474852
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523083633371615069, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0103
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4, type: 3}
@@ -3128,6 +3158,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7644971463799377141}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7644971463799377143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2394051670376300316, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7644971463799377141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &7644971463799377144
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7644971463799377143}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12834013, y: 0.0006565629, z: 0.18000007}
+  m_Center: {x: -0.0000000037252903, y: -8.731149e-11, z: 0.0000000037252903}
 --- !u!33 &8737968753774924022
 MeshFilter:
   m_ObjectHideFlags: 0
