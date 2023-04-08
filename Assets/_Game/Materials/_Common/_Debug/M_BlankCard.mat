@@ -35,9 +35,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.5
+    - _Float0: 21.46
+    - _Intensity: 1
+    - _LineWidth: 1
+    - _OutlineWidth: 88.33
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
+    - _Bounds: {r: 0.06417012, g: 0.00032828143, b: 0.09000003, a: 0}
+    - _Color0: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Tint: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 0.65882355}
   m_BuildTextureStacks: []

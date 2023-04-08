@@ -7,7 +7,7 @@ public class UVResizer : MonoBehaviour
 
     private Vector4 getBounds()
     {
-        Vector4 minBounds = currentCollider.bounds.max;
+        Vector4 minBounds = currentCollider.bounds.extents;
         return minBounds;
     }
 
@@ -21,3 +21,24 @@ public class UVResizer : MonoBehaviour
         currentMaterial.sharedMaterial.SetVector("_Bounds", getBounds());
     }
 }
+
+/*
+private Vector4 getBounds()
+{
+    Mesh mesh = GetComponent<MeshFilter>().mesh;
+    Bounds bounds = mesh.bounds;
+    Vector4 boundsSize = bounds.size;
+    return boundsSize;
+}
+
+public void setBounds()
+{
+    if (currentMaterial == null)
+    {
+        Debug.LogError("MeshRenderer or Collider not set!");
+        return;
+    }
+    currentMaterial.sharedMaterial.SetVector("_Bounds", getBounds());
+}
+}
+*/
