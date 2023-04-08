@@ -1,17 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UVResizer : MonoBehaviour
 {
-    [SerializeField] private Material currentMaterial;
+    [SerializeField] private MeshRenderer currentMaterial;
     [SerializeField] private Collider currentCollider;
-
-    private void OnValidate()
-    {
-        if (currentMaterial == null || currentCollider == null) return;
-        setBounds();
-    }
 
     private Vector4 getBounds()
     {
@@ -19,8 +11,13 @@ public class UVResizer : MonoBehaviour
         return minBounds;
     }
 
-    private void setBounds()
+    public void setBounds()
     {
-        currentMaterial.SetVector("_Bounds", getBounds());
+        if (currentMaterial == null || currentCollider == null)
+        {
+            Debug.LogError("MeshRenderer or Collider not set!");
+            return;
+        }
+        currentMaterial.sharedMaterial.SetVector("_Bounds", getBounds());
     }
 }
