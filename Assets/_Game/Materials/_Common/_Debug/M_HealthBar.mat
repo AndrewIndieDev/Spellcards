@@ -99,16 +99,17 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GlowIntensity: 1
-    - _GradientRange: -30.78
-    - _MaskDarkness: -0.15
+    - _GradientRange: -25.9
+    - _Highlightintensity: 40.06
+    - _MaskDarkness: -0.133
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Progress: 0.92864704
+    - _Progress: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 5
+    - _Scale: 2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -124,8 +125,9 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 1, g: 0.5, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MaskColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tint: {r: 1, g: 0.37312233, b: 0.14622635, a: 0}
+    - _Tint: {r: 1, g: 0.23488598, b: 0.14509803, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5540095770440571693
 MonoBehaviour:
