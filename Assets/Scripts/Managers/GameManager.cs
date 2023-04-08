@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public Card cardPrefab;
+    public CardContainer cardPrefab;
     public CardData failedCreationRef;
     public VisualEffect coins;
 
@@ -24,8 +24,7 @@ public class GameManager : MonoBehaviour
 
     public System.Action OnGameStart;
     public System.Action OnGameEnd;
-    public System.Action<EnemyGroup> OnEnemyGroupDies;
-    public System.Action<Card> OnCardPickup;
+    public System.Action<CardContainer> OnCardPickup;
     public System.Action OnCardDrop;
 
     public bool playing;
@@ -33,20 +32,20 @@ public class GameManager : MonoBehaviour
     [Command]
     private void SpawnCards(int amount)
     {
-        Card card = null;
+        CardContainer card = null;
         CardData[] cards = Resources.LoadAll<CardData>("Cards");
         for (int i = 0; i < amount; i++)
         {
             card = Instantiate(cardPrefab, new Vector3(Random.Range(-0.8f, 0.8f), 0f, Random.Range(-0.3f, 0.3f)), Quaternion.identity);
-            card.cardData = cards[i%cards.Length];
+            //card.cardData = cards[i%cards.Length];
         }
     }
 
-    public GameObject SpawnCard(CardData data, Vector3 position)
+    public CardContainer SpawnCard(CardData data, Vector3 position)
     {
-        Card spawned = Instantiate(cardPrefab, position, Quaternion.identity);
-        spawned.cardData = data;
-        return spawned.gameObject;
+        CardContainer spawned = Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
+        spawned.SetData(data);
+        return spawned;
     }
 
     private void Update()
@@ -54,7 +53,7 @@ public class GameManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
         MousePosition = hit.point;
-        MousePosition.y += 0.015f;
+        MousePosition.y = 0.05f;
 
         if (Input.GetKeyUp(KeyCode.Escape))
             GameEnd();
@@ -106,7 +105,7 @@ public class GameManager : MonoBehaviour
         RemoveCurrency(currency);
     }
 
-    public void CardPickup(Card card)
+    public void CardPickup(CardContainer card)
     {
         if (!playing) return;
 
