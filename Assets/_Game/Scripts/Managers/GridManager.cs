@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public interface IPlaceable
@@ -20,7 +21,7 @@ public enum EGridCellOccupiedFlags
 {
     None = 0,
     Enemy = 0x1,
-    Walkable = 0x2,
+    Unselectable = 0x2,
     //Pipe = 0x4,
     //SecondStory = 0x8,
     // = 0x10
@@ -46,12 +47,17 @@ public class GridManager : MonoBehaviour
     public delegate void OnGridCellChanged(Vector2Int cellPosition);
     public static event OnGridCellChanged onGridCellChanged;
 
+    public static EGridCellOccupiedFlags playerBlocked = EGridCellOccupiedFlags.Unselectable;
 
-    public static EGridCellOccupiedFlags playerBlocked = EGridCellOccupiedFlags.Enemy;
-
-    public Vector3 SelectionPositionWorld { get { return selection.transform.position; } }
+    public Vector3 SelectionPositionWorld { get { return selection.transform.position + new Vector3(gridHorizontalSize / 2f, 0f, gridVerticalSize / 2f); } }
     public Vector2Int SelectionPositionGrid { get { return currentSelectionCoords; } }
     public IPlaceable SelectedPlaceable { get; private set; }
+
+    // ONLY USED TO OCCUPY ENEMY GRID SPACES - NEED TO MANUALLY CHANGE//
+    private int gridWidth = 12;
+    private int gridHeight = 7;
+    private int enemyRows = 3;
+    ////////////////////////////////////////////////////////////////////
 
     public float gridVerticalSize = 0.2f;
     public float gridHorizontalSize = 0.1f;
@@ -66,6 +72,14 @@ public class GridManager : MonoBehaviour
         Instance = this;
         selection = Instantiate(selection);
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0.01f, gridVerticalSize);
+
+        for (int x = 0; x < gridWidth; x++)
+        {
+            for (int y = gridHeight - enemyRows; y < gridHeight; y++)
+            {
+                OccupyGridField(new Vector2Int(x, y), playerBlocked);
+            }
+        }
     }
 
     private void Update()
@@ -74,13 +88,13 @@ public class GridManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 99999f, groundLayer))
         {
             Vector2Int coords = GetGridCoordsAtWorldPosition(hit.point);
-            SelectedPlaceable = GetBuildingAtPosition(coords);
+            //SelectedPlaceable = GetBuildingAtPosition(coords);
             if (coords == currentSelectionCoords) return;
             currentSelectionCoords = coords;
             Vector3 selectionCellPosition = GetGridCellPosition(coords);
             selection.transform.position = selectionCellPosition;
             onSelectionPositionChanged?.Invoke(coords);
-            occupiedGridCells.TryGetValue(coords, out GridCell gridCell);
+            //occupiedGridCells.TryGetValue(coords, out GridCell gridCell);
         }
     }
 
@@ -252,10 +266,10 @@ public class GridManager : MonoBehaviour
         return cell.weight;
     }
 
-    public bool GetIsWalkable(Vector2Int position)
+    public bool GetIsSelectable(Vector2Int position)
     {
         GridCell cell = GetGridCell(position);
         if (cell == null) return true;
-        return (cell.occupiedFlags & EGridCellOccupiedFlags.Walkable) == EGridCellOccupiedFlags.Walkable;
+        return (cell.occupiedFlags & EGridCellOccupiedFlags.Unselectable) != EGridCellOccupiedFlags.Unselectable;
     }
 }
