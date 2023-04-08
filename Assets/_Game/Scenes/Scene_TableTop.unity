@@ -2740,16 +2740,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2230748761279387806, guid: f92c00b1ac255d249b832fd7cf4a747b,
-        type: 3}
-      propertyPath: gridVerticalSize
-      value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230748761279387806, guid: f92c00b1ac255d249b832fd7cf4a747b,
-        type: 3}
-      propertyPath: gridHorizontalSize
-      value: 0.12833333
-      objectReference: {fileID: 0}
     - target: {fileID: 2230748761279387807, guid: f92c00b1ac255d249b832fd7cf4a747b,
         type: 3}
       propertyPath: m_Name
@@ -3125,25 +3115,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 526194449323796326, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3058702688675292582, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4707952022681704934, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
         type: 3}
       propertyPath: m_Name
       value: Crafting Station
-      objectReference: {fileID: 0}
-    - target: {fileID: 5417643641904654723, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6adba55e36bbc4b9ed5d7adb01e1e4, type: 3}

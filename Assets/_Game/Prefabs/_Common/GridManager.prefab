@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db422355dafe9764e9b99bf2bded4ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridVerticalSize: 0.21
-  gridHorizontalSize: 0.14
+  gridVerticalSize: 0.18
+  gridHorizontalSize: 0.12833333
   selection: {fileID: 9221609897259007686, guid: fd7bde6ae1447dc4bb9a79b9d4e4f6b3,
     type: 3}
   groundLayer:
