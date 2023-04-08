@@ -172,7 +172,7 @@ MonoBehaviour:
   - Type: 0
     Key: Scripts
     Ordinal: 13
-    Priority: 0
+    Priority: 1
     IconType: 2620
     SmallIcon: {fileID: 0}
     LargeIcon: {fileID: 0}
