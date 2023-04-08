@@ -355,7 +355,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5174431417039984720}
   m_Layer: 0
-  m_Name: BuyStacks
+  m_Name: BuyArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
