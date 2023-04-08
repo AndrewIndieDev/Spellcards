@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Mat_Sword
   m_EditorClassIdentifier: 
   spellPrefab: {fileID: 0}
-  cardName: 
+  cardName: Sword
   description: 
   cardImage: {fileID: 2800000, guid: 7f229afcb1503ee4f91bf5ffe92b9149, type: 3}
-  cardBackground: {fileID: 0}
-  rewardAmount: 0
+  cardBackground: {fileID: 2800000, guid: 46e8ec342d7b60444a849738b04d87d3, type: 3}
+  rewardAmount: 5

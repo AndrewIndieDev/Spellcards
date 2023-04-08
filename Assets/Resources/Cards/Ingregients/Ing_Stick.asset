@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ing_Stick
   m_EditorClassIdentifier: 
   spellPrefab: {fileID: 0}
-  cardName: 
+  cardName: Stick
   description: 
   cardImage: {fileID: 2800000, guid: 00126b5d136967741abf96985203d54a, type: 3}
-  cardBackground: {fileID: 0}
-  rewardAmount: 0
+  cardBackground: {fileID: 2800000, guid: a4e886894db3cb0479d4be19e8270c16, type: 3}
+  rewardAmount: 2
