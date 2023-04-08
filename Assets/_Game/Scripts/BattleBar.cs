@@ -2,25 +2,30 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
+using UnityEngine.UIElements;
 
 public class BattleBar : MonoBehaviour
 {
     [Title("Inspector Variables")]
-    [SerializeField] private float unitsPerMinute;
+    [Range(1, 10)]
     [SerializeField] private int shownEvents;
+    [SerializeField] private float maxTimeOnBar;
+    [SerializeField] private Transform barStart;
     [SerializeField] private Transform barEnd;
+
+    [Title("Lists")]
     [SerializeField] private List<Transform> eventObjects = new();
-    [SerializeField] private List<CardData> eventData = new();
+    [SerializeField] private List<EventData> eventData = new();
 
     [Title("Read Only Variables")]
-    [ReadOnly][SerializeField] private float currentTimeInSeconds;
+    [ReadOnly][SerializeField] private float currentTime;
 
     #region Unity Methods
     private void Update()
     {
-        currentTimeInSeconds += Time.deltaTime;
-        UpdateBar();
+        currentTime += Time.deltaTime;
+        if (eventData.Count > 0)
+            UpdateBar();
     }
     #endregion
 
@@ -31,7 +36,29 @@ public class BattleBar : MonoBehaviour
     #region Private Methods
     private void UpdateBar()
     {
-        
+        for (int i = 0; i < eventObjects.Count; i++)
+        {
+            eventObjects[i].gameObject.SetActive(i < shownEvents && i < eventData.Count);
+        }
+
+        for (int i = 0; i < eventData.Count; i++)
+        {
+            float pos = Mathf.InverseLerp(0, maxTimeOnBar, eventData[i].timeToSpawn - currentTime);
+            eventObjects[i].transform.localPosition = Vector3.Lerp(barStart.localPosition, barEnd.localPosition, 1f - pos);
+
+            if (eventObjects[i].transform.localPosition.z >= 1)
+            {
+                Debug.Log("Enemy Spawned");
+                eventData.RemoveAt(i);
+            }
+        }
     }
     #endregion
+}
+
+[Serializable]
+public struct EventData
+{
+    public int timeToSpawn;
+    public CardData cardToSpawn;
 }

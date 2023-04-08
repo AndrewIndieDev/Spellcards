@@ -10,7 +10,7 @@ public class CardData : ScriptableObject
     public string cardName;
     [TextArea]
     public string description;
-    public Sprite cardImage;
-    public Sprite cardBackground;
+    public Texture2D cardImage;
+    public Texture2D cardBackground;
     public int rewardAmount;
 }

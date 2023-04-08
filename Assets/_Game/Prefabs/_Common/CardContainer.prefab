@@ -630,10 +630,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   r_Container: {fileID: 4097265202074792282}
-  r_mainCollider: {fileID: 4097265202239620191}
-  r_behindCollider: {fileID: 1794896233084984754}
+  r_MainCollider: {fileID: 4097265202239620191}
+  r_BehindCollider: {fileID: 1794896233084984754}
   r_Rigidbody: {fileID: 6435518453875717132}
-  r_cardOffsetToMouse: {x: 0, y: 0, z: 0}
+  v_PickedUp: 0
 --- !u!54 &5605668789315387328
 Rigidbody:
   m_ObjectHideFlags: 0

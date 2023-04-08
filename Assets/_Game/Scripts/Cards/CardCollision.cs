@@ -1,7 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
-using System.Runtime.CompilerServices;
 
 public class CardCollision : MonoBehaviour
 {
@@ -9,31 +8,27 @@ public class CardCollision : MonoBehaviour
     [SerializeField] private CardContainer r_Container;
 
     [Title("Inspector References")]
-    [SerializeField] private BoxCollider r_mainCollider;
-    [SerializeField] private BoxCollider r_behindCollider;
+    [SerializeField] private BoxCollider r_MainCollider;
+    [SerializeField] private BoxCollider r_BehindCollider;
     [SerializeField] private Rigidbody r_Rigidbody;
 
     [Title("Read Only Variables")]
-    [ReadOnly][SerializeField] private Vector3 r_cardOffsetToMouse;
+    [ReadOnly][SerializeField] private bool v_PickedUp;
 
     public Vector3 Position => transform.position;
+    public bool PickedUp => v_PickedUp;
 
     #region Unity Methods
     private void OnMouseDown()
     {
-        r_cardOffsetToMouse = (transform.position - GameManager.Instance.MousePosition).IgnoreAxis(EAxis.Y);
-        r_cardOffsetToMouse.x = Mathf.Clamp(r_cardOffsetToMouse.x, -0.05f, 0.05f);
-        r_cardOffsetToMouse.z = Mathf.Clamp(r_cardOffsetToMouse.z, -0.08f, 0.08f);
-        Cursor.visible = false;
-    }
-    private void OnMouseDrag()
-    {
-        transform.position = GameManager.Instance.MousePosition + r_cardOffsetToMouse;
+        v_PickedUp = true;
     }
     private void OnMouseUp()
     {
-        Cursor.visible = true;
-        Move(EAxis.Y, 0.01f);
+        v_PickedUp = false;
+
+        r_Container.Visuals.CurrentTween.onComplete += () => MoveInstant(r_Container.Visuals.Position);
+        MoveInstant(r_Container.Visuals.Position);
     }
     #endregion
 
@@ -45,9 +40,9 @@ public class CardCollision : MonoBehaviour
     {
         DisableColliders();
         if (r_Container.State.HasCardInFront)
-            r_behindCollider.enabled = true;
+            r_BehindCollider.enabled = true;
         else
-            r_mainCollider.enabled = true;
+            r_MainCollider.enabled = true;
     }
     /// <summary>
     /// Moves and Rotates the object to the desired position with zero rotation to the parent.
@@ -64,7 +59,7 @@ public class CardCollision : MonoBehaviour
     /// <param name="position">New positioin to tween to.</param>
     public void Move(Vector3 position)
     {
-        transform.DOLocalMove(position, r_Container.DEFAULT_TWEEN_TIME);
+        transform.DOMove(position, r_Container.DEFAULT_TWEEN_TIME);
     }
     /// <summary>
     /// Moves the object to a certain position on a given axis.
@@ -130,8 +125,8 @@ public class CardCollision : MonoBehaviour
     /// </summary>
     private void DisableColliders()
     {
-        r_mainCollider.enabled = false;
-        r_behindCollider.enabled = false;
+        r_MainCollider.enabled = false;
+        r_BehindCollider.enabled = false;
     }
     #endregion
 }

@@ -15,6 +15,6 @@ MonoBehaviour:
   spellPrefab: {fileID: 0}
   cardName: Meteor
   description: Drops a meteor dealing damage in a radius.
-  cardImage: {fileID: 2100000, guid: fec712540ae585a449053cf021546154, type: 2}
-  cardBackground: {fileID: 2100000, guid: 4452d70f5d1e1c048884a1c04f32a8d3, type: 2}
+  cardImage: {fileID: 2800000, guid: c4f2f64b983987e40a71a62950bc8050, type: 3}
+  cardBackground: {fileID: 2800000, guid: 1b801ecc35f7d414dacceed9a6bc5247, type: 3}
   rewardAmount: 10

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
 
 public class CardContainer : MonoBehaviour, IInteractable
 {
@@ -35,7 +36,13 @@ public class CardContainer : MonoBehaviour, IInteractable
     #region Unity Methods
     private void Start()
     {
+        GridManager.onSelectionPositionChanged += OnSelectionPositionChanged;
+
         UpdateAll();
+    }
+    void OnDestroy()
+    {
+        GridManager.onSelectionPositionChanged -= OnSelectionPositionChanged;
     }
     #endregion
 
@@ -91,6 +98,16 @@ public class CardContainer : MonoBehaviour, IInteractable
     private void ResetLocalPosition()
     {
         transform.localPosition = Vector3.zero;
+    }
+    /// <summary>
+    /// Called when the grid selection position changes.
+    /// </summary>
+    /// <param name="newPosition">New position of the selection.</param>
+    private void OnSelectionPositionChanged(Vector2Int newPosition)
+    {
+        if (!Collision.PickedUp || !GridManager.Instance.GetIsSelectable(newPosition)) return;
+
+        Visuals.Move(GridManager.Instance.SelectionPositionWorld);
     }
     #endregion
 }
