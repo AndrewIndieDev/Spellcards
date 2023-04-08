@@ -21,10 +21,14 @@ public class CardCollision : MonoBehaviour
     #region Unity Methods
     private void OnMouseDown()
     {
+        if (!CanCardBePickedUp) return;
+
         v_PickedUp = true;
     }
     private void OnMouseUp()
     {
+        if (!v_PickedUp) return;
+
         v_PickedUp = false;
 
         r_Container.Visuals.CurrentTween.onComplete += () => MoveInstant(r_Container.Visuals.Position);
@@ -128,5 +132,9 @@ public class CardCollision : MonoBehaviour
         r_MainCollider.enabled = false;
         r_BehindCollider.enabled = false;
     }
+    /// <summary>
+    /// Checks to see if the card can be picked up.
+    /// </summary>
+    private bool CanCardBePickedUp => (IEnemy)r_Container.CardData == null;
     #endregion
 }

@@ -33,7 +33,7 @@ public class CardVisuals : MonoBehaviour
     {
         SetImage(data.cardImage);
         SetBackground(data.cardBackground);
-        SetName(data.name);
+        SetName(data.cardName);
         SetSellCost(data.rewardAmount);
     }
     /// <summary>

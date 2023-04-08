@@ -54,9 +54,9 @@ public class GridManager : MonoBehaviour
     public IPlaceable SelectedPlaceable { get; private set; }
 
     // ONLY USED TO OCCUPY ENEMY GRID SPACES - NEED TO MANUALLY CHANGE//
-    private int gridWidth = 12;
-    private int gridHeight = 7;
-    private int enemyRows = 3;
+    public int gridWidth = 12;
+    public int gridHeight = 7;
+    public int enemyRows = 3;
     ////////////////////////////////////////////////////////////////////
 
     public float gridVerticalSize = 0.2f;

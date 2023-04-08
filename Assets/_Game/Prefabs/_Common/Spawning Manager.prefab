@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2230748761279387807
+--- !u!1 &7690502536238454508
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2230748761279387801}
-  - component: {fileID: 2230748761279387806}
+  - component: {fileID: 5639049227376446119}
+  - component: {fileID: 6967387219788063956}
   m_Layer: 0
-  m_Name: GridManager
+  m_Name: Spawning Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2230748761279387801
+--- !u!4 &5639049227376446119
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2230748761279387807}
+  m_GameObject: {fileID: 7690502536238454508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.67, y: 0, z: -0.58}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2230748761279387806
+--- !u!114 &6967387219788063956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2230748761279387807}
+  m_GameObject: {fileID: 7690502536238454508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db422355dafe9764e9b99bf2bded4ec1, type: 3}
+  m_Script: {fileID: 11500000, guid: 037ace00100b13946b369f2745a3c0f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridVerticalSize: 0.18
-  gridHorizontalSize: 0.12833333
-  selection: {fileID: 9221609897259007686, guid: fd7bde6ae1447dc4bb9a79b9d4e4f6b3,
+  r_CardPrefab: {fileID: 4097265202074792282, guid: 81bab5be46b96e94980bf240d77acf7d,
     type: 3}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 16384

@@ -2,7 +2,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 
-public class CardContainer : MonoBehaviour, IInteractable
+public class CardContainer : MonoBehaviour
 {
     [Title("Inspector References")]
     [SerializeField] private CardState r_State;
@@ -22,16 +22,6 @@ public class CardContainer : MonoBehaviour, IInteractable
     /*[ReadOnly]*/[SerializeField] private CardData r_Data;
 
     public CardData CardData { get { return r_Data; } }
-
-    #region Interfaces
-    /// <summary>
-    /// Called when an IInteractable object is clicked
-    /// </summary>
-    public void Interact()
-    {
-        //Do I need this?
-    }
-    #endregion
 
     #region Unity Methods
     private void Start()
@@ -88,6 +78,24 @@ public class CardContainer : MonoBehaviour, IInteractable
     {
         GameManager.Instance.AddCurrency(CardData.rewardAmount);
         Destroy(gameObject);
+    }
+    /// <summary>
+    /// Tweens the card to the given position.
+    /// </summary>
+    /// <param name="position">Position to move to.</param>
+    public void Move(Vector3 position)
+    {
+        Collision.Move(position);
+        Visuals.Move(position);
+    }
+    /// <summary>
+    /// Instantly moves the the given position.
+    /// </summary>
+    /// <param name="position">Position to move to.</param>
+    public void MoveInstant(Vector3 position)
+    {
+        Collision.MoveInstant(position);
+        Visuals.MoveInstant(position);
     }
     #endregion
 

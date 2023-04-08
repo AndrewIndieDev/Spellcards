@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class BattleBar : MonoBehaviour
 {
@@ -48,7 +47,7 @@ public class BattleBar : MonoBehaviour
 
             if (eventObjects[i].transform.localPosition.z >= 1)
             {
-                Debug.Log("Enemy Spawned");
+                SpawningManager.Instance.SpawnEnemy(eventData[i].cardToSpawn);
                 eventData.RemoveAt(i);
             }
         }
