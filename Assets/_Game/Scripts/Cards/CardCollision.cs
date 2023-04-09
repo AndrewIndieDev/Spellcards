@@ -4,6 +4,8 @@ using DG.Tweening;
 
 public class CardCollision : MonoBehaviour
 {
+    private GridManager Grid => GridManager.Instance;
+
     [Title("Container Reference")]
     [SerializeField] private CardContainer r_Container;
 
@@ -29,9 +31,10 @@ public class CardCollision : MonoBehaviour
         if (!v_PickedUp) return;
 
         v_PickedUp = false;
-
+        Grid.UnoccupyGridField(r_Container.GridPosition, EGridCellOccupiedFlags.Card);
         r_Container.Visuals.CurrentTween.onComplete += () => MoveInstant(r_Container.Visuals.Position);
         MoveInstant(r_Container.Visuals.Position);
+        Grid.OccupyGridField(Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card);
     }
     #endregion
 

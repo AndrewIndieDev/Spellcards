@@ -76,6 +76,9 @@ public class BattleBar : MonoBehaviour
         for (int i = 0; i < eventData.Count; i++)
         {
             float pos = Mathf.InverseLerp(0, maxTimeOnBar, eventData[i].timeToSpawn - currentTime);
+
+            if (eventObjects.Count <= i) break;
+
             eventObjects[i].transform.localPosition = Vector3.Lerp(barStart.localPosition, barEnd.localPosition, 1f - pos);
 
             if (eventObjects[i].transform.localPosition.z >= 1)

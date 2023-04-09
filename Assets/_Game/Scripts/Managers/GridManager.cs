@@ -19,7 +19,7 @@ public enum EGridCellOccupiedFlags
     None = 0,
     Enemy = 0x1,
     Unselectable = 0x2,
-    //Pipe = 0x4,
+    Card = 0x4,
     //SecondStory = 0x8,
     // = 0x10
     // = 0x20

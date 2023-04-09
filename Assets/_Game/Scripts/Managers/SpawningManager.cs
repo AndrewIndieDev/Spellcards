@@ -35,7 +35,7 @@ public class SpawningManager : MonoBehaviour
         var gridPosition = GetRandomGridPosition(rowMin, rowMax, 0, Grid.GridWidth);
 
         var attemptsToPlaceCard = 100;
-        while (!Grid.GridPositionFree(gridPosition) && attemptsToPlaceCard > 0)
+        while (!Grid.GridPositionFree(gridPosition, EGridCellOccupiedFlags.Card) && attemptsToPlaceCard > 0)
         {
             gridPosition = GetRandomGridPosition(rowMin, rowMax, 0, Grid.GridWidth);
             attemptsToPlaceCard--;
@@ -66,7 +66,7 @@ public class SpawningManager : MonoBehaviour
             gridPosition = GetRandomGridPosition(0, Grid.GridWidth, 0, Grid.GridHeight - Grid.EnemyRows);
 
             var attemptsToPlaceCard = 100;
-            while (!Grid.GridPositionFree(gridPosition) && attemptsToPlaceCard > 0)
+            while (!Grid.GridPositionFree(gridPosition, EGridCellOccupiedFlags.Card) && attemptsToPlaceCard > 0)
             {
                 gridPosition = GetRandomGridPosition(0, Grid.GridWidth, 0, Grid.GridHeight - Grid.EnemyRows);
                 attemptsToPlaceCard--;
@@ -104,6 +104,7 @@ public class SpawningManager : MonoBehaviour
         card.SetData(data);
         var worldPos = Grid.GetGridCellCenterPosition(gridPosition);
         card.MoveInstant(worldPos);
+        Grid.OccupyGridField(gridPosition, EGridCellOccupiedFlags.Card, card).ToString();
         return card;
     }
     /// <summary>
