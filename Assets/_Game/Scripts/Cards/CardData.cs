@@ -13,4 +13,6 @@ public class CardData : ScriptableObject
     public Texture2D cardImage;
     public Texture2D cardBackground;
     public int rewardAmount;
+    public int xSize = 1;
+    public int ySize = 1;
 }

@@ -1,71 +1,69 @@
-using QFSW.QC;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using Sirenix.OdinInspector;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    private GridManager Grid => GridManager.Instance;
+    
+    public Action OnGameStart;
+    public Action OnGameEnd;
+    public Action<CardContainer> OnCardPickup;
+    public Action OnCardDrop;
+
+    [Title("Inspector References")]
+    [SerializeField] private VisualEffect coins;
+
+    [Title("Inspector Variables")]
+    [SerializeField] private float generateGoldEveryXSec;
+    [SerializeField] private int currency;
+    [SerializeField] private LayerMask table;
+
+    [Title("Read Only Variables")]
+    [ReadOnly] public Vector3 MousePosition;
+    [ReadOnly][SerializeField] private bool playing;
+
+    #region Unity Methods
     private void Awake()
     {
         Instance = this;
     }
-
-    public CardContainer cardPrefab;
-    public CardData failedCreationRef;
-    public VisualEffect coins;
-
-    public float generateGoldEveryXSec = 3f;
-    public int currency = 0;
-
-    public LayerMask table;
-    public Vector3 MousePosition;
-
-    public System.Action OnGameStart;
-    public System.Action OnGameEnd;
-    public System.Action<CardContainer> OnCardPickup;
-    public System.Action OnCardDrop;
-
-    public bool playing;
-
-    [Command]
-    private void SpawnCards(int amount)
-    {
-        CardContainer card = null;
-        CardData[] cards = Resources.LoadAll<CardData>("Cards");
-        for (int i = 0; i < amount; i++)
-        {
-            card = Instantiate(cardPrefab, new Vector3(Random.Range(-0.8f, 0.8f), 0f, Random.Range(-0.3f, 0.3f)), Quaternion.identity);
-            //card.cardData = cards[i%cards.Length];
-        }
-    }
-
-    public CardContainer SpawnCard(CardData data, Vector3 position)
-    {
-        CardContainer spawned = Instantiate(cardPrefab, Vector3.zero, Quaternion.identity);
-        spawned.SetData(data);
-        return spawned;
-    }
-
     private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
-        MousePosition = hit.point;
-        MousePosition.y = 0.05f;
+        MousePosition = hit.point.IgnoreAxis(EAxis.Y, 0.1f);
 
-        if (Input.GetKeyUp(KeyCode.Escape))
-            GameEnd();
+        if (Input.GetMouseButtonDown(1))
+        {
+            var position = Grid.GetGridCoordsAtWorldPosition(MousePosition);
+            if (position.x < 0 || position.x >= Grid.GridWidth) return;
+            if (position.y < 0 || position.y >= Grid.GridHeight) return;
+
+            Grid.InteractWithPlaceable(position);
+        }
     }
+    #endregion
 
-    [Command]
+    #region Public Methods
+    /// <summary>
+    /// Adds a set amount of currency to your total amount.
+    /// </summary>
+    /// <param name="amount">Amount to add.</param>
     public void AddCurrency(int amount)
     {
         currency += amount;
         CheckCoinAmount();
     }
-
+    /// <summary>
+    /// Removes a set amount of currency from your total amount.
+    /// </summary>
+    /// <param name="amount">Amount to remove.</param>
+    /// <returns>True if you had enough currency, False if you didn't.</returns>
     public bool RemoveCurrency(int amount)
     {
         if (currency - amount < 0)
@@ -74,15 +72,9 @@ public class GameManager : MonoBehaviour
         CheckCoinAmount();
         return true;
     }
-
-    private void CheckCoinAmount()
-    {
-        coins.Reinit();
-        coins.SetInt("Coin Initialize", currency);
-        coins.SendEvent("Initialize");
-    }
-
-    [Command]
+    /// <summary>
+    /// Starts the game.
+    /// </summary>
     public void GameStart()
     {
         if (playing) return;
@@ -93,8 +85,9 @@ public class GameManager : MonoBehaviour
         playing = true;
         StartCoroutine(GoldOverTime());
     }
-
-    [Command]
+    /// <summary>
+    /// Ends the game.
+    /// </summary>
     public void GameEnd()
     {
         if (!playing) return;
@@ -104,26 +97,28 @@ public class GameManager : MonoBehaviour
         playing = false;
         RemoveCurrency(currency);
     }
-
-    public void CardPickup(CardContainer card)
-    {
-        if (!playing) return;
-
-        OnCardPickup?.Invoke(card);
-    }
-
-    public void CardDrop()
-    {
-        if (!playing) return;
-
-        OnCardDrop?.Invoke();
-    }
-
+    /// <summary>
+    /// Quits the game.
+    /// </summary>
     public void Quit()
     {
         Application.Quit();
     }
+    #endregion
 
+    #region Private Methods
+    /// <summary>
+    /// Used to update the coin visuals.
+    /// </summary>
+    private void CheckCoinAmount()
+    {
+        coins.Reinit();
+        coins.SetInt("Coin Initialize", currency);
+        coins.SendEvent("Initialize");
+    }
+    /// <summary>
+    /// Used to generate gold over time.
+    /// </summary>
     private IEnumerator GoldOverTime()
     {
         float cooldown = generateGoldEveryXSec;
@@ -139,4 +134,5 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 }

@@ -5,9 +5,11 @@ using DG.Tweening;
 
 public class CardPackInstance : MonoBehaviour
 {
+    private SpawningManager Spawner => SpawningManager.Instance;
+    private GridManager Grid => GridManager.Instance;
+    
     public int cardsToSpawn;
     public List<CardData> potentialCards = new();
-    public Transform radialGuide;
 
     public void Open()
     {
@@ -16,14 +18,9 @@ public class CardPackInstance : MonoBehaviour
 
     private IEnumerator SpawnCard()
     {
-        float increment = 360f / cardsToSpawn;
         while (cardsToSpawn > 0)
         {
-            CardContainer spawnedCard = GameManager.Instance.SpawnCard(potentialCards[Random.Range(0, potentialCards.Count)], transform.position);
-            spawnedCard.Collision.MoveInstant(transform.position);
-            spawnedCard.Collision.Move((transform.position + radialGuide.forward * 0.15f).IgnoreAxis(EAxis.Y, 0.01f));
-            //radialGuide.DORotate(new Vector3(0f, radialGuide.rotation.eulerAngles.y + increment, 0f), 0.005f);
-            radialGuide.eulerAngles = new Vector3(0f, radialGuide.rotation.eulerAngles.y + increment, 0f);
+            Spawner.SpawnCard(potentialCards[Random.Range(0, potentialCards.Count)], transform.position);
             cardsToSpawn--;
             yield return new WaitForSeconds(0.01f);
         }

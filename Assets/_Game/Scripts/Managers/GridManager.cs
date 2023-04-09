@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public interface IPlaceable
 {
     GameObject gameObject { get; }
-    bool UserCanDemolish { get; }
-    bool UserCanInteract { get; }
     Vector2Int Size { get; }
     Vector2Int GridPosition { get; }
     void OnPlace();
-    void OnDemolish();
+    void OnKill();
     void OnInteract();
 }
 
@@ -53,11 +50,11 @@ public class GridManager : MonoBehaviour
     public Vector2Int SelectionPositionGrid { get { return currentSelectionCoords; } }
     public IPlaceable SelectedPlaceable { get; private set; }
 
-    // ONLY USED TO OCCUPY ENEMY GRID SPACES - NEED TO MANUALLY CHANGE//
-    public int gridWidth = 12;
-    public int gridHeight = 7;
-    public int enemyRows = 3;
-    ////////////////////////////////////////////////////////////////////
+    // NEED TO MANUALLY CHANGE //
+    public int GridWidth { get { return 12; } }
+    public int GridHeight { get { return 7; } }
+    public int EnemyRows { get { return 3; } }
+    /////////////////////////////
 
     public float gridVerticalSize = 0.2f;
     public float gridHorizontalSize = 0.1f;
@@ -73,9 +70,9 @@ public class GridManager : MonoBehaviour
         selection = Instantiate(selection);
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0.01f, gridVerticalSize);
 
-        for (int x = 0; x < gridWidth; x++)
+        for (int x = 0; x < GridWidth; x++)
         {
-            for (int y = gridHeight - enemyRows; y < gridHeight; y++)
+            for (int y = GridHeight - EnemyRows; y < GridHeight; y++)
             {
                 OccupyGridField(new Vector2Int(x, y), playerBlocked);
             }
@@ -175,7 +172,7 @@ public class GridManager : MonoBehaviour
         GridCell gridCell = GetOrAddGridCell(position);
         if (gridCell == null) 
         {
-            Debug.LogError("<b>OMG THIS SHOULD NOT HAVE HAPPENED WTF</b>");
+            Dbug.Instance.LogError("<b>OMG THIS SHOULD NOT HAVE HAPPENED WTF</b>");
             return false; 
         }
         gridCell.occupiedFlags |= occupyFlags;
@@ -253,7 +250,7 @@ public class GridManager : MonoBehaviour
         return (placeables.Count > 0) ? placeables : null;
     }
 
-    public IPlaceable GetBuildingAtPosition(Vector2Int position)
+    public IPlaceable GetPlaceableAtPosition(Vector2Int position)
     {
         GridCell gridCell = GetGridCell(position);
         return gridCell != null ? gridCell.occupiers[EGridCellOccupiedFlags.Enemy] : null;
@@ -271,5 +268,11 @@ public class GridManager : MonoBehaviour
         GridCell cell = GetGridCell(position);
         if (cell == null) return true;
         return (cell.occupiedFlags & EGridCellOccupiedFlags.Unselectable) != EGridCellOccupiedFlags.Unselectable;
+    }
+
+    public void InteractWithPlaceable(Vector2Int position)
+    {
+        IPlaceable placeable = GetPlaceableAtPosition(position);
+        placeable?.OnInteract();
     }
 }

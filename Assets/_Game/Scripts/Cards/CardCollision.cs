@@ -8,8 +8,7 @@ public class CardCollision : MonoBehaviour
     [SerializeField] private CardContainer r_Container;
 
     [Title("Inspector References")]
-    [SerializeField] private BoxCollider r_MainCollider;
-    [SerializeField] private BoxCollider r_BehindCollider;
+    [SerializeField] private BoxCollider r_Collider;
     [SerializeField] private Rigidbody r_Rigidbody;
 
     [Title("Read Only Variables")]
@@ -43,10 +42,7 @@ public class CardCollision : MonoBehaviour
     public void CheckForUpdates()
     {
         DisableColliders();
-        if (r_Container.State.HasCardInFront)
-            r_BehindCollider.enabled = true;
-        else
-            r_MainCollider.enabled = true;
+        r_Collider.enabled = true;
     }
     /// <summary>
     /// Moves and Rotates the object to the desired position with zero rotation to the parent.
@@ -129,12 +125,11 @@ public class CardCollision : MonoBehaviour
     /// </summary>
     private void DisableColliders()
     {
-        r_MainCollider.enabled = false;
-        r_BehindCollider.enabled = false;
+        r_Collider.enabled = false;
     }
     /// <summary>
     /// Checks to see if the card can be picked up.
     /// </summary>
-    private bool CanCardBePickedUp => (IEnemy)r_Container.CardData == null;
+    private bool CanCardBePickedUp => r_Container.CardData.GetType() != typeof(EnemyCard);
     #endregion
 }

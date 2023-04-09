@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BattleBar : MonoBehaviour
 {
+    private SpawningManager Spawner => SpawningManager.Instance;
+
     [Title("Inspector Variables")]
     [Range(1, 10)]
     [SerializeField] private int shownEvents;
@@ -29,7 +31,38 @@ public class BattleBar : MonoBehaviour
     #endregion
 
     #region Public Methods
-
+    /// <summary>
+    /// Adds an event to the list of events.
+    /// </summary>
+    /// <param name="spawnAtTime">Time (in seconds) that you want the event to trigger.</param>
+    /// <param name="cardToSpawn">Data that you want to spawn.</param>
+    public void AddEvent(int spawnAtTime, CardData cardToSpawn)
+    {
+        eventData.Add(new EventData(spawnAtTime, cardToSpawn));
+    }
+    /// <summary>
+    /// Removes an event at the given index.
+    /// </summary>
+    /// <param name="index">Index of the event.</param>
+    public void RemoveEventAtIndex(int index)
+    {
+        eventData.RemoveAt(index);
+    }
+    /// <summary>
+    /// Removes the closest event with the given card type.
+    /// </summary>
+    /// <param name="data">Data type of the event.</param>
+    public void RemoveNextEventOfCardType(CardData data)
+    {
+        for (int i = 0; i < eventData.Count; i++)
+        {
+            if (eventData[i].cardToSpawn == data)
+            {
+                eventData.RemoveAt(i);
+                return;
+            }
+        }
+    }
     #endregion
 
     #region Private Methods
@@ -47,17 +80,23 @@ public class BattleBar : MonoBehaviour
 
             if (eventObjects[i].transform.localPosition.z >= 1)
             {
-                SpawningManager.Instance.SpawnEnemy(eventData[i].cardToSpawn);
-                eventData.RemoveAt(i);
+                Spawner.SpawnCard(eventData[i].cardToSpawn);
+                RemoveEventAtIndex(i);
             }
         }
     }
     #endregion
-}
 
-[Serializable]
-public struct EventData
-{
-    public int timeToSpawn;
-    public CardData cardToSpawn;
+    [Serializable]
+    private struct EventData
+    {
+        public int timeToSpawn;
+        public CardData cardToSpawn;
+
+        public EventData(int timeToSpawn, CardData cardToSpawn)
+        {
+            this.timeToSpawn = timeToSpawn;
+            this.cardToSpawn = cardToSpawn;
+        }
+    }
 }

@@ -1,48 +1,124 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Sirenix.OdinInspector.Editor.Validation;
+using Mono.CSharp;
 
 public class SpawningManager : MonoBehaviour
 {
     public static SpawningManager Instance;
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private GridManager Grid => GridManager.Instance;
 
     [Title("Inspector References")]
     [SerializeField] private CardContainer r_CardPrefab;
 
-    public void SpawnCard(CardData data, Vector3 position)
+    #region Unity Methods
+    private void Awake()
     {
-        var pos = new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z));
-        var cell = Grid.GetGridCell(pos);
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
+
+    #region Public Methods
+    
+    /// <summary>
+    /// Spawns an enemy at a random position in the enemy rows.
+    /// </summary>
+    /// <param name="data">Data you want the card to spawn with.</param>
+    public CardContainer SpawnEnemy(CardData data)
+    {
+        int rowMin = Grid.GridHeight - Grid.EnemyRows;
+        int rowMax = Grid.GridHeight;
+        var gridPosition = GetRandomGridPosition(rowMin, rowMax, 0, Grid.GridWidth);
+
+        var attemptsToPlaceCard = 100;
+        while (!Grid.GridPositionFree(gridPosition) && attemptsToPlaceCard > 0)
+        {
+            gridPosition = GetRandomGridPosition(rowMin, rowMax, 0, Grid.GridWidth);
+            attemptsToPlaceCard--;
+
+            if (attemptsToPlaceCard == 0)
+            {
+                Dbug.Instance.LogError($"Couldn't find a position to place {data.cardName}.");
+                return null;
+            }
+        }
+        return SpawnCard(data, gridPosition);
+    }
+    /// <summary>
+    /// Spawns a card at the desired grid position using the given world position.
+    /// </summary>
+    /// <param name="data">Data you want the card to spawn with.</param>
+    /// <param name="worldPosition"></param>
+    public CardContainer SpawnCard(CardData data, Vector3 worldPosition = default)
+    {
+        if (data.GetType() == typeof(EnemyCard))
+        {
+            return SpawnEnemy(data);
+        }
+
+        var gridPosition = Vector2Int.zero;
+        if (worldPosition == default)
+        {
+            gridPosition = GetRandomGridPosition(0, Grid.GridWidth, 0, Grid.GridHeight - Grid.EnemyRows);
+
+            var attemptsToPlaceCard = 100;
+            while (!Grid.GridPositionFree(gridPosition) && attemptsToPlaceCard > 0)
+            {
+                gridPosition = GetRandomGridPosition(0, Grid.GridWidth, 0, Grid.GridHeight - Grid.EnemyRows);
+                attemptsToPlaceCard--;
+
+                if (attemptsToPlaceCard == 0)
+                {
+                    Dbug.Instance.LogError($"Couldn't find a position to place {data.cardName}.");
+                    return null;
+                }
+            }
+        }
+        else
+        {
+            gridPosition = new Vector2Int(Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.z));
+        }
+        return SpawnCard(data, gridPosition);
+    }
+    #endregion
+
+    #region Private Methods
+    /// <summary>
+    /// Spawns a card at the desired grid position.
+    /// </summary>
+    /// <param name="data">Data you want the card to spawn with.</param>
+    /// <param name="gridPosition">Grid position you want to spawn the card at.</param>
+    private CardContainer SpawnCard(CardData data, Vector2Int gridPosition)
+    {
+        var cell = Grid.GetOrAddGridCell(gridPosition);
         if (cell == null)
         {
-            Dbug.Instance.LogError("Cell is null!");
-            return;
+            Dbug.Instance.LogError($"Cell [{gridPosition.x},{gridPosition.y}] is null!");
+            return null;
         }
         CardContainer card = Instantiate(r_CardPrefab, Vector3.zero, Quaternion.identity);
         card.SetData(data);
-        card.MoveInstant(position);
+        var worldPos = Grid.GetGridCellCenterPosition(gridPosition);
+        card.MoveInstant(worldPos);
+        return card;
     }
-    public void SpawnEnemy(CardData data)
+    /// <summary>
+    /// Get's a random grid position within the parameters.
+    /// </summary>
+    /// <param name="minRow">Minumum Row.</param>
+    /// <param name="maxRow">Maximum Row.</param>
+    /// <param name="minCol">Minumum Column.</param>
+    /// <param name="maxCol">Maximum Column.</param>
+    /// <returns></returns>
+    private Vector2Int GetRandomGridPosition(int minRow, int maxRow, int minCol, int maxCol)
     {
-        int rowMin = Grid.gridHeight - Grid.enemyRows;
-        int rowMax = Grid.gridHeight;
-        int rowToSpawn = Random.Range(rowMin, rowMax);
-        int colToSpawn = Random.Range(0, Grid.gridWidth);
-        var pos = new Vector2Int(colToSpawn, rowToSpawn);
-        var cell = Grid.GetGridCell(pos);
-        if (cell == null)
-        {
-            Dbug.Instance.LogError("Cell is null!");
-            return;
-        }
-        var cellPos = Grid.GetGridCellCenterPosition(pos);
-        CardContainer card = Instantiate(r_CardPrefab, Vector3.zero, Quaternion.identity);
-        card.SetData(data);
-        card.MoveInstant(cellPos);
+        int colToSpawn = Random.Range(minCol, maxCol);
+        int rowToSpawn = Random.Range(minRow, maxRow);
+        return new Vector2Int(colToSpawn, rowToSpawn);
     }
+    #endregion
 }
