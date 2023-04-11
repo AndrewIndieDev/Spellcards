@@ -102,9 +102,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _GlowIntensity: 1
-    - _GradientRange: -6.06
-    - _Highlightintensity: -2.24
-    - _MaskDarkness: -0.474
+    - _GradientRange: 0
+    - _Highlightintensity: 1
+    - _MaskDarkness: -0.133
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -130,7 +130,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MaskColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tint: {r: 0.18431371, g: 0.5003163, b: 1, a: 0}
+    - _Tint: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5540095770440571693
 MonoBehaviour:
