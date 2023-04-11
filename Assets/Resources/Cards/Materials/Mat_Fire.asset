@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94079779abab4f241996d42383bbe6b1, type: 3}
   m_Name: Mat_Fire
   m_EditorClassIdentifier: 
-  spellPrefab: {fileID: 0}
-  cardName: Fire
+  abilities: []
+  name: Fire
   description: 
   cardImage: {fileID: 2800000, guid: d4ea4533c92a38948ba6239b3e40de8f, type: 3}
   cardBackground: {fileID: 2800000, guid: 46e8ec342d7b60444a849738b04d87d3, type: 3}
   rewardAmount: 5
+  xSize: 1
+  ySize: 1

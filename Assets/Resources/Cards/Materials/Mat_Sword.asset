@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94079779abab4f241996d42383bbe6b1, type: 3}
   m_Name: Mat_Sword
   m_EditorClassIdentifier: 
-  spellPrefab: {fileID: 0}
-  cardName: Sword
+  abilities: []
+  name: Sword
   description: 
   cardImage: {fileID: 2800000, guid: 7f229afcb1503ee4f91bf5ffe92b9149, type: 3}
   cardBackground: {fileID: 2800000, guid: 46e8ec342d7b60444a849738b04d87d3, type: 3}
   rewardAmount: 5
+  xSize: 1
+  ySize: 1

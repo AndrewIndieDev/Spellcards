@@ -1,13 +1,14 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 
 public class CardData : ScriptableObject
 {
     [Title("Inspector References")]
-    public GameObject spellPrefab;
+    public List<AbilityData> abilities;
 
     [Title("Inspector Variables")]
-    public string cardName;
+    public new string name;
     [TextArea]
     public string description;
     public Texture2D cardImage;

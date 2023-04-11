@@ -4,15 +4,13 @@ using System;
 
 public class CardContainer : MonoBehaviour, IPlaceable
 {
-    private GridManager Grid => GridManager.Instance;
-
     [Title("Inspector References")]
-    //[SerializeField] private CardState r_State;
     [SerializeField] private CardVisuals r_Visuals;
     [SerializeField] private CardCollision r_Collision;
+    [SerializeField] private CardAbility r_Abilities;
     [SerializeField] private Timer r_Timer;
 
-    //public CardState State { get { return r_State; } }
+    public GridManager Grid { get { return GridManager.Instance; } }
     public CardVisuals Visuals { get { return r_Visuals; } }
     public CardCollision Collision { get { return r_Collision; } }
     public Timer Timer { get { return r_Timer; } }
@@ -24,6 +22,8 @@ public class CardContainer : MonoBehaviour, IPlaceable
     [ReadOnly][SerializeField] private CardData r_Data;
 
     public CardData CardData { get { return r_Data; } }
+
+    private bool IsEnemy => r_Data.GetType() == typeof(EnemyCard);
 
     #region Interface Methods
     /// <summary>
@@ -53,7 +53,18 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// </summary>
     public void OnInteract()
     {
-        Dbug.Instance.Log($"Interacted with {r_Data.cardName}!");
+        Dbug.Instance.Log(IsEnemy ? $"{r_Data.name} is an enemy, you can't interact with that!" : $"Interacted with {r_Data.name}!");
+
+        if (!IsEnemy)
+            r_Abilities.Execute(r_Abilities.GetRandomAbility());
+    }
+    /// <summary>
+    /// Called when the card has been spawned for the first time.
+    /// </summary>
+    public void OnSpawn()
+    {
+        if (IsEnemy)
+            r_Abilities.ExecuteAutonomy();
     }
     #endregion
 
@@ -86,7 +97,6 @@ public class CardContainer : MonoBehaviour, IPlaceable
     public void UpdateAll()
     {
         r_Visuals.Set(r_Data);
-        //r_State.CheckForUpdates();
         r_Collision.CheckForUpdates();
     }
     /// <summary>
@@ -119,6 +129,9 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <param name="position">Position to move to.</param>
     public void Move(Vector3 position)
     {
+        if (!CheckIfGridIsFreeOfAll(Grid.GetGridCoordsAtWorldPosition(position)))
+            return;
+
         Collision.Move(position);
         Visuals.Move(position);
     }
@@ -128,8 +141,23 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <param name="position">Position to move to.</param>
     public void MoveInstant(Vector3 position)
     {
+        if (!CheckIfGridIsFreeOfAll(Grid.GetGridCoordsAtWorldPosition(position)))
+            return;
+
         Collision.MoveInstant(position);
         Visuals.MoveInstant(position);
+    }
+    /// <summary>
+    /// Instantly moves the collision to the new position, but visually moves the card to the new position with a delay.
+    /// </summary>
+    /// <param name="position">Position to move.</param>
+    public void MoveWithVisualDelay(Vector3 position)
+    {
+        if (!CheckIfGridIsFreeOfAll(Grid.GetGridCoordsAtWorldPosition(position)))
+            return;
+
+        Collision.MoveInstant(position);
+        Visuals.Move(position);
     }
     #endregion
 
@@ -147,9 +175,15 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <param name="newPosition">New position of the selection.</param>
     private void OnSelectionPositionChanged(Vector2Int newPosition)
     {
-        if (!Collision.PickedUp || !GridManager.Instance.GetIsSelectable(newPosition)) return;
+        if (!Collision.PickedUp || !GridManager.Instance.IsPlayableArea(newPosition)) return;
 
         Visuals.Move(GridManager.Instance.SelectionPositionWorld);
+    }
+    private bool CheckIfGridIsFreeOfAll(Vector2Int position)
+    {
+        return
+            Grid.WithinGridPlayArea(position) &&
+            Grid.GridPositionFree(position, EGridCellOccupiedFlags.Card);
     }
     #endregion
 }

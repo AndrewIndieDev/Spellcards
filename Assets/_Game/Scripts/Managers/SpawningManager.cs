@@ -42,7 +42,7 @@ public class SpawningManager : MonoBehaviour
 
             if (attemptsToPlaceCard == 0)
             {
-                Dbug.Instance.LogError($"Couldn't find a position to place {data.cardName}.");
+                Dbug.Instance.LogError($"Couldn't find a position to place {data.name}.");
                 return null;
             }
         }
@@ -63,24 +63,29 @@ public class SpawningManager : MonoBehaviour
         var gridPosition = Vector2Int.zero;
         if (worldPosition == default)
         {
-            gridPosition = GetRandomGridPosition(0, Grid.GridWidth, 0, Grid.GridHeight - Grid.EnemyRows);
+            gridPosition = GetRandomGridPosition(0, Grid.GridHeight - Grid.EnemyRows, 0, Grid.GridWidth);
 
-            var attemptsToPlaceCard = 100;
+            var attemptsToPlaceCard = 200;
             while (!Grid.GridPositionFree(gridPosition, EGridCellOccupiedFlags.Card) && attemptsToPlaceCard > 0)
             {
-                gridPosition = GetRandomGridPosition(0, Grid.GridWidth, 0, Grid.GridHeight - Grid.EnemyRows);
+                gridPosition = GetRandomGridPosition(0, Grid.GridHeight - Grid.EnemyRows, 0, Grid.GridWidth);
                 attemptsToPlaceCard--;
 
                 if (attemptsToPlaceCard == 0)
                 {
-                    Dbug.Instance.LogError($"Couldn't find a position to place {data.cardName}.");
+                    Dbug.Instance.LogError($"Couldn't find a position to place {data.name}.");
                     return null;
                 }
             }
         }
         else
         {
-            gridPosition = new Vector2Int(Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.z));
+            gridPosition = Grid.GetGridCoordsAtWorldPosition(worldPosition);
+            if (!Grid.GridPositionFree(gridPosition, EGridCellOccupiedFlags.Card))
+            {
+                Dbug.Instance.LogError($"Couldn't find a position to place {data.name}.");
+                return null;
+            }
         }
         return SpawnCard(data, gridPosition);
     }
@@ -104,7 +109,8 @@ public class SpawningManager : MonoBehaviour
         card.SetData(data);
         var worldPos = Grid.GetGridCellCenterPosition(gridPosition);
         card.MoveInstant(worldPos);
-        Grid.OccupyGridField(gridPosition, EGridCellOccupiedFlags.Card, card).ToString();
+        Grid.OccupyGridField(gridPosition, EGridCellOccupiedFlags.Card, card);
+        card.OnSpawn();
         return card;
     }
     /// <summary>

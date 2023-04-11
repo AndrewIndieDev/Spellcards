@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!2083052967 &31032719 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 8753184575356846715, guid: 3d176d19b606720469ac7384da97f154,
+    type: 3}
+  m_PrefabInstance: {fileID: 5044266469407403672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &222292903
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,6 +913,84 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2132037363566281145}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1622467274
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539125, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584572279574539126, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: coins
+      value: 
+      objectReference: {fileID: 31032719}
+    - target: {fileID: 6584572279574539127, guid: b5ab1b62149177b4d89d9a5c03ab355c,
+        type: 3}
+      propertyPath: m_Name
+      value: Game Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b5ab1b62149177b4d89d9a5c03ab355c, type: 3}
 --- !u!1 &1637656738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,8 +1200,19 @@ PrefabInstance:
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.size
-      value: 36
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventObjects.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[0].cardToSpawn
+      value: 
+      objectReference: {fileID: 11400000, guid: 01565bdca6a8b784fb3e5205b16e0d50,
+        type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[0].timeToSpawn
@@ -1127,7 +1222,7 @@ PrefabInstance:
         type: 3}
       propertyPath: eventData.Array.data[1].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
+      objectReference: {fileID: 11400000, guid: 01565bdca6a8b784fb3e5205b16e0d50,
         type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
@@ -1147,336 +1242,463 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
+      propertyPath: eventData.Array.data[3].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
       propertyPath: eventData.Array.data[3].timeToSpawn
-      value: 4
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[4].cardToSpawn
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[4].timeToSpawn
-      value: 5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[5].cardToSpawn
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[5].timeToSpawn
-      value: 6
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[6].cardToSpawn
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[6].timeToSpawn
-      value: 7
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[7].cardToSpawn
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[7].timeToSpawn
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[8].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[8].timeToSpawn
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[9].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[9].timeToSpawn
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[10].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[10].timeToSpawn
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[11].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[11].timeToSpawn
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[12].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[12].timeToSpawn
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[13].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[13].timeToSpawn
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[14].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[14].timeToSpawn
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[15].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[15].timeToSpawn
-      value: 16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[16].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[16].timeToSpawn
-      value: 17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[17].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[17].timeToSpawn
-      value: 18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[18].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[18].timeToSpawn
-      value: 19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[19].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[19].timeToSpawn
-      value: 20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[20].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[20].timeToSpawn
-      value: 21
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[21].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[21].timeToSpawn
-      value: 22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[22].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[22].timeToSpawn
-      value: 23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[23].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[23].timeToSpawn
-      value: 24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[24].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[24].timeToSpawn
-      value: 25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[25].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[25].timeToSpawn
-      value: 26
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[26].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[26].timeToSpawn
-      value: 27
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[27].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[27].timeToSpawn
-      value: 28
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[28].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[28].timeToSpawn
-      value: 29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[29].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[29].timeToSpawn
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[30].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[30].timeToSpawn
-      value: 31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[31].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[31].timeToSpawn
-      value: 32
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[32].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[32].timeToSpawn
-      value: 33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[33].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[33].timeToSpawn
-      value: 34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[34].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[34].timeToSpawn
-      value: 35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[35].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[35].timeToSpawn
-      value: 36
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[36].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[36].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[37].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[37].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[38].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[38].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[39].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[39].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[40].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[40].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[41].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[41].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[42].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[42].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[43].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[43].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[44].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[44].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[45].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[45].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[46].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[46].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[47].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[47].timeToSpawn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[48].cardToSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: eventData.Array.data[48].timeToSpawn
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1549,7 +1771,7 @@ PrefabInstance:
     - target: {fileID: 2230748761279387807, guid: f92c00b1ac255d249b832fd7cf4a747b,
         type: 3}
       propertyPath: m_Name
-      value: GridManager
+      value: Grid Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

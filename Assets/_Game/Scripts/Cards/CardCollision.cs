@@ -1,11 +1,10 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class CardCollision : MonoBehaviour
 {
-    private GridManager Grid => GridManager.Instance;
-
     [Title("Container Reference")]
     [SerializeField] private CardContainer r_Container;
 
@@ -19,6 +18,8 @@ public class CardCollision : MonoBehaviour
     public Vector3 Position => transform.position;
     public bool PickedUp => v_PickedUp;
 
+    private GridManager Grid => GridManager.Instance;
+
     #region Unity Methods
     private void OnMouseDown()
     {
@@ -29,12 +30,12 @@ public class CardCollision : MonoBehaviour
     private void OnMouseUp()
     {
         if (!v_PickedUp) return;
-
         v_PickedUp = false;
-        Grid.UnoccupyGridField(r_Container.GridPosition, EGridCellOccupiedFlags.Card);
-        r_Container.Visuals.CurrentTween.onComplete += () => MoveInstant(r_Container.Visuals.Position);
-        MoveInstant(r_Container.Visuals.Position);
-        Grid.OccupyGridField(Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card);
+
+        if (r_Container.Grid.GridPositionFree(r_Container.Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card))
+            MoveInstant(r_Container.Grid.SelectionPositionWorld);
+        else
+            r_Container.Visuals.Move(Position);
     }
     #endregion
 
@@ -62,6 +63,7 @@ public class CardCollision : MonoBehaviour
     /// <param name="position">New positioin to tween to.</param>
     public void Move(Vector3 position)
     {
+        UpdateOccupancy(Grid.GetGridCoordsAtWorldPosition(position));
         transform.DOMove(position, r_Container.DEFAULT_TWEEN_TIME);
     }
     /// <summary>
@@ -85,10 +87,11 @@ public class CardCollision : MonoBehaviour
     /// <summary>
     /// Instantly move the object to the given position.
     /// </summary>
-    /// <param name="pos"></param>
-    public void MoveInstant(Vector3 pos)
+    /// <param name="position"></param>
+    public void MoveInstant(Vector3 position)
     {
-        transform.position = pos;
+        UpdateOccupancy(Grid.GetGridCoordsAtWorldPosition(position));
+        transform.position = position;
     }
     /// <summary>
     /// Tweens the rotation.
@@ -134,5 +137,13 @@ public class CardCollision : MonoBehaviour
     /// Checks to see if the card can be picked up.
     /// </summary>
     private bool CanCardBePickedUp => r_Container.CardData.GetType() != typeof(EnemyCard);
+    /// <summary>
+    /// When moving, we should tell the grid where we are moving.
+    /// </summary>
+    private void UpdateOccupancy(Vector2Int newPosition)
+    {
+        r_Container.Grid.UnoccupyGridField(r_Container.GridPosition, EGridCellOccupiedFlags.Card);
+        r_Container.Grid.OccupyGridField(newPosition, EGridCellOccupiedFlags.Card, r_Container);
+    }
     #endregion
 }

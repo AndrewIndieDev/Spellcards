@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95360bb6fe0e90a40a2bb53a599621b1, type: 3}
   m_Name: Failed Creation
   m_EditorClassIdentifier: 
-  spellPrefab: {fileID: 0}
-  cardName: Failed Creation
+  abilities: []
+  name: Failed Creation
   description: The crafting failed.
   cardImage: {fileID: 2800000, guid: 6415d7427ae4d2a4db1e2140c2cba55d, type: 3}
   cardBackground: {fileID: 2800000, guid: 270004b42a4054a4893b631c42dece86, type: 3}
   rewardAmount: 1
+  xSize: 1
+  ySize: 1

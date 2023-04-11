@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba9c8891f904924cb6aeee4f3d48aaf, type: 3}
   m_Name: Ing_Stick
   m_EditorClassIdentifier: 
-  spellPrefab: {fileID: 0}
-  cardName: Stick
+  abilities: []
+  name: Stick
   description: 
   cardImage: {fileID: 2800000, guid: 00126b5d136967741abf96985203d54a, type: 3}
   cardBackground: {fileID: 2800000, guid: a4e886894db3cb0479d4be19e8270c16, type: 3}
   rewardAmount: 2
+  xSize: 1
+  ySize: 1

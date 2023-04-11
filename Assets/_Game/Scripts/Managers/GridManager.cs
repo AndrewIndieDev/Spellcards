@@ -5,12 +5,12 @@ using UnityEngine;
 
 public interface IPlaceable
 {
-    GameObject gameObject { get; }
     Vector2Int Size { get; }
     Vector2Int GridPosition { get; }
     void OnPlace();
     void OnKill();
     void OnInteract();
+    void OnSpawn();
 }
 
 [Flags]
@@ -74,7 +74,7 @@ public class GridManager : MonoBehaviour
         {
             for (int y = GridHeight - EnemyRows; y < GridHeight; y++)
             {
-                OccupyGridField(new Vector2Int(x, y), playerBlocked);
+                OccupyGridField(new Vector2Int(x, y), playerBlocked, null);
             }
         }
     }
@@ -127,10 +127,9 @@ public class GridManager : MonoBehaviour
 
     public bool GridPositionFree(Vector2Int position, EGridCellOccupiedFlags flagsToCheck = EGridCellOccupiedFlags.All)
     {
-        GridCell gridCell;
-        if (occupiedGridCells.TryGetValue(position, out gridCell))
+        if (occupiedGridCells.TryGetValue(position, out GridCell gridCell))
         {
-            return !flagsToCheck.HasFlag(gridCell.occupiedFlags);
+            return !gridCell.occupiedFlags.HasFlag(flagsToCheck);
         }
         return true;
     }
@@ -166,7 +165,7 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
-    public bool OccupyGridField(Vector2Int position, EGridCellOccupiedFlags occupyFlags = EGridCellOccupiedFlags.All, IPlaceable occupier = null)
+    public bool OccupyGridField(Vector2Int position, EGridCellOccupiedFlags occupyFlags, IPlaceable occupier)
     {
         if (!GridPositionFree(position, occupyFlags)) return false;
         GridCell gridCell = GetOrAddGridCell(position);
@@ -188,7 +187,7 @@ public class GridManager : MonoBehaviour
     }
 
 
-    public bool OccupyGridFields(List<Vector2Int> positions, EGridCellOccupiedFlags occupyFlags = EGridCellOccupiedFlags.All, IPlaceable occupier = null)
+    public bool OccupyGridFields(List<Vector2Int> positions, EGridCellOccupiedFlags occupyFlags, IPlaceable occupier)
     {
         bool success = GridPositionsFree(positions, occupyFlags);
         if (!success) return false;
@@ -199,7 +198,7 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
-    public bool OccupyGridFields(Vector2Int[] positions, EGridCellOccupiedFlags occupyFlags = EGridCellOccupiedFlags.All, IPlaceable occupier = null)
+    public bool OccupyGridFields(Vector2Int[] positions, EGridCellOccupiedFlags occupyFlags, IPlaceable occupier)
     {
         return OccupyGridFields(positions.ToList(), occupyFlags, occupier);
     }
@@ -250,10 +249,11 @@ public class GridManager : MonoBehaviour
         return (placeables.Count > 0) ? placeables : null;
     }
 
-    public IPlaceable GetPlaceableAtPosition(Vector2Int position)
+    public IPlaceable GetPlaceableAtPosition(Vector2Int position, EGridCellOccupiedFlags flagToCheck)
     {
         GridCell gridCell = GetGridCell(position);
-        return gridCell != null ? gridCell.occupiers[EGridCellOccupiedFlags.Enemy] : null;
+        if (gridCell == null) return null;
+        return gridCell.occupiers.ContainsKey(flagToCheck) ? gridCell.occupiers[flagToCheck] : null;
     }
 
     public float GetWeightOfGridCell(Vector2Int position)
@@ -263,16 +263,27 @@ public class GridManager : MonoBehaviour
         return cell.weight;
     }
 
-    public bool GetIsSelectable(Vector2Int position)
+    public bool IsPlayableArea(Vector2Int position)
     {
         GridCell cell = GetGridCell(position);
         if (cell == null) return true;
         return (cell.occupiedFlags & EGridCellOccupiedFlags.Unselectable) != EGridCellOccupiedFlags.Unselectable;
     }
 
-    public void InteractWithPlaceable(Vector2Int position)
+    public void InteractWithPlaceable(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
     {
-        IPlaceable placeable = GetPlaceableAtPosition(position);
+        IPlaceable placeable = GetPlaceableAtPosition(position, flagToCheck);
         placeable?.OnInteract();
+    }
+
+    public void InteractWithPlaceable(Vector3 position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    {
+        Vector2Int pos = GetGridCoordsAtWorldPosition(position);
+        InteractWithPlaceable(pos, flagToCheck);
+    }
+
+    public bool WithinGridPlayArea(Vector2Int position)
+    {
+        return position.x >= 0 && position.x < GridWidth && position.y >= 0 && position.y < GridHeight;
     }
 }

@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00d0a4f82c9a404ba432a6f623fb829, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  spellPrefab: {fileID: 0}
-  cardName: Spider
+  abilities:
+  - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
+  - {fileID: 11400000, guid: ed19b4569ab1795448f422d0aec171fd, type: 2}
+  - {fileID: 11400000, guid: f9974c190f5a62043b8e9a2fb75b974f, type: 2}
+  - {fileID: 11400000, guid: f5331c91dddb93340bd81dff45588c63, type: 2}
+  name: Spider
   description: The spee-ider, Deathiss Arachnis.
   cardImage: {fileID: 2800000, guid: 97fa9a1b38ec96948be71d73136dc830, type: 3}
   cardBackground: {fileID: 2800000, guid: 270004b42a4054a4893b631c42dece86, type: 3}
   rewardAmount: 5
+  xSize: 1
+  ySize: 1

@@ -33,7 +33,7 @@ public class CardVisuals : MonoBehaviour
     {
         SetImage(data.cardImage);
         SetBackground(data.cardBackground);
-        SetName(data.cardName);
+        SetName(data.name);
         SetSellCost(data.rewardAmount);
     }
     /// <summary>
@@ -51,6 +51,8 @@ public class CardVisuals : MonoBehaviour
     /// <param name="position">New positioin to tween to.</param>
     public void Move(Vector3 position)
     {
+        if (currentTween != null)
+            currentTween.Kill();
         currentTween = transform.DOMove(position, r_Container.DEFAULT_TWEEN_TIME);
     }
     /// <summary>
@@ -85,6 +87,8 @@ public class CardVisuals : MonoBehaviour
     /// <param name="rotation">New rotation to tween to.</param>
     public void Rotate(Vector3 rotation)
     {
+        if (currentTween != null)
+            currentTween.Kill();
         currentTween = transform.DOLocalRotate(rotation, r_Container.DEFAULT_TWEEN_TIME);
     }
     /// <summary>
@@ -99,10 +103,10 @@ public class CardVisuals : MonoBehaviour
             axis == EAxis.Y ? rotateBy : 0,
             axis == EAxis.Z ? rotateBy : 0
             );
-        currentTween = transform.DOLocalRotate(rot, r_Container.DEFAULT_TWEEN_TIME);
+        Rotate(rot);
     }
     /// <summary>
-    /// IOnstantly rotates the object to the given rotation
+    /// Instantly rotates the object to the given rotation
     /// </summary>
     /// <param name="rot"></param>
     public void RotateInstant(Vector3 rot)

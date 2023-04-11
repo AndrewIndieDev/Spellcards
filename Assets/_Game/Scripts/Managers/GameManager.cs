@@ -40,11 +40,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            var position = Grid.GetGridCoordsAtWorldPosition(MousePosition);
-            if (position.x < 0 || position.x >= Grid.GridWidth) return;
-            if (position.y < 0 || position.y >= Grid.GridHeight) return;
-
-            Grid.InteractWithPlaceable(position);
+            Grid.InteractWithPlaceable(Grid.SelectionPositionGrid);
         }
     }
     #endregion
