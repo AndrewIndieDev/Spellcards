@@ -14,7 +14,7 @@ public class MoveAbility : AbilityAction
     {
         Vector2Int newPos = caller.CardContrainer.GridPosition + new Vector2Int(moveX, moveY);
         caller.CardContrainer.MoveWithVisualDelay(Grid.GetGridCellCenterPosition(newPos));
-        return 1f / millisecondsTillComplete;
+        return millisecondsTillComplete / 1000f;
     }
 
     public override void Kill()

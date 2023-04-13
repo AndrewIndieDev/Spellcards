@@ -9,8 +9,8 @@ using UnityEngine;
 public class AbilityData : ScriptableObject
 {
     [SerializeField] private bool playInSequence;
-    public List<AbilityAction> abilities;
+    public List<AbilityAction> actions;
 
     public bool PlayInSequence { get { return playInSequence; } }
-    public List<AbilityAction> Abilities { get { return abilities; } }
+    public List<AbilityAction> Actions { get { return actions; } }
 }

@@ -129,7 +129,7 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <param name="position">Position to move to.</param>
     public void Move(Vector3 position)
     {
-        if (!CheckIfGridIsFreeOfAll(Grid.GetGridCoordsAtWorldPosition(position)))
+        if (!IsGridPositionAcceptable(Grid.GetGridCoordsAtWorldPosition(position)))
             return;
 
         Collision.Move(position);
@@ -141,7 +141,7 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <param name="position">Position to move to.</param>
     public void MoveInstant(Vector3 position)
     {
-        if (!CheckIfGridIsFreeOfAll(Grid.GetGridCoordsAtWorldPosition(position)))
+        if (!IsGridPositionAcceptable(Grid.GetGridCoordsAtWorldPosition(position)))
             return;
 
         Collision.MoveInstant(position);
@@ -153,7 +153,7 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <param name="position">Position to move.</param>
     public void MoveWithVisualDelay(Vector3 position)
     {
-        if (!CheckIfGridIsFreeOfAll(Grid.GetGridCoordsAtWorldPosition(position)))
+        if (!IsGridPositionAcceptable(Grid.GetGridCoordsAtWorldPosition(position)))
             return;
 
         Collision.MoveInstant(position);
@@ -179,7 +179,12 @@ public class CardContainer : MonoBehaviour, IPlaceable
 
         Visuals.Move(GridManager.Instance.SelectionPositionWorld);
     }
-    private bool CheckIfGridIsFreeOfAll(Vector2Int position)
+    /// <summary>
+    /// This checks to see if the grid position given is free of all flags.
+    /// </summary>
+    /// <param name="position">Grid position to check.</param>
+    /// <returns>If grid position is free of all flags.</returns>
+    private bool IsGridPositionAcceptable(Vector2Int position)
     {
         return
             Grid.WithinGridPlayArea(position) &&

@@ -85,13 +85,13 @@ public class GridManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 99999f, groundLayer))
         {
             Vector2Int coords = GetGridCoordsAtWorldPosition(hit.point);
-            //SelectedPlaceable = GetBuildingAtPosition(coords);
+            coords = ClampPositionToPlayerGrid(coords);
+
             if (coords == currentSelectionCoords) return;
             currentSelectionCoords = coords;
             Vector3 selectionCellPosition = GetGridCellPosition(coords);
             selection.transform.position = selectionCellPosition;
             onSelectionPositionChanged?.Invoke(coords);
-            //occupiedGridCells.TryGetValue(coords, out GridCell gridCell);
         }
     }
 
@@ -285,5 +285,12 @@ public class GridManager : MonoBehaviour
     public bool WithinGridPlayArea(Vector2Int position)
     {
         return position.x >= 0 && position.x < GridWidth && position.y >= 0 && position.y < GridHeight;
+    }
+
+    public Vector2Int ClampPositionToPlayerGrid(Vector2Int position)
+    {
+        int x = Mathf.Clamp(position.x, 0, GridWidth);
+        int y = Mathf.Clamp(position.y, 0, GridHeight - EnemyRows - 1);
+        return new Vector2Int(x, y);
     }
 }

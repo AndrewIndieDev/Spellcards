@@ -25,13 +25,13 @@ public class CardAbility : MonoBehaviour
     {
         if (!data.PlayInSequence)
         {
-            foreach (var ability in data.Abilities)
+            foreach (var ability in data.Actions)
             {
                 ability.Execute(this);
             }
             return;
         }
-        StartCoroutine(ExecuteInOrder(data.Abilities));
+        StartCoroutine(ExecuteInOrder(data.Actions));
     }
     /// <summary>
     /// Get's a random ability and returns it.
@@ -72,12 +72,23 @@ public class CardAbility : MonoBehaviour
     {
         while (true) // add check for game state
         {
-            var actions = GetRandomAbility().Abilities;
-            yield return new WaitForSeconds(1f);
-            foreach (var action in actions)
+            var ability = GetRandomAbility();
+            if (ability.PlayInSequence)
             {
-                yield return new WaitForSeconds(action.Execute(this));
+                foreach (var action in ability.Actions)
+                {
+                    float seconds = action.Execute(this);
+                    yield return new WaitForSeconds(seconds);
+                }
             }
+            else
+            {
+                foreach (var action in ability.Actions)
+                {
+                    action.Execute(this);
+                }
+            }
+            yield return new WaitForSeconds(1f);
         }
     }
     #endregion

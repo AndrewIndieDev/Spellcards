@@ -1199,13 +1199,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
+      propertyPath: shownEvents
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
+      propertyPath: maxTimeOnBar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
+        type: 3}
       propertyPath: eventData.Array.size
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventObjects.Array.size
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
@@ -1222,12 +1232,12 @@ PrefabInstance:
         type: 3}
       propertyPath: eventData.Array.data[1].cardToSpawn
       value: 
-      objectReference: {fileID: 11400000, guid: 01565bdca6a8b784fb3e5205b16e0d50,
+      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
         type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[1].timeToSpawn
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
@@ -1238,47 +1248,51 @@ PrefabInstance:
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[2].timeToSpawn
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[3].cardToSpawn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
+        type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[3].timeToSpawn
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[4].cardToSpawn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
+        type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[4].timeToSpawn
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[5].cardToSpawn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
+        type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[5].timeToSpawn
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[6].cardToSpawn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
+        type: 2}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
       propertyPath: eventData.Array.data[6].timeToSpawn
-      value: 0
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
         type: 3}
