@@ -1,6 +1,5 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using System;
 
 public class CardContainer : MonoBehaviour, IPlaceable
 {
@@ -51,10 +50,23 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <summary>
     /// Called when the card is interacted with.
     /// </summary>
-    public void OnInteract()
+    public void OnInteract(InteractClick click)
     {
-        Dbug.Instance.Log(IsEnemy ? $"{r_Data.name} is an enemy, you can't interact with that!" : $"Interacted with {r_Data.name}!");
-
+        switch (click)
+        {
+            case InteractClick.DOWN:
+                Collision.OnInteractDown();
+                break;
+            case InteractClick.UP:
+                Collision.OnInteractUp();
+                break;
+        }
+    }
+    /// <summary>
+    /// Called when the card is interacted with to execute an ability.
+    /// </summary>
+    public void OnExecute()
+    {
         if (!IsEnemy)
             r_Abilities.Execute(r_Abilities.GetRandomAbility());
     }
@@ -71,13 +83,21 @@ public class CardContainer : MonoBehaviour, IPlaceable
     #region Unity Methods
     private void Start()
     {
-        GridManager.onSelectionPositionChanged += OnSelectionPositionChanged;
-
         UpdateAll();
+        GridManager.onSelectionGridPositionChanged += OnSelectionGridPositionChanged;
     }
-    void OnDestroy()
+    #endregion
+
+    #region Callbacks
+    /// <summary>
+    /// Called when the grid cell selection position changes.
+    /// </summary>
+    /// <param name="position">New position.</param>
+    private void OnSelectionGridPositionChanged(Vector2Int position)
     {
-        GridManager.onSelectionPositionChanged -= OnSelectionPositionChanged;
+        if (!Collision.PickedUp) return;
+
+        MoveWithVisualDelay(Grid.SelectionPositionWorld);
     }
     #endregion
 
@@ -168,16 +188,6 @@ public class CardContainer : MonoBehaviour, IPlaceable
     private void ResetLocalPosition()
     {
         transform.localPosition = Vector3.zero;
-    }
-    /// <summary>
-    /// Called when the grid selection position changes.
-    /// </summary>
-    /// <param name="newPosition">New position of the selection.</param>
-    private void OnSelectionPositionChanged(Vector2Int newPosition)
-    {
-        if (!Collision.PickedUp || !GridManager.Instance.IsPlayableArea(newPosition)) return;
-
-        Visuals.Move(GridManager.Instance.SelectionPositionWorld);
     }
     /// <summary>
     /// This checks to see if the grid position given is free of all flags.

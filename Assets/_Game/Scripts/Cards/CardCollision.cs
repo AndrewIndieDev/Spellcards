@@ -1,7 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
-using UnityEngine.UIElements;
 
 public class CardCollision : MonoBehaviour
 {
@@ -18,16 +17,18 @@ public class CardCollision : MonoBehaviour
     public Vector3 Position => transform.position;
     public bool PickedUp => v_PickedUp;
 
-    private GridManager Grid => GridManager.Instance;
-
     #region Unity Methods
-    private void OnMouseDown()
+    
+    #endregion
+
+    #region Public Methods
+    public void OnInteractDown()
     {
         if (!CanCardBePickedUp) return;
 
         v_PickedUp = true;
     }
-    private void OnMouseUp()
+    public void OnInteractUp()
     {
         if (!v_PickedUp) return;
         v_PickedUp = false;
@@ -37,9 +38,6 @@ public class CardCollision : MonoBehaviour
         else
             r_Container.Visuals.Move(Position);
     }
-    #endregion
-
-    #region Public Methods
     /// <summary>
     /// Enables the most appropriate collider at the time.
     /// </summary>
@@ -63,7 +61,7 @@ public class CardCollision : MonoBehaviour
     /// <param name="position">New positioin to tween to.</param>
     public void Move(Vector3 position)
     {
-        UpdateOccupancy(Grid.GetGridCoordsAtWorldPosition(position));
+        UpdateOccupancy(r_Container.Grid.GetGridCoordsAtWorldPosition(position));
         transform.DOMove(position, r_Container.DEFAULT_TWEEN_TIME);
     }
     /// <summary>
@@ -90,7 +88,7 @@ public class CardCollision : MonoBehaviour
     /// <param name="position"></param>
     public void MoveInstant(Vector3 position)
     {
-        UpdateOccupancy(Grid.GetGridCoordsAtWorldPosition(position));
+        UpdateOccupancy(r_Container.Grid.GetGridCoordsAtWorldPosition(position));
         transform.position = position;
     }
     /// <summary>

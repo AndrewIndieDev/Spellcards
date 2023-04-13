@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using Sirenix.OdinInspector;
 using DG.Tweening;
+using Sirenix.OdinInspector.Editor.Drawers;
 
 public class CardVisuals : MonoBehaviour
 {

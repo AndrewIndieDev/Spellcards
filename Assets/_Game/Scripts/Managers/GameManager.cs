@@ -3,17 +3,17 @@ using UnityEngine;
 using UnityEngine.VFX;
 using Sirenix.OdinInspector;
 using System;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     private GridManager Grid => GridManager.Instance;
+    private PlayerInputActions InputActions => InputManager.Instance.InputActions;
     
     public Action OnGameStart;
     public Action OnGameEnd;
-    public Action<CardContainer> OnCardPickup;
-    public Action OnCardDrop;
 
     [Title("Inspector References")]
     [SerializeField] private VisualEffect coins;
@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LayerMask table;
 
     [Title("Read Only Variables")]
-    [ReadOnly] public Vector3 MousePosition;
     [ReadOnly][SerializeField] private bool playing;
 
     #region Unity Methods
@@ -32,16 +31,42 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
     }
-    private void Update()
+    private void Start()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit hit, 1000f, table);
-        MousePosition = hit.point.IgnoreAxis(EAxis.Y, 0.1f);
+        InputActions.Player.Interact.performed += OnInteract;
+        InputActions.Player.Interact.canceled += OnInteract;
+        InputActions.Player.Execute.performed += OnExecute;
+        InputActions.Player.NavigationMouse.performed += OnNavigationMouse;
+        InputActions.Player.NavigationGamepad.performed += OnNavigationGamepad;
+    }
+    private void OnDestroy()
+    {
+        InputActions.Player.Interact.performed -= OnInteract;
+        InputActions.Player.Interact.canceled -= OnInteract;
+        InputActions.Player.Execute.performed -= OnExecute;
+        InputActions.Player.NavigationMouse.performed -= OnNavigationMouse;
+        InputActions.Player.NavigationGamepad.performed -= OnNavigationGamepad;
+    }
+    #endregion
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            Grid.InteractWithPlaceable(Grid.SelectionPositionGrid);
-        }
+    #region Callbacks
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        Grid.InteractPlaceable(context, Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card);
+    }
+    private void OnExecute(InputAction.CallbackContext context)
+    {
+        Grid.ExecutePlaceable(Grid.SelectionPositionGrid);
+    }
+    private void OnNavigationMouse(InputAction.CallbackContext context)
+    {
+        Grid.OnNavigationMouse(context);
+    }
+    private void OnNavigationGamepad(InputAction.CallbackContext context)
+    {
+        var vpos = context.ReadValue<Vector2>();
+        var newPosition = Grid.SelectionPositionGrid + new Vector2Int(Mathf.RoundToInt(vpos.x), Mathf.RoundToInt(vpos.y));
+        Grid.MoveSelection(newPosition);
     }
     #endregion
 

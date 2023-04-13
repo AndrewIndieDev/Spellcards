@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+public enum InteractClick { DOWN, UP }
 
 public interface IPlaceable
 {
@@ -9,7 +13,8 @@ public interface IPlaceable
     Vector2Int GridPosition { get; }
     void OnPlace();
     void OnKill();
-    void OnInteract();
+    void OnInteract(InteractClick click);
+    void OnExecute();
     void OnSpawn();
 }
 
@@ -39,16 +44,15 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
 
-    public delegate void OnSelectionPositionChanged(Vector2Int newPosition);
-    public static event OnSelectionPositionChanged onSelectionPositionChanged;
+    public delegate void OnSelectionGridPositionChanged(Vector2Int cellPosition);
+    public static event OnSelectionGridPositionChanged onSelectionGridPositionChanged;
     public delegate void OnGridCellChanged(Vector2Int cellPosition);
     public static event OnGridCellChanged onGridCellChanged;
 
     public static EGridCellOccupiedFlags playerBlocked = EGridCellOccupiedFlags.Unselectable;
 
     public Vector3 SelectionPositionWorld { get { return selection.transform.position + new Vector3(gridHorizontalSize / 2f, 0f, gridVerticalSize / 2f); } }
-    public Vector2Int SelectionPositionGrid { get { return currentSelectionCoords; } }
-    public IPlaceable SelectedPlaceable { get; private set; }
+    public Vector2Int SelectionPositionGrid { get { return GetGridCoordsAtWorldPosition(selection.transform.position); } }
 
     // NEED TO MANUALLY CHANGE //
     public int GridWidth { get { return 12; } }
@@ -56,12 +60,11 @@ public class GridManager : MonoBehaviour
     public int EnemyRows { get { return 3; } }
     /////////////////////////////
 
-    public float gridVerticalSize = 0.2f;
-    public float gridHorizontalSize = 0.1f;
+    public float gridVerticalSize;
+    public float gridHorizontalSize;
     public GameObject selection;
     public LayerMask groundLayer;
 
-    private Vector2Int currentSelectionCoords = -Vector2Int.one;
     private Dictionary<Vector2Int, GridCell> occupiedGridCells = new Dictionary<Vector2Int, GridCell>();
 
     private void Start()
@@ -79,19 +82,14 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void OnNavigationMouse(InputAction.CallbackContext context)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(context.ReadValue<Vector2>());
         if (Physics.Raycast(ray, out RaycastHit hit, 99999f, groundLayer))
         {
-            Vector2Int coords = GetGridCoordsAtWorldPosition(hit.point);
-            coords = ClampPositionToPlayerGrid(coords);
-
-            if (coords == currentSelectionCoords) return;
-            currentSelectionCoords = coords;
-            Vector3 selectionCellPosition = GetGridCellPosition(coords);
-            selection.transform.position = selectionCellPosition;
-            onSelectionPositionChanged?.Invoke(coords);
+            Vector2Int gridPosition = GetGridCoordsAtWorldPosition(hit.point);
+            gridPosition = ClampPositionToPlayerGrid(gridPosition);
+            MoveSelection(gridPosition);
         }
     }
 
@@ -263,23 +261,28 @@ public class GridManager : MonoBehaviour
         return cell.weight;
     }
 
-    public bool IsPlayableArea(Vector2Int position)
-    {
-        GridCell cell = GetGridCell(position);
-        if (cell == null) return true;
-        return (cell.occupiedFlags & EGridCellOccupiedFlags.Unselectable) != EGridCellOccupiedFlags.Unselectable;
-    }
-
-    public void InteractWithPlaceable(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
-    {
-        IPlaceable placeable = GetPlaceableAtPosition(position, flagToCheck);
-        placeable?.OnInteract();
-    }
-
-    public void InteractWithPlaceable(Vector3 position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    public void InteractPlaceable(InputAction.CallbackContext context, Vector3 position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
     {
         Vector2Int pos = GetGridCoordsAtWorldPosition(position);
-        InteractWithPlaceable(pos, flagToCheck);
+        InteractPlaceable(context, pos, flagToCheck);
+    }
+
+    public void InteractPlaceable(InputAction.CallbackContext context, Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    {
+        IPlaceable placeable = GetPlaceableAtPosition(position, flagToCheck);
+        placeable?.OnInteract(context.performed ? InteractClick.DOWN : InteractClick.UP);
+    }
+
+    public void ExecutePlaceable(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    {
+        IPlaceable placeable = GetPlaceableAtPosition(position, flagToCheck);
+        placeable?.OnExecute();
+    }
+
+    public void ExecutePlaceable(Vector3 position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    {
+        Vector2Int pos = GetGridCoordsAtWorldPosition(position);
+        ExecutePlaceable(pos, flagToCheck);
     }
 
     public bool WithinGridPlayArea(Vector2Int position)
@@ -292,5 +295,18 @@ public class GridManager : MonoBehaviour
         int x = Mathf.Clamp(position.x, 0, GridWidth);
         int y = Mathf.Clamp(position.y, 0, GridHeight - EnemyRows - 1);
         return new Vector2Int(x, y);
+    }
+
+    public void MoveSelection(Vector2Int position)
+    {
+        position = ClampPositionToPlayerGrid(position);
+        selection.transform.position = GetGridCellPosition(position);
+        onSelectionGridPositionChanged?.Invoke(position);
+    }
+
+    public void MoveSelection(Vector3 position)
+    {
+        Vector2Int pos = GetGridCoordsAtWorldPosition(position);
+        MoveSelection(pos);
     }
 }
