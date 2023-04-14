@@ -50,17 +50,9 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// <summary>
     /// Called when the card is interacted with.
     /// </summary>
-    public void OnInteract(InteractClick click)
+    public void OnInteract()
     {
-        switch (click)
-        {
-            case InteractClick.DOWN:
-                Collision.OnInteractDown();
-                break;
-            case InteractClick.UP:
-                Collision.OnInteractUp();
-                break;
-        }
+        Collision.OnInteract();
     }
     /// <summary>
     /// Called when the card is interacted with to execute an ability.
@@ -85,6 +77,12 @@ public class CardContainer : MonoBehaviour, IPlaceable
     {
         UpdateAll();
         GridManager.onSelectionGridPositionChanged += OnSelectionGridPositionChanged;
+        GameManager.onInteractUp += OnInteractUp;
+    }
+    void OnDestroy()
+    {
+        GridManager.onSelectionGridPositionChanged -= OnSelectionGridPositionChanged;
+        GameManager.onInteractUp -= OnInteractUp;
     }
     #endregion
 
@@ -97,7 +95,13 @@ public class CardContainer : MonoBehaviour, IPlaceable
     {
         if (!Collision.PickedUp) return;
 
-        MoveWithVisualDelay(Grid.SelectionPositionWorld);
+        //MoveWithVisualDelay(Grid.SelectionPositionWorld);
+        Visuals.Move(Grid.SelectionPositionWorld);
+    }
+    private void OnInteractUp()
+    {
+        Collision.OnInteractUp();
+        Visuals.OnInteractUp();
     }
     #endregion
 

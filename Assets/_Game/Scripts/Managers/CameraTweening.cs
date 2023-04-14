@@ -17,14 +17,12 @@ public class CameraTweening : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnGameStart += GameStart;
-        GameManager.Instance.OnGameEnd += GameEnd;
+        
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnGameStart -= GameStart;
-        GameManager.Instance.OnGameEnd -= GameEnd;
+        
     }
 
     private void SetCameraRotation(Vector3 rot)

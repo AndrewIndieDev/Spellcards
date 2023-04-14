@@ -114,6 +114,13 @@ public class CardVisuals : MonoBehaviour
     {
         transform.eulerAngles = rot;
     }
+    /// <summary>
+    /// Called when the Interact button has been cancelled.
+    /// </summary>
+    public void OnInteractUp()
+    {
+        Move(r_Container.Collision.Position);
+    }
     #endregion
 
     #region Private Methods

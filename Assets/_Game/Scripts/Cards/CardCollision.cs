@@ -22,7 +22,7 @@ public class CardCollision : MonoBehaviour
     #endregion
 
     #region Public Methods
-    public void OnInteractDown()
+    public void OnInteract()
     {
         if (!CanCardBePickedUp) return;
 
@@ -35,8 +35,6 @@ public class CardCollision : MonoBehaviour
 
         if (r_Container.Grid.GridPositionFree(r_Container.Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card))
             MoveInstant(r_Container.Grid.SelectionPositionWorld);
-        else
-            r_Container.Visuals.Move(Position);
     }
     /// <summary>
     /// Enables the most appropriate collider at the time.

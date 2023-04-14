@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour
 
     private GridManager Grid => GridManager.Instance;
     private PlayerInputActions InputActions => InputManager.Instance.InputActions;
-    
-    public Action OnGameStart;
-    public Action OnGameEnd;
+
+    public delegate void OnInteractUp();
+    public static event OnInteractUp onInteractUp;
 
     [Title("Inspector References")]
     [SerializeField] private VisualEffect coins;
@@ -52,7 +52,10 @@ public class GameManager : MonoBehaviour
     #region Callbacks
     private void OnInteract(InputAction.CallbackContext context)
     {
-        Grid.InteractPlaceable(context, Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card);
+        if (context.performed)
+            Grid.InteractPlaceable(Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card);
+        else if (context.canceled)
+            onInteractUp?.Invoke();
     }
     private void OnExecute(InputAction.CallbackContext context)
     {
@@ -100,8 +103,6 @@ public class GameManager : MonoBehaviour
     {
         if (playing) return;
 
-        OnGameStart?.Invoke();
-
         AddCurrency(15);
         playing = true;
         StartCoroutine(GoldOverTime());
@@ -112,8 +113,6 @@ public class GameManager : MonoBehaviour
     public void GameEnd()
     {
         if (!playing) return;
-
-        OnGameEnd?.Invoke();
 
         playing = false;
         RemoveCurrency(currency);

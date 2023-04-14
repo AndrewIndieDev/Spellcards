@@ -13,7 +13,7 @@ public interface IPlaceable
     Vector2Int GridPosition { get; }
     void OnPlace();
     void OnKill();
-    void OnInteract(InteractClick click);
+    void OnInteract();
     void OnExecute();
     void OnSpawn();
 }
@@ -261,16 +261,16 @@ public class GridManager : MonoBehaviour
         return cell.weight;
     }
 
-    public void InteractPlaceable(InputAction.CallbackContext context, Vector3 position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    public void InteractPlaceable(Vector3 position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
     {
         Vector2Int pos = GetGridCoordsAtWorldPosition(position);
-        InteractPlaceable(context, pos, flagToCheck);
+        InteractPlaceable(pos, flagToCheck);
     }
 
-    public void InteractPlaceable(InputAction.CallbackContext context, Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
+    public void InteractPlaceable(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
     {
         IPlaceable placeable = GetPlaceableAtPosition(position, flagToCheck);
-        placeable?.OnInteract(context.performed ? InteractClick.DOWN : InteractClick.UP);
+        placeable?.OnInteract();
     }
 
     public void ExecutePlaceable(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
