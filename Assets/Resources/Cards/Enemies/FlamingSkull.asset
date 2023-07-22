@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c00d0a4f82c9a404ba432a6f623fb829, type: 3}
-  m_Name: Spider
+  m_Name: FlamingSkull
   m_EditorClassIdentifier: 
+  autonomousAbilities: 1
   abilities:
   - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
-  - {fileID: 11400000, guid: 41d108736e9405a40bb200eed75c0dad, type: 2}
-  name: Spider
-  description: The spee-ider, Deathiss Arachnis.
-  cardImage: {fileID: 2800000, guid: 97fa9a1b38ec96948be71d73136dc830, type: 3}
+  name: Flaming Skull
+  description: The Ghost Rider of Spellcards.
+  cardImage: {fileID: 2800000, guid: ffd129d12c338844dbcbfc02ca8a6484, type: 3}
   cardBackground: {fileID: 2800000, guid: 270004b42a4054a4893b631c42dece86, type: 3}
   rewardAmount: 5
   xSize: 1

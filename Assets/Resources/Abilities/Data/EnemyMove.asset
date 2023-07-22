@@ -15,4 +15,3 @@ MonoBehaviour:
   playInSequence: 0
   actions:
   - {fileID: 11400000, guid: 6f7cb30385439534684ebf09b8fd8f6c, type: 2}
-  - {fileID: 11400000, guid: 0c39a6227ba81594dadeb70b97ac0858, type: 2}

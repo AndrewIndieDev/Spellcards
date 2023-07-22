@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00d0a4f82c9a404ba432a6f623fb829, type: 3}
+  m_Name: GoblinBoi
+  m_EditorClassIdentifier: 
+  autonomousAbilities: 1
+  abilities:
+  - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
+  name: Goblin Boi
+  description: He angry you kill his family!
+  cardImage: {fileID: 2800000, guid: 728c282ccac56594488d23dd8cb8605d, type: 3}
+  cardBackground: {fileID: 2800000, guid: 270004b42a4054a4893b631c42dece86, type: 3}
+  rewardAmount: 5
+  xSize: 1
+  ySize: 1

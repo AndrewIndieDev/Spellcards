@@ -23,6 +23,8 @@ public class CardAbility : MonoBehaviour
     /// </summary>
     public void Execute(AbilityData data)
     {
+        if (data == null)
+            return;
         if (!data.PlayInSequence)
         {
             foreach (var ability in data.Actions)
@@ -39,6 +41,8 @@ public class CardAbility : MonoBehaviour
     /// <returns>An ability.</returns>
     public AbilityData GetRandomAbility()
     {
+        if (r_Abilities == null || r_Abilities.Count <= 0)
+            return null;
         return r_Abilities[Random.Range(0, r_Abilities.Count)];
     }
     /// <summary>
@@ -73,6 +77,8 @@ public class CardAbility : MonoBehaviour
         while (true) // add check for game state
         {
             var ability = GetRandomAbility();
+            if (ability == null)
+                break;
             if (ability.PlayInSequence)
             {
                 foreach (var action in ability.Actions)

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class CardData : ScriptableObject
 {
     [Title("Inspector References")]
+    public bool autonomousAbilities;
     public List<AbilityData> abilities;
 
     [Title("Inspector Variables")]

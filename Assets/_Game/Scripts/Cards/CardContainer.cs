@@ -1,7 +1,8 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngineInternal;
 
-public class CardContainer : MonoBehaviour, IPlaceable
+public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
 {
     [Title("Inspector References")]
     [SerializeField] private CardVisuals r_Visuals;
@@ -70,6 +71,13 @@ public class CardContainer : MonoBehaviour, IPlaceable
         if (IsEnemy)
             r_Abilities.ExecuteAutonomy();
     }
+    /// <summary>
+    /// Called when something wants to hit this object.
+    /// </summary>
+    public void OnHit(int amount)
+    {
+        
+    }
     #endregion
 
     #region Unity Methods
@@ -98,8 +106,15 @@ public class CardContainer : MonoBehaviour, IPlaceable
         //MoveWithVisualDelay(Grid.SelectionPositionWorld);
         Visuals.Move(Grid.SelectionPositionWorld);
     }
+    /// <summary>
+    /// Activates when the player releases the interact button.
+    /// </summary>
     private void OnInteractUp()
     {
+        if (!Collision.PickedUp) return;
+
+        SwapCardPositions();
+
         Collision.OnInteractUp();
         Visuals.OnInteractUp();
     }
@@ -175,6 +190,7 @@ public class CardContainer : MonoBehaviour, IPlaceable
     /// Instantly moves the collision to the new position, but visually moves the card to the new position with a delay.
     /// </summary>
     /// <param name="position">Position to move.</param>
+    /// <param name="unoccupy">(Default: true) Should the move unoccupy the current grid cell.</param>
     public void MoveWithVisualDelay(Vector3 position)
     {
         if (!IsGridPositionAcceptable(Grid.GetGridCoordsAtWorldPosition(position)))
@@ -203,6 +219,22 @@ public class CardContainer : MonoBehaviour, IPlaceable
         return
             Grid.WithinGridPlayArea(position) &&
             Grid.GridPositionFree(position, EGridCellOccupiedFlags.Card);
+    }
+    /// <summary>
+    /// Checks to see if cards need to swap positions and does so.
+    /// </summary>
+    /// <returns>If cards needed to swap.</returns>
+    private void SwapCardPositions()
+    {
+        IPlaceable placeable = Grid.GetPlaceableAtPosition(Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card);
+        if (placeable == null || placeable == (IPlaceable)this)
+            return;
+
+        CardContainer cardAtPosition = (CardContainer)placeable;
+        Grid.UnoccupyGridField(cardAtPosition.GridPosition, cardAtPosition);
+        Grid.UnoccupyGridField(GridPosition, this);
+
+        cardAtPosition.MoveWithVisualDelay(Collision.Position);
     }
     #endregion
 }

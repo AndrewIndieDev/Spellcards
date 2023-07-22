@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95360bb6fe0e90a40a2bb53a599621b1, type: 3}
   m_Name: Spell_FireArrows
   m_EditorClassIdentifier: 
+  autonomousAbilities: 0
   abilities: []
   name: Fire Arrows
   description: Drops a meteor dealing damage in a radius.
-  cardImage: {fileID: 2800000, guid: 901cf7ae14bdcb44ea6d3fd6f5cf0799, type: 3}
+  cardImage: {fileID: 2800000, guid: 43dd23afe64c6804fa92d79be68190f3, type: 3}
   cardBackground: {fileID: 2800000, guid: 1b801ecc35f7d414dacceed9a6bc5247, type: 3}
   rewardAmount: 10
   xSize: 1

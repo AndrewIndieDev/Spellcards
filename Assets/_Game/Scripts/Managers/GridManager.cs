@@ -1,22 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public enum InteractClick { DOWN, UP }
-
-public interface IPlaceable
-{
-    Vector2Int Size { get; }
-    Vector2Int GridPosition { get; }
-    void OnPlace();
-    void OnKill();
-    void OnInteract();
-    void OnExecute();
-    void OnSpawn();
-}
 
 [Flags]
 public enum EGridCellOccupiedFlags
@@ -55,9 +41,9 @@ public class GridManager : MonoBehaviour
     public Vector2Int SelectionPositionGrid { get { return GetGridCoordsAtWorldPosition(selection.transform.position); } }
 
     // NEED TO MANUALLY CHANGE //
-    public int GridWidth { get { return 12; } }
-    public int GridHeight { get { return 7; } }
-    public int EnemyRows { get { return 3; } }
+    public int GridWidth { get { return 23; } }
+    public int GridHeight { get { return 14; } }
+    public int EnemyRows { get { return 2; } }
     /////////////////////////////
 
     public float gridVerticalSize;
@@ -219,6 +205,17 @@ public class GridManager : MonoBehaviour
         }
         return false;
     }
+
+    public bool UnoccupyGridField(Vector2Int position, CardContainer cardToCheck)
+    {
+        if (occupiedGridCells.TryGetValue(position, out GridCell cell))
+        {
+            CardContainer found = cell.occupiers[EGridCellOccupiedFlags.Card] as CardContainer;
+            if (found != null && found == cardToCheck)
+                return UnoccupyGridField(position, EGridCellOccupiedFlags.Card);
+        }
+        return false;
+    }   
 
     public bool UnoccupyGridFields(List<Vector2Int> positions, EGridCellOccupiedFlags unoccupyFlags = EGridCellOccupiedFlags.All)
     {

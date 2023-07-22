@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Grid
   m_Shader: {fileID: 4800000, guid: a39d3850a7da60f429088b4344a28c4e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -27,15 +30,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnemyZoneCellOpacity: 0.05
-    - _EnemyZoneCoverage: 3
+    - _EnemyZoneCoverage: 2
     - _EnemyZoneLineOpacity: 1
     - _EnemyZoneOpacity: 0.86
     - _Float1: -0.8
-    - _LineWidth: 0.058
+    - _LineWidth: 0.2
     - _Scale: 1
     - _StepAmount: 0.25
     m_Colors:
     - _EnemyZoneColor: {r: 0.8113208, g: 0.32344773, b: 0.31763974, a: 1}
-    - _GridSize: {r: 12, g: 7, b: 0, a: 0}
+    - _GridSize: {r: 24, g: 14, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 0.2}
   m_BuildTextureStacks: []

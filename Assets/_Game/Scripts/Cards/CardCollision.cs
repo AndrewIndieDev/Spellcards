@@ -22,12 +22,18 @@ public class CardCollision : MonoBehaviour
     #endregion
 
     #region Public Methods
+    /// <summary>
+    /// Activates when the player interacts with the card.
+    /// </summary>
     public void OnInteract()
     {
         if (!CanCardBePickedUp) return;
 
         v_PickedUp = true;
     }
+    /// <summary>
+    /// Activates when the player releases the card.
+    /// </summary>
     public void OnInteractUp()
     {
         if (!v_PickedUp) return;
@@ -112,7 +118,7 @@ public class CardCollision : MonoBehaviour
         transform.DOLocalRotate(rot, r_Container.DEFAULT_TWEEN_TIME);
     }
     /// <summary>
-    /// IOnstantly rotates the object to the given rotation
+    /// Instantly rotates the object to the given rotation
     /// </summary>
     /// <param name="rot"></param>
     public void RotateInstant(Vector3 rot)
@@ -138,7 +144,10 @@ public class CardCollision : MonoBehaviour
     /// </summary>
     private void UpdateOccupancy(Vector2Int newPosition)
     {
-        r_Container.Grid.UnoccupyGridField(r_Container.GridPosition, EGridCellOccupiedFlags.Card);
+        if (newPosition == r_Container.GridPosition)
+            return;
+
+        r_Container.Grid.UnoccupyGridField(r_Container.GridPosition, r_Container);
         r_Container.Grid.OccupyGridField(newPosition, EGridCellOccupiedFlags.Card, r_Container);
     }
     #endregion
