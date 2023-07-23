@@ -155,14 +155,6 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
         ResetLocalPosition();
     }
     /// <summary>
-    /// Sells the current card and adds the sell cost to the GameManager's currency.
-    /// </summary>
-    public void Sell()
-    {
-        GameManager.Instance.AddCurrency(CardData.rewardAmount);
-        Destroy(gameObject);
-    }
-    /// <summary>
     /// Tweens the card to the given position.
     /// </summary>
     /// <param name="position">Position to move to.</param>

@@ -14,7 +14,7 @@ public class CardVisuals : MonoBehaviour
     [SerializeField] private MeshRenderer m_Background;
     [SerializeField] private MeshRenderer m_Outline;
     [SerializeField] private TMP_Text t_Name;
-    [SerializeField] private TMP_Text t_SellCost;
+    [SerializeField] private TMP_Text t_SellCost; // Unused, selling was removed.
 
     public Tween CurrentTween => currentTween;
     public Vector3 Position => transform.position;
@@ -35,7 +35,6 @@ public class CardVisuals : MonoBehaviour
         SetImage(data.cardImage);
         SetBackground(data.cardBackground);
         SetName(data.name);
-        SetSellCost(data.rewardAmount);
     }
     /// <summary>
     /// Moves and Rotates the object to the desired position with zero rotation to the parent.

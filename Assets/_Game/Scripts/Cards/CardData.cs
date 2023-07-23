@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System;
 
 public class CardData : ScriptableObject
 {
@@ -9,12 +10,19 @@ public class CardData : ScriptableObject
     public List<AbilityData> abilities;
 
     [Title("Inspector Variables")]
+    public CardStats cardStats;
     public new string name;
     [TextArea]
     public string description;
     public Texture2D cardImage;
     public Texture2D cardBackground;
-    public int rewardAmount;
     public int xSize = 1;
     public int ySize = 1;
+}
+
+[Serializable]
+public struct CardStats
+{
+    public int health;
+    public int attack;
 }

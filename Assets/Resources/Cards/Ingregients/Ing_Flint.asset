@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autonomousAbilities: 0
   abilities: []
+  cardStats:
+    health: 2
+    attack: 0
   name: Flint
   description: 
   cardImage: {fileID: 2800000, guid: 0be625c6ab3c07641b263b2089ce95a7, type: 3}
   cardBackground: {fileID: 2800000, guid: a4e886894db3cb0479d4be19e8270c16, type: 3}
-  rewardAmount: 2
   xSize: 1
   ySize: 1
