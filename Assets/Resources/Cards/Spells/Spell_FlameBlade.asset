@@ -15,10 +15,12 @@ MonoBehaviour:
   autonomousAbilities: 0
   abilities:
   - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
+  cardStats:
+    health: 4
+    attack: 0
   name: Flame Blade
   description: Drops a meteor dealing damage in a radius.
   cardImage: {fileID: 2800000, guid: 23702d5555aa2a34a8e10de84f524f59, type: 3}
   cardBackground: {fileID: 2800000, guid: 1b801ecc35f7d414dacceed9a6bc5247, type: 3}
-  rewardAmount: 10
   xSize: 1
   ySize: 1

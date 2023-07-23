@@ -247,6 +247,43 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!84 &527680758
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 512
+  m_Height: 512
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
 --- !u!1 &559347592
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +319,7 @@ MonoBehaviour:
   camToDrawWith: {fileID: 559347596}
   layer:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 0
   renderers:
   - {fileID: 1673386174}
   terrains: []
@@ -375,13 +412,13 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.0914087
+  orthographic size: 2.3572876
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 0
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 1282537886}
+  m_TargetTexture: {fileID: 527680758}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -399,12 +436,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559347592}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 9.968, z: 0}
-  m_LocalScale: {x: 1, y: 1.0000026, z: 1.0000026}
+  m_LocalPosition: {x: 0, y: 5.000001, z: 0}
+  m_LocalScale: {x: 1, y: 1.0000033, z: 1.0000033}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1673386172}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &691293358
 GameObject:
@@ -1616,111 +1653,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1181777609
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1181777610}
-  - component: {fileID: 1181777612}
-  - component: {fileID: 1181777611}
-  - component: {fileID: 1181777613}
-  m_Layer: 14
-  m_Name: GridVisual
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1181777610
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181777609}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.08, y: 2.5200002, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!23 &1181777611
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181777609}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: fa34328013449c8498248485bab3f6a8, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1181777612
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181777609}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &1181777613
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181777609}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 1.0000004, z: 6.123235e-17}
-  m_Center: {x: 0.000000007450581, y: 0.000000009313226, z: -0.0000000055879354}
 --- !u!1001 &1230000861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1827,43 +1759,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1282537886
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 512
-  m_Height: 512
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!4 &1619241193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2132037364111452496, guid: 7da941912b8eb8742ab226902309007d,
@@ -2069,7 +1964,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: -943711563823048917, guid: b6254580046c6bb41b84d284e41f74fb, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b6254580046c6bb41b84d284e41f74fb,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 559347597}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6254580046c6bb41b84d284e41f74fb,
         type: 3}
@@ -2155,7 +2054,7 @@ MonoBehaviour:
   camToDrawWith: {fileID: 559347596}
   layer:
     serializedVersion: 2
-    m_Bits: 32768
+    m_Bits: 0
   renderers:
   - {fileID: 1673386174}
   terrains: []
@@ -2267,543 +2166,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleBar
       objectReference: {fileID: 0}
-    - target: {fileID: 2132037364940231308, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3555536146521844479, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.02106
-      objectReference: {fileID: 0}
-    - target: {fileID: 3555536146521844479, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.998
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: shownEvents
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: maxTimeOnBar
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.size
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventObjects.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[0].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: 01565bdca6a8b784fb3e5205b16e0d50,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[0].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[1].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: af90e093661f8fe4f85130729c348045,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[1].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[2].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: bf00c572bab271f489ea0bfa94314637,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[2].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[3].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: ab39b43df63e0d749a43acf7b5c4ea79,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[3].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[4].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: cf485729f5faa414f92f92d6325b612f,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[4].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[5].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: 298aaefb1b4250540aab4e997ce2be89,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[5].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[6].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: 53f114ccd2b806c4a9b6f256a8e595f6,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[6].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[7].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: fa8e8eba606045242ab8493f34bdef14,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[7].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[8].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: 3d6bd09f132b857458cdad040d37723e,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[8].timeToSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[9].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: afe16319d2302e6468a9e2940f319ac5,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[9].timeToSpawn
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[10].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: 960fc247427d5104e98cb490f877abc2,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[10].timeToSpawn
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[11].cardToSpawn
-      value: 
-      objectReference: {fileID: 11400000, guid: fe8c73dfc30624e4897127986f6bea01,
-        type: 2}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[11].timeToSpawn
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[12].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[12].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[13].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[13].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[14].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[14].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[15].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[15].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[16].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[16].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[17].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[17].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[18].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[18].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[19].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[19].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[20].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[20].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[21].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[21].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[22].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[22].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[23].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[23].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[24].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[24].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[25].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[25].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[26].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[26].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[27].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[27].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[28].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[28].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[29].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[29].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[30].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[30].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[31].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[31].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[32].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[32].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[33].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[33].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[34].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[34].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[35].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[35].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[36].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[36].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[37].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[37].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[38].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[38].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[39].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[39].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[40].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[40].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[41].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[41].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[42].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[42].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[43].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[43].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[44].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[44].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[45].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[45].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[46].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[46].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[47].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[47].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[48].cardToSpawn
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7771799099005718214, guid: 7da941912b8eb8742ab226902309007d,
-        type: 3}
-      propertyPath: eventData.Array.data[48].timeToSpawn
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2825,7 +2187,7 @@ PrefabInstance:
     - target: {fileID: 2230748761279387801, guid: f92c00b1ac255d249b832fd7cf4a747b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.67
+      value: -1.539
       objectReference: {fileID: 0}
     - target: {fileID: 2230748761279387801, guid: f92c00b1ac255d249b832fd7cf4a747b,
         type: 3}
@@ -2835,7 +2197,7 @@ PrefabInstance:
     - target: {fileID: 2230748761279387801, guid: f92c00b1ac255d249b832fd7cf4a747b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.58
+      value: -1.262
       objectReference: {fileID: 0}
     - target: {fileID: 2230748761279387801, guid: f92c00b1ac255d249b832fd7cf4a747b,
         type: 3}

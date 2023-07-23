@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autonomousAbilities: 0
   abilities: []
+  cardStats:
+    health: 3
+    attack: 0
   name: Arrow
   description: 
   cardImage: {fileID: 2800000, guid: 2635b54a01e871c4295fe8e839e80e92, type: 3}
   cardBackground: {fileID: 2800000, guid: 46e8ec342d7b60444a849738b04d87d3, type: 3}
-  rewardAmount: 5
   xSize: 1
   ySize: 1

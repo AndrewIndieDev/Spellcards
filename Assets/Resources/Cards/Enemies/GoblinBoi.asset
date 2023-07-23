@@ -15,10 +15,12 @@ MonoBehaviour:
   autonomousAbilities: 1
   abilities:
   - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
+  cardStats:
+    health: 5
+    attack: 1
   name: Goblin Boi
   description: He angry you kill his family!
   cardImage: {fileID: 2800000, guid: 728c282ccac56594488d23dd8cb8605d, type: 3}
   cardBackground: {fileID: 2800000, guid: 270004b42a4054a4893b631c42dece86, type: 3}
-  rewardAmount: 5
   xSize: 1
   ySize: 1

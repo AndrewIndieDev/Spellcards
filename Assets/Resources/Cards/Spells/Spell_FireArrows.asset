@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autonomousAbilities: 0
   abilities: []
+  cardStats:
+    health: 4
+    attack: 0
   name: Fire Arrows
   description: Drops a meteor dealing damage in a radius.
   cardImage: {fileID: 2800000, guid: 43dd23afe64c6804fa92d79be68190f3, type: 3}
   cardBackground: {fileID: 2800000, guid: 1b801ecc35f7d414dacceed9a6bc5247, type: 3}
-  rewardAmount: 10
   xSize: 1
   ySize: 1

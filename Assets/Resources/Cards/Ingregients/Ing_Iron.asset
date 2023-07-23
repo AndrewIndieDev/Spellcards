@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autonomousAbilities: 0
   abilities: []
+  cardStats:
+    health: 2
+    attack: 0
   name: Iron
   description: 
   cardImage: {fileID: 2800000, guid: f08c5e4fd87812241abe5cc05bfbd2b5, type: 3}
   cardBackground: {fileID: 2800000, guid: a4e886894db3cb0479d4be19e8270c16, type: 3}
-  rewardAmount: 2
   xSize: 1
   ySize: 1
