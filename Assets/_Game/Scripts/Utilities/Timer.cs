@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Timer : MonoBehaviour
     [Title("Inspector References")]
     [SerializeField] private Transform r_Percentage;
     [SerializeField] private GameObject r_TimerVisual;
+    [SerializeField] private MeshRenderer r_TimerMesh;
     [SerializeField] private UnityEvent r_TimerActions;
 
     [Title("Read Only Variables")]
@@ -24,6 +26,18 @@ public class Timer : MonoBehaviour
         timeInSeconds = time;
         r_TimerVisual.SetActive(true);
         TimerManager.Run(this);
+    }
+    /// <summary>
+    /// Updates the current time by deltaTime and updates the timer mesh.
+    /// </summary>
+    /// <param name="deltaTime">deltaTime passed in.</param>
+    public void UpdateTime(float deltaTime)
+    {
+        timeInSeconds -= deltaTime;
+        r_TimerMesh.material.SetFloat("_Timer", timeInSeconds);
+
+        if (timeInSeconds <= 0.0f)
+            Finished();
     }
     /// <summary>
     /// Pauses the current timer.
@@ -44,6 +58,7 @@ public class Timer : MonoBehaviour
     /// </summary>
     public void Clear()
     {
+        r_TimerMesh.material.SetFloat("_Timer", 0.0f);
         r_TimerVisual.SetActive(false);
         Pause();
     }

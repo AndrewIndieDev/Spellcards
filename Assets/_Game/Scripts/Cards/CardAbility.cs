@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class CardAbility : MonoBehaviour
 {
+    private GridManager Grid => GridManager.Instance;
+
     [Title("Inspector References")]
     [SerializeField] private CardContainer r_CardContainer;
 
@@ -25,7 +27,7 @@ public class CardAbility : MonoBehaviour
     {
         if (data == null)
             return;
-        if (!data.PlayInSequence)
+        if (!data.ExecuteInOrder)
         {
             foreach (var ability in data.Actions)
             {
@@ -43,6 +45,9 @@ public class CardAbility : MonoBehaviour
     {
         if (r_Abilities == null || r_Abilities.Count <= 0)
             return null;
+
+        if (Utilities.GetRandomNumber(0, 100) < 50)
+            return r_Abilities[0];
         return r_Abilities[Random.Range(0, r_Abilities.Count)];
     }
     /// <summary>
@@ -63,9 +68,7 @@ public class CardAbility : MonoBehaviour
     private IEnumerator ExecuteInOrder(List<AbilityAction> actions)
     {
         foreach (var action in actions)
-        {
             yield return new WaitForSeconds(action.Execute(this));
-        }
     }
     /// <summary>
     /// Executes the ability actions in sequence, autonomously.
@@ -79,22 +82,28 @@ public class CardAbility : MonoBehaviour
             var ability = GetRandomAbility();
             if (ability == null)
                 break;
-            if (ability.PlayInSequence)
+
+            r_CardContainer.Timer.Run(10f);
+            yield return new WaitForSeconds(10f);
+
+            if (ability == r_Abilities[0])
+            {
+                IPlaceable found = Grid.GetPlaceableAtPosition(r_CardContainer.GridPosition - new Vector2Int(0, 1), EGridCellOccupiedFlags.Card);
+                if (found == null || (found as CardContainer).IsEnemy)
+                    continue;
+                CardContainer toAttack = found as CardContainer;
+                toAttack.OnHit(r_CardContainer.CardData.cardStats.attack);
+            }
+            if (ability.ExecuteInOrder)
             {
                 foreach (var action in ability.Actions)
-                {
-                    float seconds = action.Execute(this);
-                    yield return new WaitForSeconds(seconds);
-                }
+                    yield return new WaitForSeconds(action.Execute(this));
             }
             else
             {
                 foreach (var action in ability.Actions)
-                {
                     action.Execute(this);
-                }
             }
-            yield return new WaitForSeconds(1f);
         }
     }
     #endregion

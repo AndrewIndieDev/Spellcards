@@ -15,6 +15,8 @@ public class CardVisuals : MonoBehaviour
     [SerializeField] private MeshRenderer m_Outline;
     [SerializeField] private TMP_Text t_Name;
     [SerializeField] private TMP_Text t_SellCost; // Unused, selling was removed.
+    [SerializeField] private TMP_Text t_CardHealth;
+    [SerializeField] private TMP_Text t_CardAttack;
 
     public Tween CurrentTween => currentTween;
     public Vector3 Position => transform.position;
@@ -35,6 +37,8 @@ public class CardVisuals : MonoBehaviour
         SetImage(data.cardImage);
         SetBackground(data.cardBackground);
         SetName(data.name);
+        SetHealth(data.cardStats.health);
+        SetAttack(data.cardStats.attack);
     }
     /// <summary>
     /// Moves and Rotates the object to the desired position with zero rotation to the parent.
@@ -120,6 +124,14 @@ public class CardVisuals : MonoBehaviour
     {
         Move(r_Container.Collision.Position);
     }
+    public void UpdateHealth(int amount)
+    {
+        t_CardHealth.text = amount.ToString();
+    }
+    public void UpdateAttack(int amount)
+    {
+        t_CardAttack.text = amount.ToString();
+    }
     #endregion
 
     #region Private Methods
@@ -154,6 +166,20 @@ public class CardVisuals : MonoBehaviour
     private void SetSellCost(int sellCost)
     {
         t_SellCost.text = sellCost.ToString();
+    }
+    private void SetHealth(int amount)
+    {
+        if (amount > 0)
+            t_CardHealth.text = amount.ToString();
+        else
+            t_CardHealth.transform.parent.gameObject.SetActive(false);
+    }
+    private void SetAttack(int amount)
+    {
+        if (amount > 0)
+            t_CardAttack.text = amount.ToString();
+        else
+            t_CardAttack.transform.parent.gameObject.SetActive(false);
     }
     #endregion
 }

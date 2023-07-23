@@ -43,9 +43,7 @@ public class CardTimerManager : MonoBehaviour
     {
         foreach (var timer in active)
         {
-            timer.timeInSeconds -= Time.deltaTime;
-            if (timer.timeInSeconds <= 0.0f)
-                timer.Finished();
+            timer.UpdateTime(Time.deltaTime);
         }
     }
     #endregion

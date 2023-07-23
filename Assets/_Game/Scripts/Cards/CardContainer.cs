@@ -20,10 +20,12 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
 
     [Title("Read Only Variables")]
     [ReadOnly][SerializeField] private CardData r_Data;
+    [ReadOnly][SerializeField] private int cardHealth;
+    [ReadOnly][SerializeField] private int cardAttack;
 
     public CardData CardData { get { return r_Data; } }
 
-    private bool IsEnemy => r_Data.GetType() == typeof(EnemyCard);
+    public bool IsEnemy => r_Data.GetType() == typeof(EnemyCard);
 
     #region Interface Methods
     /// <summary>
@@ -46,7 +48,7 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     /// </summary>
     public void OnKill()
     {
-        
+        Destroy(gameObject);
     }
     /// <summary>
     /// Called when the card is interacted with.
@@ -76,7 +78,14 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     /// </summary>
     public void OnHit(int amount)
     {
-        
+        cardHealth -= amount;
+        if (cardHealth <= 0)
+        {
+            cardHealth = 0;
+            OnKill();
+        }
+
+        Visuals.UpdateHealth(cardHealth);
     }
     #endregion
 
@@ -129,6 +138,8 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     {
         r_Data = data;
         r_Visuals.Set(r_Data);
+        cardHealth = data.cardStats.health;
+        cardAttack = data.cardStats.attack;
     }
     /// <summary>
     /// Used to send a notification to components to update themselves.
