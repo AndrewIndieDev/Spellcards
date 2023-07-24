@@ -41,8 +41,9 @@ public class CardTimerManager : MonoBehaviour
 
     private void Update()
     {
-        foreach (var timer in active)
+        for (int i = active.Count - 1; i >= 0; i--)
         {
+            Timer timer = active[i];
             timer.UpdateTime(Time.deltaTime);
         }
     }

@@ -83,16 +83,19 @@ public class CardAbility : MonoBehaviour
             if (ability == null)
                 break;
 
-            r_CardContainer.Timer.Run(10f);
-            yield return new WaitForSeconds(10f);
+            float randTime = (float)Utilities.GetRandomNumber(200, 300) / 100f;
+            r_CardContainer.Timer.Run(randTime);
+            yield return new WaitForSeconds(randTime);
 
             if (ability == r_Abilities[0])
             {
                 IPlaceable found = Grid.GetPlaceableAtPosition(r_CardContainer.GridPosition - new Vector2Int(0, 1), EGridCellOccupiedFlags.Card);
-                if (found == null || (found as CardContainer).IsEnemy)
+                if (found != null && !(found as CardContainer).IsEnemy)
+                {
+                    CardContainer toAttack = found as CardContainer;
+                    toAttack.OnHit(r_CardContainer.CardData.cardStats.attack);
                     continue;
-                CardContainer toAttack = found as CardContainer;
-                toAttack.OnHit(r_CardContainer.CardData.cardStats.attack);
+                }
             }
             if (ability.ExecuteInOrder)
             {

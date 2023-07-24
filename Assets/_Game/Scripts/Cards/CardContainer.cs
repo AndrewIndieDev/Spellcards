@@ -48,6 +48,7 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     /// </summary>
     public void OnKill()
     {
+        Grid.UnoccupyGridField(GridPosition);
         Destroy(gameObject);
     }
     /// <summary>

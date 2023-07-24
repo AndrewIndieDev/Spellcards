@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private UnityEvent r_TimerActions;
 
     [Title("Read Only Variables")]
+    [ReadOnly] private float r_Duration;
     [ReadOnly] public float timeInSeconds;
 
     #region Public Methods
@@ -23,6 +24,7 @@ public class Timer : MonoBehaviour
     /// <param name="time">Seconds till the timer finishes.</param>
     public void Run(float time)
     {
+        r_Duration = time;
         timeInSeconds = time;
         r_TimerVisual.SetActive(true);
         TimerManager.Run(this);
@@ -34,7 +36,7 @@ public class Timer : MonoBehaviour
     public void UpdateTime(float deltaTime)
     {
         timeInSeconds -= deltaTime;
-        r_TimerMesh.material.SetFloat("_Timer", timeInSeconds);
+        r_TimerMesh.material.SetFloat("_Timer", timeInSeconds / r_Duration);
 
         if (timeInSeconds <= 0.0f)
             Finished();
