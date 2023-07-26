@@ -49,6 +49,11 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     public void OnKill()
     {
         Grid.UnoccupyGridField(GridPosition);
+
+        CardData toSpawn = r_Data.dropList.RandomElement();
+        if (toSpawn != null && Utilities.GetRandomNumber(0, 2) == 0)
+            SpawningManager.Instance.SpawnCard(toSpawn, GridPosition);
+
         Destroy(gameObject);
     }
     /// <summary>

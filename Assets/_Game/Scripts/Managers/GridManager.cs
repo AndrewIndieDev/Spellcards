@@ -38,7 +38,7 @@ public class GridManager : MonoBehaviour
 
     // NEED TO MANUALLY CHANGE //
     public int GridWidth { get { return 23; } }
-    public int GridHeight { get { return 13; } }
+    public int GridHeight { get { return 14; } }
     public int EnemyRows { get { return 2; } }
     /////////////////////////////
 
@@ -297,7 +297,7 @@ public class GridManager : MonoBehaviour
     public Vector2Int ClampPositionToPlayerGrid(Vector2Int position)
     {
         int x = Mathf.Clamp(position.x, 0, GridWidth);
-        int y = Mathf.Clamp(position.y, 0, GridHeight - EnemyRows);
+        int y = Mathf.Clamp(position.y, 0, GridHeight - EnemyRows - 1);
         return new Vector2Int(x, y);
     }
 

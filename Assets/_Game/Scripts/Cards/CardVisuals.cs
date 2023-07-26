@@ -24,7 +24,11 @@ public class CardVisuals : MonoBehaviour
     private Tween currentTween;
 
     #region Unity Methods
-
+    private void OnDestroy()
+    {
+        if (currentTween != null)
+            currentTween.Kill();
+    }
     #endregion
 
     #region Public Methods

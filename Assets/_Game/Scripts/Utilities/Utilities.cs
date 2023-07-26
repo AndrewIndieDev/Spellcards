@@ -41,9 +41,15 @@ public static class Utilities
 
     public static T RandomElement<T>(this IList<T> list)
     {
-        return list.Count > 0 ? list[UnityEngine.Random.Range(0, list.Count)] : default(T);
+        return list.Count > 0 ? list[UnityEngine.Random.Range(0, list.Count)] : default;
     }
 
+    /// <summary>
+    /// Get's a random number between min and max.
+    /// </summary>
+    /// <param name="min">min(inclusive)</param>
+    /// <param name="max">max(exclusive)</param>
+    /// <returns>Random int between two numbers.</returns>
     public static int GetRandomNumber(int min, int max)
     {
         using (RNGCryptoServiceProvider rg = new RNGCryptoServiceProvider())

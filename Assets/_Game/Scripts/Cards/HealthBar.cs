@@ -1,6 +1,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using QFSW.QC;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        HealthPercentage = 100;
     }
     #endregion
 
@@ -38,7 +40,7 @@ public class HealthBar : MonoBehaviour
         HealthPercentage = Mathf.Clamp(HealthPercentage - amount, 0, 100);
 
         if (HealthPercentage <= 0)
-            Dbug.Instance.Log("DEAD!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     #endregion
 }

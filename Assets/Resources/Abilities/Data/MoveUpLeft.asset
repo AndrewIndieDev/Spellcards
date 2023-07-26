@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18615568bf5c0e84a811a1a709371960, type: 3}
+  m_Name: MoveUpLeft
+  m_EditorClassIdentifier: 
+  playInSequence: 0
+  actions:
+  - {fileID: 11400000, guid: 3af6a6c27c02a9d439fe18f08a4b4827, type: 2}
+  - {fileID: 11400000, guid: 0c39a6227ba81594dadeb70b97ac0858, type: 2}

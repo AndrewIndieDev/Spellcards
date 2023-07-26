@@ -89,15 +89,12 @@ public class SpawningManager : MonoBehaviour
         }
         return SpawnCard(data, gridPosition);
     }
-    #endregion
-
-    #region Private Methods
     /// <summary>
     /// Spawns a card at the desired grid position.
     /// </summary>
     /// <param name="data">Data you want the card to spawn with.</param>
     /// <param name="gridPosition">Grid position you want to spawn the card at.</param>
-    private CardContainer SpawnCard(CardData data, Vector2Int gridPosition)
+    public CardContainer SpawnCard(CardData data, Vector2Int gridPosition)
     {
         var cell = Grid.GetOrAddGridCell(gridPosition);
         if (cell == null)
@@ -113,13 +110,16 @@ public class SpawningManager : MonoBehaviour
         card.OnSpawn();
         return card;
     }
+    #endregion
+
+    #region Private Methods
     /// <summary>
     /// Get's a random grid position within the parameters.
     /// </summary>
-    /// <param name="minRow">Minumum Row.</param>
-    /// <param name="maxRow">Maximum Row.</param>
-    /// <param name="minCol">Minumum Column.</param>
-    /// <param name="maxCol">Maximum Column.</param>
+    /// <param name="minRow">Minumum Row. (inclusive)</param>
+    /// <param name="maxRow">Maximum Row. (exclusive)</param>
+    /// <param name="minCol">Minumum Column. (inclusive)</param>
+    /// <param name="maxCol">Maximum Column. (exclusive)</param>
     /// <returns></returns>
     private Vector2Int GetRandomGridPosition(int minRow, int maxRow, int minCol, int maxCol)
     {

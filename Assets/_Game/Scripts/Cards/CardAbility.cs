@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEditor.Playables;
 using UnityEngine;
 
@@ -83,11 +84,11 @@ public class CardAbility : MonoBehaviour
             if (ability == null)
                 break;
 
-            float randTime = (float)Utilities.GetRandomNumber(200, 300) / 100f;
+            float randTime = (float)Utilities.GetRandomNumber(50, 100) / 100f;
             r_CardContainer.Timer.Run(randTime);
             yield return new WaitForSeconds(randTime);
 
-            if (ability == r_Abilities[0])
+            if (ability == r_Abilities[0] || r_CardContainer.GridPosition.y == 0)
             {
                 IPlaceable found = Grid.GetPlaceableAtPosition(r_CardContainer.GridPosition - new Vector2Int(0, 1), EGridCellOccupiedFlags.Card);
                 if (found != null && !(found as CardContainer).IsEnemy)
@@ -96,6 +97,8 @@ public class CardAbility : MonoBehaviour
                     toAttack.OnHit(r_CardContainer.CardData.cardStats.attack);
                     continue;
                 }
+                else if (r_CardContainer.GridPosition.y == 0)
+                    HealthBar.Instance.OnHit(r_CardContainer.CardData.cardStats.attack);
             }
             if (ability.ExecuteInOrder)
             {

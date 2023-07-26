@@ -6,10 +6,11 @@ using System;
 public class CardData : ScriptableObject
 {
     [Title("Inspector References")]
-    public bool autonomousAbilities;
     public List<AbilityData> abilities;
+    public List<CardData> dropList;
 
     [Title("Inspector Variables")]
+    public bool autonomousAbilities;
     public CardStats cardStats;
     public new string name;
     [TextArea]

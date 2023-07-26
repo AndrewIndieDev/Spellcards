@@ -15,6 +15,13 @@ MonoBehaviour:
   autonomousAbilities: 1
   abilities:
   - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
+  - {fileID: 11400000, guid: d7ecefc0b5cec254da4f6a2c822c904d, type: 2}
+  - {fileID: 11400000, guid: abc818faaf9938f42af1c7607df032c6, type: 2}
+  - {fileID: 11400000, guid: 671204e397d45784fb58b0c4519e78a6, type: 2}
+  - {fileID: 11400000, guid: a37a84e17ffc12a4996cf4c2dc315279, type: 2}
+  - {fileID: 11400000, guid: 2c971f9a7320664489fc41c2458b6ff2, type: 2}
+  - {fileID: 11400000, guid: 9e92c620203e90140b9374f271d0e43d, type: 2}
+  - {fileID: 11400000, guid: 873db3ba877f1c94f98d716954682177, type: 2}
   cardStats:
     health: 5
     attack: 1
