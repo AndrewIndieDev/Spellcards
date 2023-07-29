@@ -3,9 +3,12 @@ using TMPro;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 using Sirenix.OdinInspector.Editor.Drawers;
+using UnityEngine.InputSystem.LowLevel;
 
 public class CardVisuals : MonoBehaviour
 {
+    private GridManager Grid => GridManager.Instance;
+
     [Title("Container Reference")]
     [SerializeField] private CardContainer r_Container;
 
@@ -20,6 +23,7 @@ public class CardVisuals : MonoBehaviour
 
     public Tween CurrentTween => currentTween;
     public Vector3 Position => transform.position;
+    public Vector3 CardScale => new Vector3(r_Container.CardData.xSize, 1f, r_Container.CardData.ySize);
 
     private Tween currentTween;
 
@@ -38,6 +42,8 @@ public class CardVisuals : MonoBehaviour
     /// <param name="data">The new data that needs to be reflected in the visuals</param>
     public void Set(CardData data)
     {
+        transform.localScale = new Vector3(data.xSize, 1f, data.ySize);
+        MoveInstant(Grid.GetGridCellPosition(r_Container.GridPosition));
         SetImage(data.cardImage);
         SetBackground(data.cardBackground);
         SetName(data.name);
@@ -56,9 +62,10 @@ public class CardVisuals : MonoBehaviour
     /// <summary>
     /// Tweens the position.
     /// </summary>
-    /// <param name="position">New positioin to tween to.</param>
+    /// <param name="position">New position to tween to.</param>
     public void Move(Vector3 position)
     {
+        position = Grid.GetGridCellPosition(position) + GetLocalSizePosition();
         if (currentTween != null)
             currentTween.Kill();
         currentTween = transform.DOMove(position, r_Container.DEFAULT_TWEEN_TIME);
@@ -84,10 +91,10 @@ public class CardVisuals : MonoBehaviour
     /// <summary>
     /// Instantly move the object to the given position.
     /// </summary>
-    /// <param name="pos"></param>
-    public void MoveInstant(Vector3 pos)
+    /// <param name="worldPosition">World position to move to.</param>
+    public void MoveInstant(Vector3 worldPosition)
     {
-        transform.position = pos;
+        transform.position = Grid.GetGridCellPosition(worldPosition) + GetLocalSizePosition();
     }
     /// <summary>
     /// Tweens the rotation.
@@ -135,6 +142,13 @@ public class CardVisuals : MonoBehaviour
     public void UpdateAttack(int amount)
     {
         t_CardAttack.text = amount.ToString();
+    }
+    public void OnHit()
+    {
+        if (currentTween != null)
+            currentTween.Complete();
+        SetScale(1.2f);
+        currentTween = transform.DOScale(CardScale, r_Container.DEFAULT_TWEEN_TIME);
     }
     #endregion
 
@@ -184,6 +198,14 @@ public class CardVisuals : MonoBehaviour
             t_CardAttack.text = amount.ToString();
         else
             t_CardAttack.transform.parent.gameObject.SetActive(false);
+    }
+    private void SetScale(float scale)
+    {
+        transform.localScale = CardScale * scale;
+    }
+    private Vector3 GetLocalSizePosition()
+    {
+        return new Vector3(r_Container.CardData.xSize / 2f * Grid.gridHorizontalSize, 0f, r_Container.CardData.ySize / 2f * Grid.gridVerticalSize);
     }
     #endregion
 }

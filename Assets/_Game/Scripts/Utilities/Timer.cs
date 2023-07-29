@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class CardTimer : MonoBehaviour
 {
     public CardTimerManager TimerManager { get { return CardTimerManager.Instance; } }
 
@@ -58,7 +58,7 @@ public class Timer : MonoBehaviour
     /// <summary>
     /// Stops the timer and disables it.
     /// </summary>
-    public void Clear()
+    public void Cancel()
     {
         r_TimerMesh.material.SetFloat("_Timer", 0.0f);
         r_TimerVisual.SetActive(false);
@@ -69,7 +69,7 @@ public class Timer : MonoBehaviour
     /// </summary>
     public void Finished()
     {
-        Clear();
+        Cancel();
         // Tell container that it's finished?
     }
     #endregion

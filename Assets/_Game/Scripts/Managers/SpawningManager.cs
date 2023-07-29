@@ -2,6 +2,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor.Validation;
 using Mono.CSharp;
+using System.Collections.Generic;
 
 public class SpawningManager : MonoBehaviour
 {
@@ -78,15 +79,6 @@ public class SpawningManager : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            gridPosition = Grid.GetGridCoordsAtWorldPosition(worldPosition);
-            if (!Grid.GridPositionFree(gridPosition, EGridCellOccupiedFlags.Card))
-            {
-                Dbug.Instance.LogError($"Couldn't find a position to place {data.name}.");
-                return null;
-            }
-        }
         return SpawnCard(data, gridPosition);
     }
     /// <summary>
@@ -96,6 +88,16 @@ public class SpawningManager : MonoBehaviour
     /// <param name="gridPosition">Grid position you want to spawn the card at.</param>
     public CardContainer SpawnCard(CardData data, Vector2Int gridPosition)
     {
+        List<Vector2Int> toOccupy = new();
+        for (int x = 0; x < data.xSize; x++)
+        {
+            for (int y = 0; y < data.ySize; y++)
+            {
+                toOccupy.Add(new Vector2Int(gridPosition.x + x, gridPosition.y + y));
+            }
+        }
+        if (!Grid.GridPositionsFree(toOccupy))
+            return null;
         var cell = Grid.GetOrAddGridCell(gridPosition);
         if (cell == null)
         {
@@ -103,10 +105,9 @@ public class SpawningManager : MonoBehaviour
             return null;
         }
         CardContainer card = Instantiate(r_CardPrefab, Vector3.zero, Quaternion.identity);
+        card.MoveInstant(Grid.GetGridCellCenterPosition(gridPosition));
         card.SetData(data);
-        var worldPos = Grid.GetGridCellCenterPosition(gridPosition);
-        card.MoveInstant(worldPos);
-        Grid.OccupyGridField(gridPosition, EGridCellOccupiedFlags.Card, card);
+        Grid.OccupyGridFields(toOccupy, EGridCellOccupiedFlags.Card, card);
         card.OnSpawn();
         return card;
     }

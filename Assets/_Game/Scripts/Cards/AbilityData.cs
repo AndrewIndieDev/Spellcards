@@ -8,6 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New AbilityData", menuName = "Abilities/Data")]
 public class AbilityData : ScriptableObject
 {
+    public AbilityStyle abilityStyle;
     [SerializeField] private bool playInSequence;
     public List<AbilityAction> actions;
 

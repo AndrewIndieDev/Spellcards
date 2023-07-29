@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95360bb6fe0e90a40a2bb53a599621b1, type: 3}
   m_Name: Spell_FlameBlade
   m_EditorClassIdentifier: 
-  autonomousAbilities: 0
   abilities:
-  - {fileID: 11400000, guid: 24c7919dced585146952574e37cf8dfd, type: 2}
+  - {fileID: 11400000, guid: 359a6a5f34e6c834bb05c051e7c25198, type: 2}
+  dropList: []
+  autonomousAbilities: 0
   cardStats:
     health: 4
-    attack: 0
+    attack: 10
   name: Flame Blade
   description: Drops a meteor dealing damage in a radius.
   cardImage: {fileID: 2800000, guid: 23702d5555aa2a34a8e10de84f524f59, type: 3}

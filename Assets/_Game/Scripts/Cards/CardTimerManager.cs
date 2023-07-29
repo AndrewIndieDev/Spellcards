@@ -7,14 +7,14 @@ public class CardTimerManager : MonoBehaviour
     public static CardTimerManager Instance;
 
     [Title("Read Only Variables")]
-    [ReadOnly][SerializeField] private List<Timer> active = new();
+    [ReadOnly][SerializeField] private List<CardTimer> active = new();
 
     #region Public Methods
     /// <summary>
     /// Adds a timer to the list of running timers.
     /// </summary>
     /// <param name="timer">Timer to add to the running timers list</param>
-    public void Run(Timer timer)
+    public void Run(CardTimer timer)
     {
         Utilities.AddUnique(active, timer);
     }
@@ -22,7 +22,7 @@ public class CardTimerManager : MonoBehaviour
     /// Removes a timer from the active timers list.
     /// </summary>
     /// <param name="timer"></param>
-    public void Pause(Timer timer)
+    public void Pause(CardTimer timer)
     {
         Utilities.RemoveUnique(active, timer);
     }
@@ -43,7 +43,12 @@ public class CardTimerManager : MonoBehaviour
     {
         for (int i = active.Count - 1; i >= 0; i--)
         {
-            Timer timer = active[i];
+            if (active[i] == null)
+            {
+                active.RemoveAt(i);
+                continue;
+            }
+            CardTimer timer = active[i];
             timer.UpdateTime(Time.deltaTime);
         }
     }
