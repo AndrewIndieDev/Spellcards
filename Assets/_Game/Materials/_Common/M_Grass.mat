@@ -71,6 +71,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _WindNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 264b103efdd7e864380dc87b954d213c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -108,27 +112,37 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _IntensityAddition: 0
-    - _IntensityMultiply: 1.44
+    - _IntensityMultiply: 1.86
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RotAngle: 1.85
+    - _ShadowIntensity: 0.888
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _WindSpeed: 0.05
+    - _WindStrength: 0.15
+    - _WindTiling: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _metal: 0
+    - _smoothness: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.5835262, g: 0.8773585, b: 0.6182885, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PivPoint: {r: 0, g: 0, b: 0, a: 0}
+    - _Position: {r: 0, g: 0.02, b: 0, a: 0}
+    - _RotationAxis: {r: 1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Vector1: {r: -0.37, g: 2.52, b: 0, a: 0}
+    - _Vector1: {r: 1.09, g: 0.33, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7116609895835909224
 MonoBehaviour:
