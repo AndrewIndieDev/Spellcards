@@ -108,6 +108,7 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
         UpdateAll();
         GridManager.onSelectionGridPositionChanged += OnSelectionGridPositionChanged;
         GameManager.onInteractUp += OnInteractUp;
+        
     }
     void OnDestroy()
     {

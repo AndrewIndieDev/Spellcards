@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 public class AbilityVisual : MonoBehaviour
@@ -75,12 +76,17 @@ public class AbilityVisual : MonoBehaviour
     }
     private void EnableVisual()
     {
-        enabled = true;
+        StartCoroutine(EnabledTimer());
 
         SetPosition(current.Collision.Position);
 
         r_ArrowHead.enabled = true;
         r_LineRenderer.enabled = true;
+    }
+    private IEnumerator EnabledTimer()
+    {
+        yield return new WaitForSeconds(0.1f);
+        enabled = true;
     }
     #endregion
 }

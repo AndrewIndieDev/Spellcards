@@ -25,6 +25,10 @@ public class GridCell
 public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public delegate void OnSelectionGridPositionChanged(Vector2Int cellPosition);
     public static event OnSelectionGridPositionChanged onSelectionGridPositionChanged;
@@ -51,7 +55,6 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        Instance = this;
         selection = Instantiate(selection);
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0.01f, gridVerticalSize);
 
@@ -62,15 +65,15 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector2Int position = SelectionPositionGrid;
-            GridCell clicked = GetGridCell(position);
-            Debug.Log($"{position.x}, {position.y} | {((clicked != null) ? clicked.occupiedFlag : "<NULL>")}");
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Vector2Int position = SelectionPositionGrid;
+    //        GridCell clicked = GetGridCell(position);
+    //        Debug.Log($"{position.x}, {position.y} | {((clicked != null) ? clicked.occupiedFlag : "<NULL>")}");
+    //    }
+    //}
 
     public void OnNavigationMouse(InputAction.CallbackContext context)
     {

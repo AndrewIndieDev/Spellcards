@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         InputActions.Player.Interact.performed += OnInteract;
         InputActions.Player.Interact.canceled += OnInteract;
         InputActions.Player.Execute.performed += OnExecute;
+        InputActions.Player.Execute.canceled += OnExecute;
         InputActions.Player.NavigationMouse.performed += OnNavigationMouse;
         InputActions.Player.NavigationGamepad.performed += OnNavigationGamepad;
     }
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         InputActions.Player.Interact.performed -= OnInteract;
         InputActions.Player.Interact.canceled -= OnInteract;
         InputActions.Player.Execute.performed -= OnExecute;
+        InputActions.Player.Execute.canceled -= OnExecute;
         InputActions.Player.NavigationMouse.performed -= OnNavigationMouse;
         InputActions.Player.NavigationGamepad.performed -= OnNavigationGamepad;
     }
