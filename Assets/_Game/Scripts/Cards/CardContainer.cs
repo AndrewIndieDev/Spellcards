@@ -8,12 +8,12 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     [SerializeField] private CardVisuals r_Visuals;
     [SerializeField] private CardCollision r_Collision;
     [SerializeField] private CardAbility r_Abilities;
-    [SerializeField] private Timer r_Timer;
+    [SerializeField] private CardTimer r_Timer;
 
     public GridManager Grid { get { return GridManager.Instance; } }
     public CardVisuals Visuals { get { return r_Visuals; } }
     public CardCollision Collision { get { return r_Collision; } }
-    public Timer Timer { get { return r_Timer; } }
+    public CardTimer Timer { get { return r_Timer; } }
 
     [Title("Inspector Variables")]
     public float DEFAULT_TWEEN_TIME;
@@ -54,6 +54,8 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
         if (toSpawn != null && Utilities.GetRandomNumber(0, 2) == 0)
             SpawningManager.Instance.SpawnCard(toSpawn, GridPosition);
 
+        Timer.Cancel();
+
         Destroy(gameObject);
     }
     /// <summary>
@@ -68,8 +70,9 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     /// </summary>
     public void OnExecute()
     {
-        if (!IsEnemy)
-            r_Abilities.Execute(r_Abilities.GetRandomAbility());
+        if (IsEnemy)
+            return;
+        r_Abilities.Execute(CardData.abilities[0]);
     }
     /// <summary>
     /// Called when the card has been spawned for the first time.
@@ -82,15 +85,19 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
     /// <summary>
     /// Called when something wants to hit this object.
     /// </summary>
-    public void OnHit(int amount)
+    public void OnHit(int amount, CardContainer hitBy = null)
     {
+        CardData.OnHit(hitBy);
+
         cardHealth -= amount;
         if (cardHealth <= 0)
         {
             cardHealth = 0;
             OnKill();
+            return;
         }
 
+        Visuals.OnHit();
         Visuals.UpdateHealth(cardHealth);
     }
     #endregion
@@ -101,6 +108,7 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
         UpdateAll();
         GridManager.onSelectionGridPositionChanged += OnSelectionGridPositionChanged;
         GameManager.onInteractUp += OnInteractUp;
+        
     }
     void OnDestroy()
     {

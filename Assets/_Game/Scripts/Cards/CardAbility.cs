@@ -94,7 +94,7 @@ public class CardAbility : MonoBehaviour
                 if (found != null && !(found as CardContainer).IsEnemy)
                 {
                     CardContainer toAttack = found as CardContainer;
-                    toAttack.OnHit(r_CardContainer.CardData.cardStats.attack);
+                    toAttack.OnHit(r_CardContainer.CardData.cardStats.attack, r_CardContainer);
                     continue;
                 }
                 else if (r_CardContainer.GridPosition.y == 0)

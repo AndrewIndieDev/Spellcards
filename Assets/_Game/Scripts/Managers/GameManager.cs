@@ -4,6 +4,7 @@ using UnityEngine.VFX;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     public static event OnInteractUp onInteractUp;
 
     [Title("Inspector References")]
-    [SerializeField] private VisualEffect coins;
+    [SerializeField] private AbilityVisual r_AbilityVisual;
 
     [Title("Inspector Variables")]
     [SerializeField] private float generateGoldEveryXSec;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         InputActions.Player.Interact.performed += OnInteract;
         InputActions.Player.Interact.canceled += OnInteract;
         InputActions.Player.Execute.performed += OnExecute;
+        InputActions.Player.Execute.canceled += OnExecute;
         InputActions.Player.NavigationMouse.performed += OnNavigationMouse;
         InputActions.Player.NavigationGamepad.performed += OnNavigationGamepad;
     }
@@ -44,8 +46,14 @@ public class GameManager : MonoBehaviour
         InputActions.Player.Interact.performed -= OnInteract;
         InputActions.Player.Interact.canceled -= OnInteract;
         InputActions.Player.Execute.performed -= OnExecute;
+        InputActions.Player.Execute.canceled -= OnExecute;
         InputActions.Player.NavigationMouse.performed -= OnNavigationMouse;
         InputActions.Player.NavigationGamepad.performed -= OnNavigationGamepad;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     #endregion
 
@@ -59,7 +67,10 @@ public class GameManager : MonoBehaviour
     }
     private void OnExecute(InputAction.CallbackContext context)
     {
-        Grid.ExecutePlaceable(Grid.SelectionPositionGrid);
+        CardContainer card = Grid.GetPlaceableAtPosition(Grid.SelectionPositionGrid, EGridCellOccupiedFlags.Card) as CardContainer;
+        if (card == null || card.CardData.abilities.Count <= 0)
+            return;
+        r_AbilityVisual.Init(card.CardData.abilities[0].abilityStyle, card);
     }
     private void OnNavigationMouse(InputAction.CallbackContext context)
     {
@@ -75,47 +86,22 @@ public class GameManager : MonoBehaviour
 
     #region Public Methods
     /// <summary>
-    /// Adds a set amount of currency to your total amount.
-    /// </summary>
-    /// <param name="amount">Amount to add.</param>
-    public void AddCurrency(int amount)
-    {
-        currency += amount;
-        CheckCoinAmount();
-    }
-    /// <summary>
-    /// Removes a set amount of currency from your total amount.
-    /// </summary>
-    /// <param name="amount">Amount to remove.</param>
-    /// <returns>True if you had enough currency, False if you didn't.</returns>
-    public bool RemoveCurrency(int amount)
-    {
-        if (currency - amount < 0)
-            return false;
-        currency -= amount;
-        CheckCoinAmount();
-        return true;
-    }
-    /// <summary>
     /// Starts the game.
     /// </summary>
     public void GameStart()
     {
-        if (playing) return;
-
-        AddCurrency(15);
+        if (playing)
+            return;
         playing = true;
-        StartCoroutine(GoldOverTime());
     }
     /// <summary>
     /// Ends the game.
     /// </summary>
     public void GameEnd()
     {
-        if (!playing) return;
-
+        if (!playing)
+            return;
         playing = false;
-        RemoveCurrency(currency);
     }
     /// <summary>
     /// Quits the game.
@@ -127,32 +113,6 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Private Methods
-    /// <summary>
-    /// Used to update the coin visuals.
-    /// </summary>
-    private void CheckCoinAmount()
-    {
-        coins.Reinit();
-        coins.SetInt("Coin Initialize", currency);
-        coins.SendEvent("Initialize");
-    }
-    /// <summary>
-    /// Used to generate gold over time.
-    /// </summary>
-    private IEnumerator GoldOverTime()
-    {
-        float cooldown = generateGoldEveryXSec;
-        while (playing)
-        {
-            if (!playing) break;
-            cooldown -= Time.deltaTime;
-            if (cooldown <= 0)
-            {
-                AddCurrency(1);
-                cooldown = generateGoldEveryXSec;
-            }
-            yield return null;
-        }
-    }
+
     #endregion
 }

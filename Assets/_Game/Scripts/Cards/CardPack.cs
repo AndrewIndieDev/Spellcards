@@ -37,8 +37,8 @@ public class CardPack : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.Instance.RemoveCurrency(cost))
-            draggingPack = Instantiate(packPrefab, transform.position, Quaternion.identity);
+        //if (GameManager.Instance.RemoveCurrency(cost))
+        //    draggingPack = Instantiate(packPrefab, transform.position, Quaternion.identity);
     }
 
     private void OnMouseDrag()

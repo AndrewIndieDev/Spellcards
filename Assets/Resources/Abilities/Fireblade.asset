@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5aa1a4b915916d4cb6c2106048ad4d4, type: 3}
+  m_Name: Fireblade
+  m_EditorClassIdentifier: 
+  name: Fireball
+  millisecondsTillComplete: 500
+  p_Projectile: {fileID: 3062454024075089738, guid: d60175e4d7be67e4e8d7998705e1b447,
+    type: 3}
+  p_ImpactVFX: {fileID: 3259163283906517372, guid: 0c297a11e1c82774fbc84beb42f7d7b6,
+    type: 3}
+  r_Ease: 26

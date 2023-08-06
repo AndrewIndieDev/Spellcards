@@ -25,6 +25,10 @@ public class GridCell
 public class GridManager : MonoBehaviour
 {
     public static GridManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public delegate void OnSelectionGridPositionChanged(Vector2Int cellPosition);
     public static event OnSelectionGridPositionChanged onSelectionGridPositionChanged;
@@ -37,7 +41,7 @@ public class GridManager : MonoBehaviour
     public Vector2Int SelectionPositionGrid { get { return GetGridCoordsAtWorldPosition(selection.transform.position); } }
 
     // NEED TO MANUALLY CHANGE //
-    public int GridWidth { get { return 23; } }
+    public int GridWidth { get { return 24; } }
     public int GridHeight { get { return 14; } }
     public int EnemyRows { get { return 2; } }
     /////////////////////////////
@@ -51,28 +55,25 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
-        Instance = this;
         selection = Instantiate(selection);
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0.01f, gridVerticalSize);
 
-        //for (int x = 0; x < GridWidth; x++)
-        //{
-        //    for (int y = GridHeight - EnemyRows; y < GridHeight; y++)
-        //    {
-        //        OccupyGridField(new Vector2Int(x, y), playerBlocked, null);
-        //    }
-        //}
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
+        for (int x = 0; x < GridWidth; x++)
         {
-            Vector2Int position = SelectionPositionGrid;
-            GridCell clicked = GetGridCell(position);
-            Debug.Log($"{position.x}, {position.y} | {((clicked != null) ? clicked.occupiedFlag : "<NULL>")}");
+            CardData card = Resources.LoadAll<CardData>("Cards/Structures")[0];
+            SpawningManager.Instance.SpawnCard(card, new Vector2Int(x, 9));
         }
     }
+
+    //private void Update()
+    //{
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Vector2Int position = SelectionPositionGrid;
+    //        GridCell clicked = GetGridCell(position);
+    //        Debug.Log($"{position.x}, {position.y} | {((clicked != null) ? clicked.occupiedFlag : "<NULL>")}");
+    //    }
+    //}
 
     public void OnNavigationMouse(InputAction.CallbackContext context)
     {
@@ -99,6 +100,11 @@ public class GridManager : MonoBehaviour
         return transform.position + new Vector3(gridPosition.x * gridHorizontalSize, 0.0f, gridPosition.y * gridVerticalSize);
     }
 
+    public Vector3 GetGridCellPosition(Vector3 worldPosition)
+    {
+        return GetGridCellPosition(GetGridCoordsAtWorldPosition(worldPosition));
+    }
+
     public Vector3 GetGridCellCenterPosition(Vector2Int gridPosition)
     {
         return GetGridCellPosition(gridPosition) + new Vector3(gridHorizontalSize / 2.0f, 0.0f, gridVerticalSize / 2.0f);
@@ -115,7 +121,7 @@ public class GridManager : MonoBehaviour
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0, gridVerticalSize).IgnoreAxis(EAxis.Y, 0.1f);
     }
 
-    public bool GridPositionFree(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.None)
+    public bool GridPositionFree(Vector2Int position, EGridCellOccupiedFlags flagToCheck = EGridCellOccupiedFlags.Card)
     {
         if (occupiedGridCells.TryGetValue(position, out GridCell gridCell))
         {
@@ -124,7 +130,7 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
-    public bool GridPositionsFree(List<Vector2Int> positions, EGridCellOccupiedFlags flagsToCheck = EGridCellOccupiedFlags.None)
+    public bool GridPositionsFree(List<Vector2Int> positions, EGridCellOccupiedFlags flagsToCheck = EGridCellOccupiedFlags.Card)
     {
         foreach(Vector2Int position in positions)
         {
@@ -134,7 +140,7 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
-    public bool GridPositionsFree(Vector2Int[] positions, EGridCellOccupiedFlags flagsToCheck = EGridCellOccupiedFlags.None)
+    public bool GridPositionsFree(Vector2Int[] positions, EGridCellOccupiedFlags flagsToCheck = EGridCellOccupiedFlags.Card)
     {
         return GridPositionsFree(positions.ToList(), flagsToCheck);
     }
@@ -296,7 +302,7 @@ public class GridManager : MonoBehaviour
 
     public Vector2Int ClampPositionToPlayerGrid(Vector2Int position)
     {
-        int x = Mathf.Clamp(position.x, 0, GridWidth);
+        int x = Mathf.Clamp(position.x, 0, GridWidth - 1);
         int y = Mathf.Clamp(position.y, 0, GridHeight - EnemyRows - 1);
         return new Vector2Int(x, y);
     }

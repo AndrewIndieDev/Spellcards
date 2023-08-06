@@ -2,6 +2,17 @@
 using System;
 using Sirenix.OdinInspector;
 
+public enum AbilityType
+{
+    RANGED
+}
+
+public enum AbilityTarget
+{
+    GROUND,
+    CARD
+}
+
 [Serializable]
 public class AbilityAction : ScriptableObject
 {

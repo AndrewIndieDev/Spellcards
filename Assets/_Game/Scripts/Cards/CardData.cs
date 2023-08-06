@@ -19,6 +19,8 @@ public class CardData : ScriptableObject
     public Texture2D cardBackground;
     public int xSize = 1;
     public int ySize = 1;
+
+    public virtual void OnHit(CardContainer whoHitMe) { }
 }
 
 [Serializable]
@@ -26,4 +28,17 @@ public struct CardStats
 {
     public int health;
     public int attack;
+}
+
+[Serializable]
+public struct AbilityStyle
+{
+    public Material arrowHead;
+    public Color arrowColour;
+
+    public Material lineMaterial;
+    public Color lineColour;
+
+    public AbilityType type;
+    public AbilityTarget target;
 }
