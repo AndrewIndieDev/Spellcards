@@ -24,6 +24,8 @@ public class RenderTerrainMap : MonoBehaviour
     bool RealTimeDiffuse;
     RenderTexture tempTex;
 
+    [SerializeField] private float frameCaptureDelay = .5f;
+
     private Bounds bounds;
 
     void GetBounds()
@@ -61,7 +63,8 @@ public class RenderTerrainMap : MonoBehaviour
     {
         GetBounds();
         SetUpCam();
-        DrawDiffuseMap();
+        StartCoroutine(CameraSetupDelay(frameCaptureDelay));
+        //DrawDiffuseMap();
     }
 
     void OnRenderObject()
@@ -110,4 +113,24 @@ public class RenderTerrainMap : MonoBehaviour
         camToDrawWith.transform.parent = gameObject.transform;
     }
 
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            GetBounds();
+            SetUpCam();
+            DrawDiffuseMap();
+        }
+    }
+
+    
+#endif
+
+    private IEnumerator CameraSetupDelay(float waitTime)
+    {
+        yield return 1; //On next frame
+        DrawDiffuseMap();
+        Debug.Log("Baked Texture");
+    }
 }

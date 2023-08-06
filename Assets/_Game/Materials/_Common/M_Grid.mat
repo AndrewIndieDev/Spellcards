@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3001
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -49,12 +49,12 @@ Material:
     - _Float1: -0.8
     - _LineWidth: 0.2
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: 1
     - _Scale: 1
     - _StepAmount: 0.25
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EnemyZoneColor: {r: 0.8113207, g: 0.32344767, b: 0.31763968, a: 1}
+    - _EnemyZoneColor: {r: 0.8113207, g: 0.32344761, b: 0.31763965, a: 1}
     - _GridSize: {r: 24, g: 14, b: 0, a: 0}
     - _Tint: {r: 0, g: 0, b: 0, a: 0.5254902}
   m_BuildTextureStacks: []

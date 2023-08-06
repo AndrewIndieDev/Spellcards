@@ -43,7 +43,7 @@ Shader "Spell Cards/Terrain/Grass"
 
 		Tags { "RenderPipeline"="UniversalPipeline" "RenderType"="Transparent" "Queue"="Transparent" }
 
-		Cull Off
+		Cull Back
 		AlphaToMask Off
 
 		
@@ -166,7 +166,7 @@ Shader "Spell Cards/Terrain/Grass"
 			Name "Forward"
 			Tags { "LightMode"="UniversalForwardOnly" }
 
-			Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
+			Blend SrcAlpha OneMinusSrcAlpha
 			ZWrite Off
 			ZTest LEqual
 			Offset 0 , 0
@@ -1889,7 +1889,7 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;84;2388.42,1074.304;Inherit;False;
 Node;AmplifyShaderEditor.RangedFloatNode;86;2200.42,1473.304;Inherit;False;Property;_WindSpeed;Wind Speed;9;0;Create;True;0;0;0;False;0;False;0.08;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;88;2373.42,1469.304;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.Vector2Node;87;2206.42,1277.304;Inherit;False;Constant;_WindDirection;Wind Direction;10;0;Create;True;0;0;0;False;0;False;0,1;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
-Node;AmplifyShaderEditor.SamplerNode;83;2890.42,1189.304;Inherit;True;Property;_WindNoiseTexture;WindNoise Texture;8;0;Create;True;0;0;0;False;0;False;-1;e199ee8112362864f831425463b09fda;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;83;2890.42,1189.304;Inherit;True;Property;_WindNoiseTexture;WindNoise Texture;8;0;Create;True;0;0;0;False;0;False;-1;e199ee8112362864f831425463b09fda;e199ee8112362864f831425463b09fda;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.PannerNode;85;2608.42,1221.304;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.GetLocalVarNode;90;3207.614,591.971;Inherit;False;89;Wind;1;0;OBJECT;;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.RangedFloatNode;82;2209.42,1163.304;Inherit;False;Property;_WindTiling;Wind Tiling;7;0;Create;True;0;0;0;False;0;False;0.1;0;0;0;0;1;FLOAT;0
@@ -1918,7 +1918,7 @@ Node;AmplifyShaderEditor.RangedFloatNode;98;3211.046,1829.241;Inherit;False;Prop
 Node;AmplifyShaderEditor.PosVertexDataNode;100;3181.046,2214.242;Inherit;False;0;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.Vector3Node;99;3215.046,2060.241;Inherit;False;Property;_Position;Position;11;0;Create;True;0;0;0;False;0;False;0,0,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.DynamicAppendNode;102;3448.846,2140.338;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;133;3749.289,138.1281;Float;False;True;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;Spell Cards/Terrain/Grass;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;2;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;3;True;12;all;0;False;True;1;5;False;;10;False;;1;1;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;0;;0;0;Standard;23;Surface;1;638262009802968514;  Blend;0;0;Two Sided;0;638262009814516850;Forward Only;0;0;Cast Shadows;0;638262009823344943;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;0;0;Built-in Fog;0;0;DOTS Instancing;0;0;Meta Pass;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;0;10;False;True;False;True;False;False;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;133;3749.289,138.1281;Float;False;True;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;Spell Cards/Terrain/Grass;2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;8;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;True;3;True;12;all;0;True;True;2;5;False;;10;False;;0;5;False;;10;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;0;;0;0;Standard;23;Surface;1;638262009802968514;  Blend;0;0;Two Sided;1;638269027934989461;Forward Only;0;0;Cast Shadows;0;638262009823344943;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;0;0;Built-in Fog;0;0;DOTS Instancing;0;0;Meta Pass;0;0;Extra Pre Pass;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Vertex Position,InvertActionOnDeselection;1;0;0;10;False;True;False;True;False;False;True;True;True;True;False;;False;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;152;3611.245,-384.0112;Inherit;False;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
 Node;AmplifyShaderEditor.LightAttenuation;142;2471.528,-129.8577;Inherit;False;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;149;2685.528,-136.8577;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
@@ -1991,4 +1991,4 @@ WireConnection;151;0;150;0
 WireConnection;151;1;148;0
 WireConnection;153;0;151;0
 ASEEND*/
-//CHKSM=72850399A8EB3FA4B817C728B44D0983789100E2
+//CHKSM=5623CD96B74D4B65DF66F9A47324CDC8C120803F
