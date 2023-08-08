@@ -108,7 +108,6 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
         UpdateAll();
         GridManager.onSelectionGridPositionChanged += OnSelectionGridPositionChanged;
         GameManager.onInteractUp += OnInteractUp;
-        
     }
     void OnDestroy()
     {
@@ -215,6 +214,18 @@ public class CardContainer : MonoBehaviour, IPlaceable, IDamageable
 
         Collision.MoveInstant(position);
         Visuals.Move(position);
+    }
+    public void MoveVisualThenDestroy(Vector3 position)
+    {
+        Visuals.MoveThenDestroy(position);
+    }
+    public void Select()
+    {
+        Visuals.Select();
+    }
+    public void Deselect()
+    {
+        Visuals.Deselect();
     }
     #endregion
 

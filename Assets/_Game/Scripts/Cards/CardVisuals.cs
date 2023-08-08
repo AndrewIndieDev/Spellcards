@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using DG.Tweening;
 using Sirenix.OdinInspector.Editor.Drawers;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UIElements;
 
 public class CardVisuals : MonoBehaviour
 {
@@ -96,6 +97,11 @@ public class CardVisuals : MonoBehaviour
     {
         transform.position = Grid.GetGridCellPosition(worldPosition) + GetLocalSizePosition();
     }
+    public void MoveThenDestroy(Vector3 position)
+    {
+        Move(position);
+        currentTween.onComplete += () => Destroy(gameObject);
+    }
     /// <summary>
     /// Tweens the rotation.
     /// </summary>
@@ -149,6 +155,14 @@ public class CardVisuals : MonoBehaviour
             currentTween.Complete();
         SetScale(1.2f);
         currentTween = transform.DOScale(CardScale, r_Container.DEFAULT_TWEEN_TIME);
+    }
+    public void Select()
+    {
+        SetGlow(1f);
+    }
+    public void Deselect()
+    {
+        SetGlow(0f);
     }
     #endregion
 
@@ -206,6 +220,10 @@ public class CardVisuals : MonoBehaviour
     private Vector3 GetLocalSizePosition()
     {
         return new Vector3(r_Container.CardData.xSize / 2f * Grid.gridHorizontalSize, 0f, r_Container.CardData.ySize / 2f * Grid.gridVerticalSize);
+    }
+    private void SetGlow(float amount)
+    {
+        m_Outline.material.SetFloat("_Opacity", Mathf.Clamp01(amount));
     }
     #endregion
 }

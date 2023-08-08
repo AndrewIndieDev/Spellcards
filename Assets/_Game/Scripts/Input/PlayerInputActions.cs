@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Craft"",
+                    ""type"": ""Button"",
+                    ""id"": ""10adb208-42f9-4a53-8173-5ec686adf427"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -161,6 +170,105 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""NavigationGamepad"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54def0ff-0b00-479d-ac81-e286289216cd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Craft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Crafting"",
+            ""id"": ""656f12ab-6689-4184-9539-428689ef6f83"",
+            ""actions"": [
+                {
+                    ""name"": ""Craft"",
+                    ""type"": ""Button"",
+                    ""id"": ""bf667fff-f508-4cf0-9a23-04aafcfcccc4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NavigationMouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""787fdd4e-2954-4e3d-ae7e-66cd6cdfaf71"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""d160168e-39df-4500-8003-9ff37a53d529"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7b81ad0-7b49-4a38-8228-bb283f0caae9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a954867e-6dff-41d5-ba36-bcdf9afa6873"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Craft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1882ed6-528c-41da-aaaa-e38ba4023a32"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87e6cc08-18ee-471e-a528-8e849e5acd0f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""436ce83a-0f95-4951-87a7-6f422f7fe83a"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""NavigationMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -197,6 +305,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Back = m_Player.FindAction("Back", throwIfNotFound: true);
         m_Player_NavigationMouse = m_Player.FindAction("NavigationMouse", throwIfNotFound: true);
         m_Player_NavigationGamepad = m_Player.FindAction("NavigationGamepad", throwIfNotFound: true);
+        m_Player_Craft = m_Player.FindAction("Craft", throwIfNotFound: true);
+        // Crafting
+        m_Crafting = asset.FindActionMap("Crafting", throwIfNotFound: true);
+        m_Crafting_Craft = m_Crafting.FindAction("Craft", throwIfNotFound: true);
+        m_Crafting_NavigationMouse = m_Crafting.FindAction("NavigationMouse", throwIfNotFound: true);
+        m_Crafting_Select = m_Crafting.FindAction("Select", throwIfNotFound: true);
+        m_Crafting_Exit = m_Crafting.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,6 +378,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Back;
     private readonly InputAction m_Player_NavigationMouse;
     private readonly InputAction m_Player_NavigationGamepad;
+    private readonly InputAction m_Player_Craft;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -272,6 +388,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Back => m_Wrapper.m_Player_Back;
         public InputAction @NavigationMouse => m_Wrapper.m_Player_NavigationMouse;
         public InputAction @NavigationGamepad => m_Wrapper.m_Player_NavigationGamepad;
+        public InputAction @Craft => m_Wrapper.m_Player_Craft;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -296,6 +413,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @NavigationGamepad.started += instance.OnNavigationGamepad;
             @NavigationGamepad.performed += instance.OnNavigationGamepad;
             @NavigationGamepad.canceled += instance.OnNavigationGamepad;
+            @Craft.started += instance.OnCraft;
+            @Craft.performed += instance.OnCraft;
+            @Craft.canceled += instance.OnCraft;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -315,6 +435,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @NavigationGamepad.started -= instance.OnNavigationGamepad;
             @NavigationGamepad.performed -= instance.OnNavigationGamepad;
             @NavigationGamepad.canceled -= instance.OnNavigationGamepad;
+            @Craft.started -= instance.OnCraft;
+            @Craft.performed -= instance.OnCraft;
+            @Craft.canceled -= instance.OnCraft;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -332,6 +455,76 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Crafting
+    private readonly InputActionMap m_Crafting;
+    private List<ICraftingActions> m_CraftingActionsCallbackInterfaces = new List<ICraftingActions>();
+    private readonly InputAction m_Crafting_Craft;
+    private readonly InputAction m_Crafting_NavigationMouse;
+    private readonly InputAction m_Crafting_Select;
+    private readonly InputAction m_Crafting_Exit;
+    public struct CraftingActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public CraftingActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Craft => m_Wrapper.m_Crafting_Craft;
+        public InputAction @NavigationMouse => m_Wrapper.m_Crafting_NavigationMouse;
+        public InputAction @Select => m_Wrapper.m_Crafting_Select;
+        public InputAction @Exit => m_Wrapper.m_Crafting_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Crafting; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CraftingActions set) { return set.Get(); }
+        public void AddCallbacks(ICraftingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CraftingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CraftingActionsCallbackInterfaces.Add(instance);
+            @Craft.started += instance.OnCraft;
+            @Craft.performed += instance.OnCraft;
+            @Craft.canceled += instance.OnCraft;
+            @NavigationMouse.started += instance.OnNavigationMouse;
+            @NavigationMouse.performed += instance.OnNavigationMouse;
+            @NavigationMouse.canceled += instance.OnNavigationMouse;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
+        }
+
+        private void UnregisterCallbacks(ICraftingActions instance)
+        {
+            @Craft.started -= instance.OnCraft;
+            @Craft.performed -= instance.OnCraft;
+            @Craft.canceled -= instance.OnCraft;
+            @NavigationMouse.started -= instance.OnNavigationMouse;
+            @NavigationMouse.performed -= instance.OnNavigationMouse;
+            @NavigationMouse.canceled -= instance.OnNavigationMouse;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
+        }
+
+        public void RemoveCallbacks(ICraftingActions instance)
+        {
+            if (m_Wrapper.m_CraftingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICraftingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CraftingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CraftingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CraftingActions @Crafting => new CraftingActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -357,5 +550,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnBack(InputAction.CallbackContext context);
         void OnNavigationMouse(InputAction.CallbackContext context);
         void OnNavigationGamepad(InputAction.CallbackContext context);
+        void OnCraft(InputAction.CallbackContext context);
+    }
+    public interface ICraftingActions
+    {
+        void OnCraft(InputAction.CallbackContext context);
+        void OnNavigationMouse(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }
