@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
         {
             Vector3 pos = Vector3.zero;
             for (int i = 0; i < selectedCards.Count; i++)
-                pos += selectedCards[i].transform.position;
+                pos += selectedCards[i].Collision.Position;
             centerPos = pos / selectedCards.Count;
         }
 
@@ -257,6 +257,18 @@ public class GameManager : MonoBehaviour
             toMove.Key.MoveVisualThenDestroy(toMove.Value);
         }
 
+        for (int i = 0; i < checking.Count; i++)
+        {
+            CardData data = checking[i];
+            Vector2Int gridPosition = Grid.GetGridCoordsAtWorldPosition(allPositions[i]);
+            CardContainer craftingCard = null;
+            craftingCard = SpawningManager.Instance.SpawnCrafting(gridPosition, data.craftTime,
+                ()=> {
+                    craftingCard.OnKill();
+                    SpawningManager.Instance.SpawnCard(data, gridPosition);
+                });
+        }
+
         DisableCrafting();
     }
     #endregion
@@ -301,7 +313,8 @@ public class GameManager : MonoBehaviour
         {
             Vector3 neighbourPos = Grid.GetGridCellCenterPosition(centerGridPos + gridNeighbours[i]);
             Vector2Int neighbourGridPos = Grid.GetGridCoordsAtWorldPosition(neighbourPos);
-            if (Grid.GetPlaceableAtPosition(neighbourGridPos, EGridCellOccupiedFlags.Card) is CardContainer card)
+            if (Grid.GetPlaceableAtPosition(neighbourGridPos, EGridCellOccupiedFlags.Card) is CardContainer card
+                || Grid.ClampPositionToPlayerGrid(neighbourGridPos) != neighbourGridPos)
                 continue;
             else
                 neighbours.Add(neighbourPos);

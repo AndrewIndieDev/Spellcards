@@ -19,6 +19,7 @@ public class CardData : ScriptableObject
     public Texture2D cardBackground;
     public int xSize = 1;
     public int ySize = 1;
+    public float craftTime;
 
     public virtual void OnHit(CardContainer whoHitMe) { }
 }

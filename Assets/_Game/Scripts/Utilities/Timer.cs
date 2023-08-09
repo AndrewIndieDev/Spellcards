@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,13 +18,16 @@ public class CardTimer : MonoBehaviour
     [ReadOnly] private float r_Duration;
     [ReadOnly] public float timeInSeconds;
 
+    private Action cb_OnFinish;
+
     #region Public Methods
     /// <summary>
     /// Starts the timer with an amount of seconds till it finishes.
     /// </summary>
     /// <param name="time">Seconds till the timer finishes.</param>
-    public void Run(float time)
+    public void Run(float time, Action callback = null)
     {
+        cb_OnFinish = callback;
         r_Duration = time;
         timeInSeconds = time;
         r_TimerVisual.SetActive(true);
@@ -62,6 +66,7 @@ public class CardTimer : MonoBehaviour
     {
         r_TimerMesh.material.SetFloat("_Timer", 0.0f);
         r_TimerVisual.SetActive(false);
+        cb_OnFinish = null;
         Pause();
     }
     /// <summary>
@@ -69,8 +74,8 @@ public class CardTimer : MonoBehaviour
     /// </summary>
     public void Finished()
     {
+        cb_OnFinish?.Invoke();
         Cancel();
-        // Tell container that it's finished?
     }
     #endregion
 }

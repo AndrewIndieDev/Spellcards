@@ -1,7 +1,5 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor.Validation;
-using Mono.CSharp;
 using System.Collections.Generic;
 
 public class SpawningManager : MonoBehaviour
@@ -12,6 +10,7 @@ public class SpawningManager : MonoBehaviour
 
     [Title("Inspector References")]
     [SerializeField] private CardContainer r_CardPrefab;
+    [SerializeField] private CardData r_CraftingCardData;
 
     #region Unity Methods
     private void Awake()
@@ -109,6 +108,33 @@ public class SpawningManager : MonoBehaviour
         card.SetData(data);
         Grid.OccupyGridFields(toOccupy, EGridCellOccupiedFlags.Card, card);
         card.OnSpawn();
+        return card;
+    }
+
+    public CardContainer SpawnCrafting(Vector2Int gridPosition, float craftTime, System.Action callback)
+    {
+        List<Vector2Int> toOccupy = new();
+        for (int x = 0; x < r_CraftingCardData.xSize; x++)
+        {
+            for (int y = 0; y < r_CraftingCardData.ySize; y++)
+            {
+                toOccupy.Add(new Vector2Int(gridPosition.x + x, gridPosition.y + y));
+            }
+        }
+        if (!Grid.GridPositionsFree(toOccupy))
+            return null;
+        var cell = Grid.GetOrAddGridCell(gridPosition);
+        if (cell == null)
+        {
+            Dbug.Instance.LogError($"Cell [{gridPosition.x},{gridPosition.y}] is null!");
+            return null;
+        }
+        CardContainer card = Instantiate(r_CardPrefab, Vector3.zero, Quaternion.identity);
+        card.MoveInstant(Grid.GetGridCellCenterPosition(gridPosition));
+        card.SetData(r_CraftingCardData);
+        Grid.OccupyGridFields(toOccupy, EGridCellOccupiedFlags.Card, card);
+        card.OnSpawn();
+        card.Timer.Run(craftTime, callback);
         return card;
     }
     #endregion

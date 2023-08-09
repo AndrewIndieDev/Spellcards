@@ -25,3 +25,4 @@ MonoBehaviour:
   cardBackground: {fileID: 2800000, guid: 1b801ecc35f7d414dacceed9a6bc5247, type: 3}
   xSize: 1
   ySize: 1
+  craftTime: 30

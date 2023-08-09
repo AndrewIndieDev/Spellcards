@@ -57,12 +57,6 @@ public class GridManager : MonoBehaviour
     {
         selection = Instantiate(selection);
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0.01f, gridVerticalSize);
-
-        for (int x = 0; x < GridWidth; x++)
-        {
-            CardData card = Resources.LoadAll<CardData>("Cards/Structures")[0];
-            SpawningManager.Instance.SpawnCard(card, new Vector2Int(x, 9));
-        }
     }
 
     //private void Update()
