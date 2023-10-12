@@ -84,7 +84,7 @@ public class CardAbility : MonoBehaviour
             if (ability == null)
                 break;
 
-            float randTime = (float)Utilities.GetRandomNumber(50, 100) / 100f;
+            float randTime = (float)Utilities.GetRandomNumber(200, 400) / 100f;
             r_CardContainer.Timer.Run(randTime);
             yield return new WaitForSeconds(randTime);
 

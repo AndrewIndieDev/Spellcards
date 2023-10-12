@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18615568bf5c0e84a811a1a709371960, type: 3}
   m_Name: MoveDownLeft
   m_EditorClassIdentifier: 
+  abilityStyle:
+    arrowHead: {fileID: 0}
+    arrowColour: {r: 0, g: 0, b: 0, a: 0}
+    lineMaterial: {fileID: 0}
+    lineColour: {r: 0, g: 0, b: 0, a: 0}
+    type: 0
+    target: 0
   playInSequence: 0
   actions:
   - {fileID: 11400000, guid: 6f7cb30385439534684ebf09b8fd8f6c, type: 2}
