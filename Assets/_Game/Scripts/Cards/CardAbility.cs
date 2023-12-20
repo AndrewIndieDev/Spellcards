@@ -1,8 +1,6 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
-using UnityEditor.Playables;
 using UnityEngine;
 
 public class CardAbility : MonoBehaviour

@@ -12,6 +12,8 @@ public class SpawningManager : MonoBehaviour
     [SerializeField] private CardContainer r_CardPrefab;
     [SerializeField] private CardData r_CraftingCardData;
 
+    public CardData spikedWall_debug;
+
     #region Unity Methods
     private void Awake()
     {
