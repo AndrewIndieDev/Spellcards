@@ -24,7 +24,7 @@ public class CardTimerManager : MonoBehaviour
     /// <param name="timer"></param>
     public void Pause(CardTimer timer)
     {
-        Utilities.RemoveUnique(active, timer);
+        Utilities.RemoveIfContains(active, timer);
     }
     #endregion
 

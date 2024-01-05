@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -58,21 +57,23 @@ public class GridManager : MonoBehaviour
         selection = Instantiate(selection);
         selection.transform.localScale = new Vector3(gridHorizontalSize, 0.01f, gridVerticalSize);
 
+        /// DEBUG ///
         for (int x = 0; x < GridWidth; x++)
         {
             SpawningManager.Instance.SpawnCard(SpawningManager.Instance.spikedWall_debug, new Vector2Int(x, GridHeight - 5));
         }
+        /////////////
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetMouseButtonDown(1))
-    //    {
-    //        Vector2Int position = SelectionPositionGrid;
-    //        GridCell clicked = GetGridCell(position);
-    //        Debug.Log($"{position.x}, {position.y} | {((clicked != null) ? clicked.occupiedFlag : "<NULL>")}");
-    //    }
-    //}
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector2Int position = SelectionPositionGrid;
+            GridCell clicked = GetGridCell(position);
+            Debug.Log($"{position.x}, {position.y} | {((clicked != null) ? clicked.occupiedFlag : "<NULL>")}");
+        }
+    }
 
     public void OnNavigationMouse(InputAction.CallbackContext context)
     {

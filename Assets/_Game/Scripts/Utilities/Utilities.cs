@@ -47,27 +47,36 @@ public static class Utilities
     /// <summary>
     /// Get's a random number between min and max.
     /// </summary>
-    /// <param name="min">min(inclusive)</param>
-    /// <param name="max">max(exclusive)</param>
+    /// <param name="minInclusive">min(inclusive)</param>
+    /// <param name="maxExclusive">max(exclusive)</param>
     /// <returns>Random int between two numbers.</returns>
-    public static int GetRandomNumber(int min, int max)
+    public static int GetRandomNumber(int minInclusive, int maxExclusive)
     {
         using (RNGCryptoServiceProvider rg = new RNGCryptoServiceProvider())
         {
             byte[] rno = new byte[3];
             rg.GetBytes(rno);
-            return min + (BitConverter.ToUInt16(rno, 0) % (max - min));
+            return minInclusive + (BitConverter.ToUInt16(rno, 0) % (maxExclusive - minInclusive));
         }
     }
 
-    public static float Remap(this float s, float a1, float a2, float b1, float b2)
+    public static float RemapRange(this float s, float a1, float a2, float b1, float b2)
     {
+        // Remap a value from one range (a1 to a2) to another (b1 to b2)
+        // Example, I have 15(s) / 240(a2) health (a1 = 0), I want to remap that to a scale of 0 to 1
+        // (s - a1) | 15 - 0 = 15
+        // (b2 - b1) | 1 - 0 = 1
+        // (a2 - a1) | 240 - 0 = 240
+        // 15 * 1 = 15
+        // 15 / 240 = 0.0625
+        // 0 + 0.0625 = 0.0625
+
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
 
     public static float RemapClamped(this float s, float a1, float a2, float b1, float b2)
     {
-        return Mathf.Clamp(Remap(s, a1, a2, b1, b2), b1, b2);
+        return Mathf.Clamp(RemapRange(s, a1, a2, b1, b2), b1, b2);
     }
 
     public static Vector2 Rotate(this Vector2 v, float degrees)
@@ -92,7 +101,7 @@ public static class Utilities
         return false;
     }
 
-    public static bool RemoveUnique<T>(this List<T> list, T item)
+    public static bool RemoveIfContains<T>(this List<T> list, T item)
     {
         if (list.Contains(item))
         {
@@ -118,9 +127,9 @@ public static class Utilities
         return array.Length > index && index >= 0;
     }
 
-    public static bool IsValidIndex<T>(this List<T> array, int index)
+    public static bool IsValidIndex<T>(this List<T> list, int index)
     {
-        return array.Count > index && index >= 0;
+        return list.Count > index && index >= 0;
     }
 
     public static Vector2 IgnoreAxis(this Vector2 vector, EAxis ignoredAxis, float ignoredAxisValue = 0)
@@ -218,7 +227,6 @@ public static class Utilities
         Dictionary<string, Transform> boneMap = new Dictionary<string, Transform>();
         foreach (Transform bone in parent.bones)
             boneMap[bone.gameObject.name] = bone;
-
 
         SkinnedMeshRenderer myRenderer = smr;
 
@@ -332,7 +340,7 @@ public static class Utilities
     {
         string result = "";
         if (s.Length > 1)
-            s = char.ToUpper(s[0]) + s.Substring(1);
+            s = char.ToUpper(s[0]) + s[1..];
         for (int i = 0; i < s.Length; i++)
         {
             if (char.IsUpper(s[i]) == true && i != 0)
@@ -557,7 +565,7 @@ public class PriorityQueue<T> where T : IComparable<T>
         string s = "";
         for (int i = 0; i < data.Count; ++i)
             s += data[i].ToString() + " ";
-        s += "count = " + data.Count;
+        s += "\ncount = " + data.Count;
         return s;
     }
 
